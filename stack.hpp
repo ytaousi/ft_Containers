@@ -30,41 +30,58 @@ class ft::stack
     
     // Members Fuctions
 
-        // Constructor
+    // Constructor
     explicit stack (const container_type& ctnr = container_type())
     {
 
     }
+    // Destructor
+    ~stack()
+    {
 
+    }
+
+    // return true or false wheter the container is empty or not
+    // it make a call to the method empty() of the underlying container
     bool empty() const
     {
-
+        return (c.empty());
     }
-        
+
+    // return the size of the container
+    // it make a call to the method size() of the underlying container
     size_type size() const
     {
-
+        return (c.size());
     }
-        
+    
+    // return a reference or contant reference
+    //      to the element on the top of stack (last element added to stack)
+    // it make a call to the method back() of the underlying container
     value_type& top()
     {
-
+        return (c.back());
     }
-        
     const value_type& top() const
     {
-
+        return (c.back());
     }
 
+    // insert an element on the stack
+    // it make a call to the method push_back() of the underlying container
     void push (const value_type& val)
     {
-            
+        c.push_back(val);
     }
 
+    // remove element on top of stack
+    // it make a call to the method pop_back() of the underlying container
     void pop()
     {
-
+        c.pop_back();
     }
+    protected:
+        container_type c;
 
 };
 
