@@ -3,7 +3,7 @@
 
 # include <memory>
 
-// VECTOR is implemented as sequence
+// VECTOR is implemented as sequence container representing arrays that can change in size
 
 namespace ft
 {
