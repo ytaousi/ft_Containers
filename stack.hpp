@@ -12,11 +12,11 @@ namespace ft
 template <class T, class Container = std::vector<T>>
 class ft::stack
 {
-    
+    // Type of the elements (T) first template parameter
     typedef T           value_type;
-
+    // Type of underlying container second template parameter
     typedef Container   container_type;
-
+    // an unsigned intergal type
     typedef size_t      size_type;
 
     public:
