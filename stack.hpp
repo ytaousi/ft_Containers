@@ -46,7 +46,7 @@ class ft::stack
     // it make a call to the method empty() of the underlying container
     bool empty() const
     {
-        this->c.empty();
+        return (this->c.empty());
     }
 
     // return the size of the container
