@@ -2,6 +2,7 @@
 # define STACK_HPP
 
 # include <vector>
+# include <cstddef>
 
 // STACK is implemented as an adaptive container it means it encapsulate
 //  an object of specifice container class as its underlying container 
@@ -17,7 +18,7 @@ namespace ft
     class stack;
 }
 
-template <class T, class Container = std::vector<T>>
+template <class T, class Container>
 class ft::stack
 {
     public:
@@ -45,7 +46,10 @@ class ft::stack
     // it make a call to the method empty() of the underlying container
     bool empty() const
     {
-        return (c.empty());
+        if (c.empty() == 0)
+            return false;
+        else
+            return true;
     }
 
     // return the size of the container
@@ -87,38 +91,38 @@ class ft::stack
 
 // Non Member-Fuctions overloading
 
-template <class T, class Container>
-bool operator== (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// template <class T, class Container>
+// bool operator== (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
+// }
 
-template <class T, class Container>
-bool operator!= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// template <class T, class Container>
+// bool operator!= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
+// }
 
-template <class T, class Container>
-bool operator<  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// template <class T, class Container>
+// bool operator<  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
+// }
 
-template <class T, class Container>
-bool operator<= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// template <class T, class Container>
+// bool operator<= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
-template <class T, class Container>
-bool operator> (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// }
+// template <class T, class Container>
+// bool operator> (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
-template <class T, class Container>
-bool operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
-{
+// }
+// template <class T, class Container>
+// bool operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+// {
 
-}
+// }
 
 #endif
