@@ -68,7 +68,6 @@ class ft::vector
     // Member Fuctions
 
         // Iterator Function's
-    
 
     iterator begin()
     {
