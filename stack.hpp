@@ -14,7 +14,7 @@
 
 namespace ft
 {
-    template <class T, class Container = std::vector<T> >
+    template <class T, class Container = std::vector<T> > // ft::vector under construction
     class stack;
 }
 
@@ -32,10 +32,8 @@ class ft::stack
     // Members Fuctions
 
     // Constructor
-    explicit stack (const container_type& ctnr = container_type())
-    {
+    explicit stack (const container_type& ctnr = container_type()) : c(ctnr){};
 
-    }
     // Destructor
     ~stack()
     {
