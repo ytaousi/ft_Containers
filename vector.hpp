@@ -23,7 +23,7 @@ class ft::vector
         typedef typename allocator_type::pointer            pointer;
         typedef typename allocator_type::const_pointer      const_pointer;
 
-        // need to typedef the iterators type
+        // need to typedef the iterators type : check  documentation
 
     // need to define the default/fill/range constructors : done
     
@@ -47,7 +47,7 @@ class ft::vector
 
     }
 
-    // copy constructor 1/4
+    // copy constructor 
     vector(const ft::vector& object)
     {
 
@@ -225,6 +225,48 @@ class ft::vector
 
     // need to declare  fuction's  assign()/erase()/insert()
 
+    // range
+    template <class InputIterator>
+    void assign (InputIterator first, InputIterator last)
+    {
+
+    }
+
+    // fill
+    void assign (size_type n, const value_type& val)
+    {
+
+    }
+
+    //
+    iterator erase (iterator position)
+    {
+
+    }
+
+    //
+    iterator erase (iterator first, iterator last)
+    {
+
+    }
+
+    //single element
+    iterator insert (iterator position, const value_type& val)
+    {
+
+    }
+
+    // fill
+    void insert (iterator position, size_type n, const value_type& val)
+    {
+
+    }
+    // range
+    template <class InputIterator>
+    void insert (iterator position, InputIterator first, InputIterator last)
+    {
+
+    }
         // Alloctor function
     
     // return a copy of the allocator object associated with the vector
@@ -235,4 +277,50 @@ class ft::vector
     private:
         allocator_type _alloc;
 };
+
+    // Non-member function's
+
+//
+template <class T, class Alloc>
+void swap (ft::vector<T,Alloc>& x, ft::vector<T,Alloc>& y)
+{
+
+}
+
+// 
+template <class T, class Alloc>
+bool operator== (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
+
+template <class T, class Alloc>
+bool operator!= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
+
+template <class T, class Alloc>
+bool operator<  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
+
+template <class T, class Alloc>
+bool operator<= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
+
+template <class T, class Alloc>
+bool operator>  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
+
+template <class T, class Alloc>
+bool operator>= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+{
+
+}
 #endif
