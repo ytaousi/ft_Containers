@@ -25,7 +25,27 @@ class ft::vector
 
         // need to typedef the iterators type
 
-    // need to define the default/fill/range constructors
+    // need to define the default/fill/range constructors : done
+    
+    // Constructs an empty container, with no elements.
+    explicit vector (const allocator_type& alloc = allocator_type())
+    {
+
+    }
+
+    // Constructs a container with n elements. Each element is a copy of val.
+    explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+    {
+
+    }
+
+    // Constructs a container with as many elements as the range [first,last), 
+    //  with each element constructed from its corresponding element in that range, in the same order.
+    template <class InputIterator>
+    vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+    {
+
+    }
 
     // copy constructor 1/4
     vector(const ft::vector& object)
@@ -42,16 +62,52 @@ class ft::vector
     // destructor
     ~vector()
     {
-        ;
+        
     }
     
     // Member Fuctions
 
         // Iterator Function's
-            // begin();
-            // rbegin();
-            // end();
-            // rend();
+    
+
+    iterator begin()
+    {
+
+    }
+
+    const_iterator begin() const
+    {
+
+    }
+
+    reverse_iterator rbegin()
+    {
+
+    }
+    const_reverse_iterator rbegin() const
+    {
+
+    }
+
+    iterator end()
+    {
+
+    }
+
+    const_iterator end() const
+    {
+
+    }
+
+    reverse_iterator rend()
+    {
+
+    }
+
+    const_reverse_iterator rend() const
+    {
+
+    }
         
         // Capacity Function's
 
@@ -177,5 +233,7 @@ class ft::vector
     {
 
     }
+    private:
+        allocator_type _alloc;
 };
 #endif
