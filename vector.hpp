@@ -223,7 +223,7 @@ class ft::vector
 
     }
 
-    // need to declare  fuction's  assign()/erase()/insert()
+    // need to declare  fuction's  assign()/erase()/insert() : done
 
     // range
     template <class InputIterator>
@@ -274,8 +274,23 @@ class ft::vector
     {
 
     }
+    /*
+    Typiquement, l'implémentation d'un vecteur stocke :
+        _array (pointeur vers le début du tableau)
+        _size (taille)
+        _capacité (capacité)
+        _alloc (allocateur)
+    Une implémentation utilisant uniquement des pointeurs est également possible :
+        _start (pointeur vers le début du tableau)
+        _end (pointeur vers l'emplacement mémoire après le dernier élément du vecteur)
+        _end_capacity (pointeur vers le dernier emplacement mémoire alloué)
+        _alloc (allocateur)
+    */
     private:
         allocator_type _alloc;
+        size_type      _size;
+        size_type      _capacity;
+        value_type     _array;
 };
 
     // Non-member function's
