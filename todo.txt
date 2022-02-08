@@ -18,3 +18,7 @@ Implement Vector Container :
 
 
 Implement Iterator for ft::vector<T, Alloc>
+
+    - Random Access Iterator 
+        // can be used to access elements at an arbitrary offset position relative to 
+        //  the element they point to, offering the same functionality as pointers.
