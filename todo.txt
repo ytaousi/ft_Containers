@@ -1,0 +1,20 @@
+Container Stack difened using the std::vector for tests
+
+Implement Vector Container :
+    . define properties types
+
+    - constructor
+    - destructor
+    - operaotr =
+
+    - iterators function
+    - elements access function's
+    - elements modifier function's
+    - capacity function's
+    - allocator function
+
+    - non-member overload function's
+    - non-member swap function
+
+
+Implement Iterator for ft::vector<T, Alloc>
