@@ -18,24 +18,21 @@ class ft::vector
         typedef T                                           value_type;
         typedef Alloc                                       allocator_type;
 
-        // typedef value_type&                                 reference;
-        // typedef const value_type&                           const_reference;
-        // typedef value_type*                                 pointer;
-        // typedef const value_type*                           const_pointer;
         typedef	typename allocator_type::reference			reference;
 		typedef	typename allocator_type::const_reference	const_reference;
 		typedef	typename allocator_type::pointer			pointer;
 		typedef	typename allocator_type::const_pointer		const_pointer;
 
-        typedef size_t                                      size_type;
-
-        //typedef ptrdiff_t                                   difference_type;
-        typedef	typename iterator_traits<iterator>::difference_type	difference_type;
         
-        // need to typedef the iterators type : check  documentation
+        // need to typedef the iterators type : check  documentation 4 of 4
+        typedef ft::iterator<value_type>            iterator;
+        typedef ft::iterator<const value_type>      const_iterator;
+        typedef ft::reverse_iterator<iterator>     reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
-    // need to define the default/fill/range constructors : done
-    
+        typedef ptrdiff_t                                   difference_type;
+        typedef size_t                                      size_type;
+    // need to define the default/fill/range constructors : done    
     // Constructs an empty container, with no elements.
     explicit vector (const allocator_type& alloc = allocator_type())
     {
