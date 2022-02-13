@@ -301,44 +301,44 @@ namespace ft
 
     //
     template <class T, class Alloc>
-    void swap (ft::vector<T,Alloc>& x, ft::vector<T,Alloc>& y)
+    void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
     {
         x.swap(y);
     }
 
     // 
     template <class T, class Alloc>
-    bool operator== (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator!= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator<  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator<= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator>  (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator>= (const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
+    bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
 
     }
