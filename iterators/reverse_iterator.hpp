@@ -128,7 +128,7 @@ namespace ft
     template <class Iterator>
     reverse_iterator<Iterator> operator+ (typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it)
     {
-
+        return (rev_it + n);
     }
     
     // substraction operator
