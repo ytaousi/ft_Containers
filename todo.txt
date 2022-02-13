@@ -1,15 +1,33 @@
+Implement Stack Container :
+    
+    template <class T, class Container = ft::vector<T> >
+    class ft::stack;
+
+
+Basically all stack methods make a call to the underlying Container methods ; GG EZ
+
 Container Stack difened using the std::vector for tests
+
+    template <class T, class Container = std::vector<T> >
+    class ft::stack;
 
 i Think stack is done i should test it with the tester mamoussa and others created
 
+
 Implement Vector Container :
+
+    template <class T, Alloc = std::allocator<T> >
+    class ft::vector;
+
+
     . define properties types
+
 
     - constructor
     - destructor
     - operaotr =
 
-    - iterators function
+    - iterators function    
     - elements access function's
     - elements modifier function's
     - capacity function's
@@ -24,3 +42,11 @@ Implement Iterator for ft::vector<T, Alloc>
     - Random Access Iterator 
         // can be used to access elements at an arbitrary offset position relative to 
         //  the element they point to, offering the same functionality as pointers.
+
+
+
+
+
+
+    when Bored From iterators
+Define ft::vector<T, Alloc>  member function algo except those using iterators for tests
