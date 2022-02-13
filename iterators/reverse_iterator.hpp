@@ -3,6 +3,8 @@
 
 # include "iterator.hpp"
 
+// still need to define the iterator traits template
+// so that typedef's takes in account
 namespace ft
 {
     template <class Iterator>
