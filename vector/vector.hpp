@@ -2,8 +2,8 @@
 # define VECTOR_HPP
 
 # include <memory>
-# include "reverse_iterator.hpp"
-# include "iterator.hpp"
+# include "../iterators/reverse_iterator.hpp"
+# include "../iterators/iterator.hpp"
 
 // VECTOR is implemented as sequence container representing arrays that can change in size
 

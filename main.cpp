@@ -1,4 +1,8 @@
-#include "stack.hpp"
+#include "./stack/stack.hpp"
+#include "./vector/vector.hpp"
+#include "enable_if.hpp"
+#include "equal.hpp"
+#include "lexicographical_compare.hpp"
 
 #include <iostream>
 #include <string>
@@ -16,7 +20,7 @@ int main()
     return (0);
 }
 
-// Intra container main.cpp
+// 42 Intra ft_container main.cpp
 
 // #include <iostream>
 // #include <string>
