@@ -73,6 +73,7 @@ namespace ft
             {
                 this->c.pop_back();
             }
+        
         //template <class T, class Container>
         friend bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
         {
@@ -114,8 +115,6 @@ namespace ft
     };
 
     // Non Member-Fuctions overloading
-
-    
 
 }
 #endif
