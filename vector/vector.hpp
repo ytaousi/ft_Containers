@@ -23,8 +23,8 @@ namespace ft
 
             
             // need to typedef the iterators type : check  documentation 4 of 4
-            typedef ft::Iterator<value_type>                    iterator;
-            typedef ft::Iterator<const value_type>              const_iterator;
+            typedef ft::iterator<value_type>                    iterator;
+            typedef ft::iterator<const value_type>              const_iterator;
             typedef ft::reverse_iterator<iterator>              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
 
