@@ -80,6 +80,8 @@
         "optional": "cpp",
         "ratio": "cpp",
         "string_view": "cpp",
-        "__functional_03": "cpp"
+        "__functional_03": "cpp",
+        "__functional_base_03": "cpp",
+        "list": "cpp"
     }
 }

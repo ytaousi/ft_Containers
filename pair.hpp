@@ -37,6 +37,8 @@ namespace ft
 
 
         private:
+            first_type  first;
+            second_type second;
     };
 
             // Non-member function's
