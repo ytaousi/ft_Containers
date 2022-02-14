@@ -22,7 +22,7 @@ namespace ft
             rand_acc_iterator & operator = (const rand_acc_iterator & instance);
 
         private:
-
+            pointer iter;
     };
 }
 
