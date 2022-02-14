@@ -24,12 +24,12 @@ namespace ft
             typedef ft::iterator<std::random_access_iterator, T>::reference         reference;
             typedef ft::iterator<std::random_access_iterator, T>::iterator_category iterator_category;
         
-        private:
             rand_acc_iterator();
             ~rand_acc_iterator();
             rand_acc_iterator(const rand_acc_iterator & instance);
             rand_acc_iterator & operator = (const rand_acc_iterator & instance);
-            
+
+        private:
 
     };
 }
