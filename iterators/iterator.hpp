@@ -27,7 +27,10 @@ namespace ft
         private:
             rand_acc_iterator();
             ~rand_acc_iterator();
+            rand_acc_iterator(const rand_acc_iterator & instance);
+            rand_acc_iterator & operator = (const rand_acc_iterator & instance);
             
+
     };
 }
 

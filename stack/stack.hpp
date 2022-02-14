@@ -3,6 +3,8 @@
 
 # include <vector>
 # include <cstddef>
+# include <deque>
+# include <list>
 // # include "../vector/vector.hpp" under construction still need iterator implementation
 
 // STACK is implemented as an adaptive container it means it encapsulate
