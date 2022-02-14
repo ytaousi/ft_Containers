@@ -118,13 +118,13 @@ namespace ft
         // necessarily equal to vector capacity        
         size_type size() const
         {
-
+            return _size;
         }
 
         // return 
         size_type max_size() const
         {
-
+            return _capacity;
         }
 
         //
