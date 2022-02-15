@@ -1,3 +1,4 @@
+
 Implement Stack Container :
     
     template <class T, class Container = ft::vector<T> >
@@ -38,13 +39,15 @@ Implement Vector Container :
     - non-member overload function's
     - non-member swap function
 
+Whisper : this shit i CaSe SeNsSitIVe , so care when you are typedefing your types [copy passta cpp reference] and definning your class's template's
 
 Implement Iterator for ft::vector<T, Alloc>
 
     - Random Access Iterator 
         // can be used to access elements at an arbitrary offset position relative to 
         //  the element they point to, offering the same functionality as pointers.
-
+    - define the base templateClass "Iterator" typedef's 
+    - define the traits ...
 
 
 
