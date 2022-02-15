@@ -6,7 +6,7 @@
 
 namespace ft
 {
-    template <class value_type>
+    template <class T>
     class rand_access_iterator
     {
         public:

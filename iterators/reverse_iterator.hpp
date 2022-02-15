@@ -11,12 +11,12 @@ namespace ft
     class reverse_iterator
     {
         public:
-            typedef Iterator        iterator_type;
-            typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
-            typedef typename iterator_traits<Iterator>::value_type        value_type;
-            typedef typename iterator_traits<Iterator>::difference_type   difference_type;
-            typedef typename iterator_traits<Iterator>::pointer           pointer;
-            typedef typename iterator_traits<Iterator>::reference         reference;
+            typedef Iterator                                                iterator_type;
+            typedef typename iterator_traits<Iterator>::iterator_category   iterator_category;
+            typedef typename iterator_traits<Iterator>::value_type          value_type;
+            typedef typename iterator_traits<Iterator>::difference_type     difference_type;
+            typedef typename iterator_traits<Iterator>::pointer             pointer;
+            typedef typename iterator_traits<Iterator>::reference           reference;
         
             // default Constructor
             // construct a reverse iterator that points to no object 
@@ -36,8 +36,8 @@ namespace ft
             // Copy
             // construct a reverse iterator from some other reverse iterator 
             // the constructed object keeps the same sense pf iteration as re_it
-            template <class Iter>
-            reverse_iterator (const reverse_iterator<Iter>& rev_it)
+            template <class Iterator>
+            reverse_iterator (const reverse_iterator<Iterator>& rev_it)
             {
 
             }

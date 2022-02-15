@@ -47,6 +47,8 @@ namespace ft
 
         // Constructs a container with as many elements as the range [first,last), 
         //  with each element constructed from its corresponding element in that range, in the same order.
+        // template <class MyIterator>
+        // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
         template <class InputIterator>
         vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
@@ -60,7 +62,7 @@ namespace ft
         }
 
         // assignement operator overloading
-        ft::vector & operator=(const ft::vector& object)
+        vector & operator=(const vector& object)
         {
 
         }
@@ -232,6 +234,8 @@ namespace ft
         // need to declare  fuction's  assign()/erase()/insert() : done
 
         // range
+        // template <class MyIterator>
+        // void assign (MyIterator first, MyIterator last)
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last)
         {
@@ -268,6 +272,8 @@ namespace ft
 
         }
         // range
+        // template <class MyIterator>
+        // void inset (iterator position, MyIterator first, MyIterator last)
         template <class InputIterator>
         void insert (iterator position, InputIterator first, InputIterator last)
         {
@@ -280,23 +286,11 @@ namespace ft
         {
             return (_alloc);
         }
-        /*
-        Typiquement, l'implémentation d'un vecteur stocke :
-            _array (pointeur vers le début du tableau)
-            _size (taille)
-            _capacité (capacité)
-            _alloc (allocateur)
-        Une implémentation utilisant uniquement des pointeurs est également possible :
-            _start (pointeur vers le début du tableau)
-            _end (pointeur vers l'emplacement mémoire après le dernier élément du vecteur)
-            _end_capacity (pointeur vers le dernier emplacement mémoire alloué)
-            _alloc (allocateur)
-        */
         private:
             allocator_type _alloc;
             size_type      _size;
             size_type      _capacity;
-            value_type*     _array; // pointer _array
+            value_type*     _array;
     };
 
     // Non-member function's
