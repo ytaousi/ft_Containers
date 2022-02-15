@@ -54,7 +54,7 @@ namespace ft
         }
 
         // copy constructor 
-        vector(const ft::vector& object)
+        vector(const vector& object)
         {
 
         }
