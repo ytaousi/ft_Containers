@@ -126,25 +126,32 @@ namespace ft
         // return 
         size_type max_size() const
         {
-            return _capacity;
+            return ;
         }
 
         //
         void resize(size_type n, value_type val = value_type())
         {
-
+            //Resizes the container so that it contains n elements.
+            //If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them)
+            //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
+            //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
+            //Notice that this function changes the actual content of the container by inserting or erasing elements from it.
         } 
 
         //
         size_type capacity() const
         {
-
+            return _capacity ;
         }
 
         //
         bool empty() const
         {
-
+            if (_size == 0)
+                return true ;
+            else
+                return false ;
         }
 
         //
@@ -155,52 +162,62 @@ namespace ft
 
             // element access function's
         
-        //
+        //Returns a reference to the element at specified location pos. No bounds checking is performed.
         reference operator[] (size_type n)
         {
-
+            return (_array[n]);
         }
         
-        //
+        //Returns a reference to the element at specified location pos. No bounds checking is performed.
         const_reference operator[] (size_type n) const
         {
-
+            return (_array[n]);
         }
 
-        //
+        //Returns a reference to the element at specified location pos, with bounds checking.
+        //If pos is not within the range of the container, an exception of type std::out_of_range is thrown.
         reference at (size_type n)
         {
-
+            if (n >= _size)
+                throw std::out_of_range();
+            return (_array[n]);
         }
 
-        //
+        //Returns a reference to the element at specified location pos, with bounds checking.
+        //If pos is not within the range of the container, an exception of type std::out_of_range is thrown.
         const_reference at (size_type n) const
         {
-
+            if (n >= _size)
+                throw std::out_of_range();
+            return (_array[n]);
         }
 
-        //
+        //Returns a reference to the first element in the container.
+        //Calling front on an empty container is undefined.
         reference front()
         {
-
+            return (_array[0]);
         }
 
-        //
+        //Returns a reference to the first element in the container.
+        //Calling front on an empty container is undefined.
         const_reference front() const
         {
-
+            return (_array[0]);
         }
 
-        //
+        //Returns a reference to the last element in the container.
+        //Calling back on an empty container causes undefined behavior.
         reference back()
         {
-
+            return (_array[size - 1]);
         }
 
-        //
+        //Returns a reference to the last element in the container.
+        //Calling back on an empty container causes undefined behavior.
         const_reference back() const
         {
-
+            return (_array[size - 1]);
         }
 
             // Element Modifiers function's
@@ -208,11 +225,13 @@ namespace ft
         //
         void clear()
         {
-
+            //Erases all elements from the container. After this call, size() returns zero.
+            //Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated.  
+            //Leaves the capacity() of the vector unchanged (note: the standard's restriction on the changes to capacity is in the specification of vector::reserve
         }
 
         //
-        void swap (ft::vector& x)
+        void swap (vector& x)
         {
 
         }
@@ -220,7 +239,8 @@ namespace ft
         //
         void pop_back()
         {
-
+            //Removes the last element in the vector, effectively reducing the container size by one.
+            //This destroys the removed element.
         }
 
         //
