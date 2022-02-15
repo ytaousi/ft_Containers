@@ -6,15 +6,21 @@
 
 namespace ft
 {
-    template <class T>
-    class rand_access_iterator
+    template <class value_type>
+    class random_access_iterator
     {
         public:
-            typedef ft::Iterator<std::random_access_iterator, T>::value_type        value_type;
-            typedef ft::Iterator<std::random_access_iterator, T>::difference_type   difference_type;
-            typedef ft::Iterator<std::random_access_iterator, T>::pointer           pointer;
-            typedef ft::Iterator<std::random_access_iterator, T>::reference         reference;
-            typedef ft::Iterator<std::random_access_iterator, T>::iterator_category iterator_category;
+            // typedef typename iterator_traits<Iterator>::value_type                           value_type;
+            // typedef typename iterator_traits<Iterator>::difference_type   difference_type;
+            // typedef typename iterator_traits<Iterator>::pointer           pointer;
+            // typedef typename iterator_traits<Iterartor>::reference         reference;
+            // typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
+            
+            typedef ft::Iterator<std::random_access_iterator_tag, T>::value_type        value_type;
+            typedef ft::Iterator<std::random_access_iterator_tag, T>::difference_type   difference_type;
+            typedef ft::Iterator<std::random_access_iterator_tag, T>::pointer           pointer;
+            typedef ft::Iterator<std::random_access_iterator_tag, T>::reference         reference;
+            typedef ft::Iterator<std::random_access_iterator_tag, T>::iterator_category iterator_category;
         
             rand_acc_iterator();
             ~rand_acc_iterator();

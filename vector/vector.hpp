@@ -23,10 +23,10 @@ namespace ft
 
             
             // need to typedef the iterators type : check  documentation 4 of 4
-            // this should be typedef ft::random_access_iterator<value_type>
-            typedef ft::Iterator<std::random_access_iterator_tag, value_type>                    iterator;
-            
-            typedef ft::Iterator<std::random_access_iterator_tag, const value_type>              const_iterator;
+            typedef ft::random_access_iterator<value_type>                                         iterator;
+            typedef ft::random_access_iterator<const value_type>                                   const_iterator;
+            //typedef ft::Iterator<std::random_access_iterator_tag, value_type>                    iterator;
+            //typedef ft::Iterator<std::random_access_iterator_tag, const value_type>              const_iterator;
             typedef ft::reverse_iterator<iterator>              reverse_iterator;        // fix data validation
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator; //
 
