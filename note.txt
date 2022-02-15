@@ -1,14 +1,3 @@
-// Generique programming       
-
-Data types not specified in implementation , but when it is used
-
-compile time polymorphisme
-
-
-
-
-
-
 /*
 * Tree's
 */
@@ -16,6 +5,9 @@ AVL tree Tutorial : https://www.codesdope.com/course/data-structures-avl-trees/
 AVL tree visualizer : https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 
+// Generique programming       
+
+Data types not specified in implementation
 
 
 /*
@@ -25,19 +17,9 @@ Un vecteur est un tableau dynamique, la mémoire dans laquelle est allouée en u
     qui est essentiellement un gros wrapper sur les opérateurs new et delete.
 https://www.cplusplus.com/reference/memory/allocator/?kw=allocator
 
-
-
-Typiquement, l'implémentation d'un vecteur stocke :
-    _array (pointeur vers le début du tableau)
-    _size (taille)
-    _capacité (capacité)
-    _alloc (allocateur)
-Une implémentation utilisant uniquement des pointeurs est également possible :
-    _start (pointeur vers le début du tableau)
-    _end (pointeur vers l'emplacement mémoire après le dernier élément du vecteur)
-    _end_capacity (pointeur vers le dernier emplacement mémoire alloué)
-    _alloc (allocateur)
-
+À un moment donné, vous avez besoin d'un constructeur de vecteurs avec des itérateurs,
+    et vous tombez sur le fait que deux constructeurs ont le même nombre de paramètres.
+Comment faire savoir au compilateur lequel appeler? enable_if vient à la rescousse ! Bien écrit ici :
 
 /*
 *Iterators
@@ -52,14 +34,8 @@ Correct the way to implement
 https://stackoverflow.com/questions/3582608/how-to-correctly-implement-custom-iterators-and-const-iterators
 
 
-
-
-À un moment donné, vous avez besoin d'un constructeur de vecteurs avec des itérateurs,
-    et vous tombez sur le fait que deux constructeurs ont le même nombre de paramètres.
-Comment faire savoir au compilateur lequel appeler? enable_if vient à la rescousse ! Bien écrit ici :
-
-
-
 /*
 * Iterator Invalidation
 */
+
+*************************************************************
