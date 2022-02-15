@@ -16,7 +16,7 @@ namespace ft
 {
         //Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2)
 
-    //Elements are compared using operator<.
+    //Elements are compared using operator "<"".
     template< class InputIterator1, class InputIterator2 >
     bool lexicographical_compare( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2 )
     {

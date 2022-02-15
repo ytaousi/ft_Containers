@@ -13,6 +13,8 @@ namespace ft
             typedef T1 first_type;
             typedef T2 second_type;
 
+            first_type  first;
+            second_type second;
                     // Member function's
             pair()
             {
@@ -37,8 +39,6 @@ namespace ft
 
 
         private:
-            first_type  first;
-            second_type second;
     };
 
             // Non-member function's
