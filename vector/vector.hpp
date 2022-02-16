@@ -65,7 +65,6 @@ namespace ft
             _alloc.allocte(_capacity, _array);
             for (size_type i = 0; i < _size ; i++)
                 _array[i] = object._array[i];
-
         }
         
         // destructor
