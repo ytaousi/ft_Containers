@@ -78,41 +78,41 @@ namespace ft
 
         iterator begin()
         {
-            iterator(_array[0]);
+            iterator(_array);
         }
 
         const_iterator begin() const
         {
-            const_iterator(_array[0]);
+            const_iterator(_array);
         }
 
         reverse_iterator rbegin()
         {
-            reverse_iterator(_array[_size - 1]);
+            reverse_iterator(_array + (size - 1));
         }
         const_reverse_iterator rbegin() const
         {
-            const_reverse_iterator(_array[_size - 1]);
+            const_reverse_iterator(_array + (_size - 1));
         }
 
         iterator end()
         {
-            iterator(_array[_size]);
+            iterator(_array + _size);
         }
 
         const_iterator end() const
         {
-            const_iterator(_array[_size]);
+            const_iterator(_array + _size);
         }
 
         reverse_iterator rend()
         {
-            reverse_iterator(_array[_size - 1 - _size]);
+            reverse_iterator(_array - 1); // stupid but fun or wrong
         }
 
         const_reverse_iterator rend() const
         {
-            const_reverse_iterator(_array[_size - 1 - _size]);
+            const_reverse_iterator(_array - 1); //
         }
             
             // Capacity Function's
@@ -127,7 +127,7 @@ namespace ft
         // return 
         size_type max_size() const
         {
-            return INT_MAX;
+            return INT_MAX; /// wayyyylii 
         }
 
         //
@@ -179,7 +179,7 @@ namespace ft
         //If pos is not within the range of the container, an exception of type std::out_of_range is thrown.
         reference at (size_type n)
         {
-            if (n >= _size)
+            if (n < 0 || n >= _size)
                 throw std::out_of_range();
             return (_array[n]);
         }
@@ -188,7 +188,7 @@ namespace ft
         //If pos is not within the range of the container, an exception of type std::out_of_range is thrown.
         const_reference at (size_type n) const
         {
-            if (n >= _size)
+            if (n < 0 || n >= _size)
                 throw std::out_of_range();
             return (_array[n]);
         }
