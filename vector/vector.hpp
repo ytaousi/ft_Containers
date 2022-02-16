@@ -32,7 +32,7 @@ namespace ft
             typedef size_t                                      size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
-        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL){};
+        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(nullptr){};
 
         // Constructs a container with n elements. Each element is a copy of val.
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
@@ -51,7 +51,7 @@ namespace ft
         }
 
         // copy constructor 
-        vector(const vector& object) : _size(object.size()), _capacity(object.capacity())
+        vector(const vector& object) : _size(0), _capacity(0), _array(nullptr)
         {
             *this = object;
         }
@@ -59,6 +59,10 @@ namespace ft
         // assignement operator overloading
         vector & operator=(const vector& object)
         {
+            _size = object.size();
+            _capacity = object.capacity();
+            _alloc.allocte(_capacity, _array);
+            // then copy element of object inner array ...
 
         }
         
