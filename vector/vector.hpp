@@ -32,10 +32,7 @@ namespace ft
             typedef size_t                                      size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
-        explicit vector (const allocator_type& alloc = allocator_type())
-        {
-
-        }
+        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL){};
 
         // Constructs a container with n elements. Each element is a copy of val.
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
@@ -54,9 +51,9 @@ namespace ft
         }
 
         // copy constructor 
-        vector(const vector& object)
+        vector(const vector& object) : _size(object.size()), _capacity(object.capacity())
         {
-
+            *this = object;
         }
 
         // assignement operator overloading
@@ -68,7 +65,11 @@ namespace ft
         // destructor
         ~vector()
         {
-            
+            for (size_type i = 0 ; i < _size; i++)
+                _alloc.destroy(_array[i]);
+            _alloc.deallocate(_array, _capacity);
+            //    this->get_allocator().destroy(_array[i]);
+            //this->get_allocator().deallocate(_array, _capacity);
         }
         
         // Member Fuctions
@@ -77,41 +78,41 @@ namespace ft
 
         iterator begin()
         {
-
+            iterator(_array[0]);
         }
 
         const_iterator begin() const
         {
-
+            const_iterator(_array[0]);
         }
 
         reverse_iterator rbegin()
         {
-
+            reverse_iterator(_array[_size - 1]);
         }
         const_reverse_iterator rbegin() const
         {
-
+            const_reverse_iterator(_array[_size - 1]);
         }
 
         iterator end()
         {
-
+            iterator(_array[_size]);
         }
 
         const_iterator end() const
         {
-
+            const_iterator(_array[_size]);
         }
 
         reverse_iterator rend()
         {
-
+            reverse_iterator(_array[_size - 1 - _size]);
         }
 
         const_reverse_iterator rend() const
         {
-
+            const_reverse_iterator(_array[_size - 1 - _size]);
         }
             
             // Capacity Function's
@@ -126,7 +127,7 @@ namespace ft
         // return 
         size_type max_size() const
         {
-            return ;
+            return INT_MAX;
         }
 
         //
@@ -230,10 +231,11 @@ namespace ft
             //Leaves the capacity() of the vector unchanged (note: the standard's restriction on the changes to capacity is in the specification of vector::reserve
         }
 
-        //
+        //Exchanges the contents of the container with those of other. Does not invoke any move, copy, or swap operations on individual elements.
+        //All iterators and references remain valid. The past-the-end iterator is invalidated.
         void swap (vector& x)
         {
-
+            // sizes may differ ?? so capacity also ?? hmmm
         }
 
         //
