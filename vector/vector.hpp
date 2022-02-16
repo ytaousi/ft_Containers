@@ -59,10 +59,12 @@ namespace ft
         // assignement operator overloading
         vector & operator=(const vector& object)
         {
+            // assign new values 
             _size = object.size();
             _capacity = object.capacity();
             _alloc.allocte(_capacity, _array);
-            // then copy element of object inner array ...
+            for (size_type i = 0; i < _size ; i++)
+                _array[i] = object._array[i];
 
         }
         
@@ -72,8 +74,6 @@ namespace ft
             for (size_type i = 0 ; i < _size; i++)
                 _alloc.destroy(_array[i]);
             _alloc.deallocate(_array, _capacity);
-            //    this->get_allocator().destroy(_array[i]);
-            //this->get_allocator().deallocate(_array, _capacity);
         }
         
         // Member Fuctions
@@ -131,7 +131,7 @@ namespace ft
         // return 
         size_type max_size() const
         {
-            return INT_MAX; /// wayyyylii 
+            return SIZE_MAX; // more logical thats the maximum possible value for size_t object's
         }
 
         //
