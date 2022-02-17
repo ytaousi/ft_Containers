@@ -40,12 +40,13 @@ namespace ft
         // Constructs a container with n elements. Each element is a copy of val.
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
+            std::cout << "Constructor of multi-element of vector called" << std::endl;
+            _array = nullptr;
             _size = n;
             _capacity = n;
             _array = _alloc.allocate(n);
-            for (size_t i = 0; i < _size; i++)
+            for (size_type i = 0; i < n; i++)
                 _alloc.construct(_array + i, val);
-            std::cout << "Constructor of multi-element of vector called" << std::endl;
         }
 
         // Constructs a container with as many elements as the range [first,last), 
@@ -70,7 +71,7 @@ namespace ft
             // assign new values 
             _size = object.size();
             _capacity = object.capacity();
-            _alloc.allocte(_capacity, _array);
+            _array = _alloc.allocte(_capacity);
             for (size_t i = 0; i < _size ; i++)
                 _alloc.construct(_array + i, object._array + i);
             return (*this);
@@ -79,10 +80,10 @@ namespace ft
         // destructor
         ~vector()
         {
-            for (size_t i = 0 ; i < _size; i++)
-                _alloc.destroy(&_array[i]);
-            _alloc.deallocate(_array, _capacity);
             std::cout << "vector Destructor Called" << std::endl;
+            // for (size_t i = 0 ; i < _size; i++)
+            //     _alloc.destroy(&_array[i]);
+            //_alloc.deallocate(_array, _capacity);
         }
         
         // Member Fuctions
@@ -323,7 +324,7 @@ namespace ft
             allocator_type _alloc;
             size_type      _size;
             size_type      _capacity;
-            value_type*     _array;
+            pointer     _array;
     };
 
     // Non-member function's
