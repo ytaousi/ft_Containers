@@ -5,6 +5,7 @@
 # include "../iterators/reverse_iterator.hpp"
 # include "../iterators/iterator.hpp"
 # include <exception>
+# include <iostream>
 
 // VECTOR is implemented as sequence container representing arrays that can change in size
 
@@ -35,17 +36,18 @@ namespace ft
         // Constructs an empty container, with no elements.
         explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(nullptr)
         {
-            
+            std::cout << "Constructor of empty vector Called" << std::endl;
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
             _array = _alloc.allocate(n);
-            for (size_type i = 0; i < n; i++)
+            for (size_t i = 0; i < n; i++)
                 _alloc.construct(_array[i], val);
             _size = n;
             _capacity = n;
+            std::cout << "Constructor of multielement of vector called" << std::endl;
         }
 
         // Constructs a container with as many elements as the range [first,last), 
@@ -71,16 +73,18 @@ namespace ft
             _size = object.size();
             _capacity = object.capacity();
             _alloc.allocte(_capacity, _array);
-            for (size_type i = 0; i < _size ; i++)
+            for (size_t i = 0; i < _size ; i++)
                 _alloc.construct(_array[i], object._array[i]);
+            return (*this);
         }
         
         // destructor
         ~vector()
         {
-            for (size_type i = 0 ; i < _size; i++)
+            for (size_t i = 0 ; i < _size; i++)
                 _alloc.destroy(&_array[i]);
-            _alloc.deallocate(_array, _capacity);
+            //_alloc.deallocate(_array, _capacity);
+            std::cout << "vector Destructor Called" << std::endl;
         }
         
         // Member Fuctions
