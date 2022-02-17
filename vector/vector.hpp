@@ -44,8 +44,7 @@ namespace ft
         {
             std::cout << "Constructor of multi-element of vector called" << std::endl;
             _array = _alloc.allocate(n);
-            for (size_t i = 0; i < n; i++)
-                _alloc.construct(&_array[i], val);
+            _alloc.construct(_array, val);
             _size = n;
             _capacity = n;
         }
@@ -74,7 +73,8 @@ namespace ft
             _capacity = object.capacity();
             _alloc.allocte(_capacity, _array);
             for (size_t i = 0; i < _size ; i++)
-                _alloc.construct(_array[i], object._array[i]);
+                _array[i] = object._array[i];
+                //_alloc.construct(_array[i], object._array[i]);
             return (*this);
         }
         
