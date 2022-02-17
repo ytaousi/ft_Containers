@@ -6,6 +6,8 @@
 # include "../iterators/iterator.hpp"
 # include <exception>
 # include <iostream>
+# include "../enable_if.hpp"
+# include "../is_integral.hpp"
 
 // VECTOR is implemented as sequence container representing arrays that can change in size
 
@@ -53,10 +55,11 @@ namespace ft
         //  with each element constructed from its corresponding element in that range, in the same order.
         // template <class MyIterator>
         // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
-        template <class InputIterator>
+        template <class InputIterator, class =  typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
         vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
             ;
+            std::cout << "ne"<< std::endl;
         }
 
         // copy constructor 

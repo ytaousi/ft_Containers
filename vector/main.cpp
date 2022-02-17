@@ -4,7 +4,7 @@
 
 int main()
 {
-    ft::vector<int> first(14, 0);
+    ft::vector<int> first(14, 4);
     std::vector<int> second (14, 23);
 
     for (size_t i = 0; i < 14; i++)
