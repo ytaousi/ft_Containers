@@ -10,16 +10,16 @@ namespace ft
     class random_access_iterator
     {
         public:
-            typedef ft::Iterator<std::random_access_iterator_tag, T>::value_type        value_type;
-            typedef ft::Iterator<std::random_access_iterator_tag, T>::difference_type   difference_type;
-            typedef ft::Iterator<std::random_access_iterator_tag, T>::pointer           pointer;
-            typedef ft::Iterator<std::random_access_iterator_tag, T>::reference         reference;
-            typedef ft::Iterator<std::random_access_iterator_tag, T>::iterator_category iterator_category;
+            typedef typename ft::Iterator<std::random_access_iterator_tag, T>::value_type        value_type;
+            typedef typename ft::Iterator<std::random_access_iterator_tag, T>::difference_type   difference_type;
+            typedef typename ft::Iterator<std::random_access_iterator_tag, T>::pointer           pointer;
+            typedef typename ft::Iterator<std::random_access_iterator_tag, T>::reference         reference;
+            typedef typename ft::Iterator<std::random_access_iterator_tag, T>::iterator_category iterator_category;
         
-            rand_access_iterator();
-            ~rand_access_iterator();
-            rand_access_iterator(const rand_access_iterator & instance);
-            rand_access_iterator & operator = (const rand_access_iterator & instance);
+            random_access_iterator();
+            ~random_access_iterator();
+            random_access_iterator(const random_access_iterator & instance);
+            random_access_iterator & operator = (const random_access_iterator & instance);
 
         private:
             pointer iter;
