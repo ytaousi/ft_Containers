@@ -42,11 +42,12 @@ namespace ft
         // Constructs a container with n elements. Each element is a copy of val.
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
-            std::cout << "Constructor of multi-element of vector called" << std::endl;
-            _array = _alloc.allocate(n);
-            _alloc.construct(_array, val);
             _size = n;
             _capacity = n;
+            _array = _alloc.allocate(n);
+            for (size_t i = 0; i < _size; i++)
+                _alloc.construct(_array + i, val);
+            std::cout << "Constructor of multi-element of vector called" << std::endl;
         }
 
         // Constructs a container with as many elements as the range [first,last), 
@@ -73,8 +74,7 @@ namespace ft
             _capacity = object.capacity();
             _alloc.allocte(_capacity, _array);
             for (size_t i = 0; i < _size ; i++)
-                _array[i] = object._array[i];
-                //_alloc.construct(_array[i], object._array[i]);
+                _alloc.construct(_array + i, object._array + i);
             return (*this);
         }
         
