@@ -4,6 +4,7 @@
 # include <memory>
 # include "../iterators/reverse_iterator.hpp"
 # include "../iterators/iterator.hpp"
+# include <exception>
 
 // VECTOR is implemented as sequence container representing arrays that can change in size
 
@@ -78,7 +79,7 @@ namespace ft
         ~vector()
         {
             for (size_type i = 0 ; i < _size; i++)
-                _alloc.destroy(_array[i]);
+                _alloc.destroy(&_array[i]);
             _alloc.deallocate(_array, _capacity);
         }
         
@@ -98,7 +99,7 @@ namespace ft
 
         reverse_iterator rbegin()
         {
-            return reverse_iterator(_array + (size - 1));
+            return reverse_iterator(_array + (_size - 1));
         }
         const_reverse_iterator rbegin() const
         {
@@ -190,8 +191,8 @@ namespace ft
         reference at (size_type n)
         {
             if (n < 0 || n >= _size)
-                throw std::out_of_range();
-            return (_array[n]);
+                throw std::out_of_range("Out of Range");
+            return (_array + n);
         }
 
         //Returns a reference to the element at specified location pos, with bounds checking.
@@ -199,36 +200,36 @@ namespace ft
         const_reference at (size_type n) const
         {
             if (n < 0 || n >= _size)
-                throw std::out_of_range();
-            return (_array[n]);
+                throw std::out_of_range("Out of Range");
+            return (_array + n);
         }
 
         //Returns a reference to the first element in the container.
         //Calling front on an empty container is undefined.
         reference front()
         {
-            return (_array[0]);
+            return (_array);
         }
 
         //Returns a reference to the first element in the container.
         //Calling front on an empty container is undefined.
         const_reference front() const
         {
-            return (_array[0]);
+            return (_array);
         }
 
         //Returns a reference to the last element in the container.
         //Calling back on an empty container causes undefined behavior.
         reference back()
         {
-            return (_array[size - 1]);
+            return (_array + _size - 1);
         }
 
         //Returns a reference to the last element in the container.
         //Calling back on an empty container causes undefined behavior.
         const_reference back() const
         {
-            return (_array[size - 1]);
+            return (_array + _size - 1);
         }
 
             // Element Modifiers function's

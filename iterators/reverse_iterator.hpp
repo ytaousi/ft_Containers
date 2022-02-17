@@ -36,8 +36,8 @@ namespace ft
             // Copy
             // construct a reverse iterator from some other reverse iterator 
             // the constructed object keeps the same sense pf iteration as re_it
-            template <class Iterator>
-            reverse_iterator (const reverse_iterator<Iterator>& rev_it)
+            template <class IIterator>
+            reverse_iterator (const reverse_iterator<IIterator>& rev_it)
             {
 
             }
