@@ -58,25 +58,25 @@ namespace ft
         template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
         vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
-            ;
-            std::cout << "ne"<< std::endl;
+            std::cout << "Range Constructor with iterators Called" << std::endl;
         }
 
         // copy constructor 
         vector(const vector& object) : _size(0), _capacity(0), _array(nullptr)
         {
+            std::cout << "Copy Constructor Called" << std::endl;
             *this = object;
         }
 
         // assignement operator overloading
         vector & operator=(const vector& object)
         {
-            // assign new values 
+            std::cout << " Assignement Operator Called " << std::endl; 
             _size = object.size();
             _capacity = object.capacity();
-            _array = _alloc.allocte(_capacity);
-            for (size_t i = 0; i < _size ; i++)
-                _alloc.construct(_array + i, object._array + i);
+            _array = _alloc.allocate(_capacity);
+            for (size_type i = 0; i < _size ; i++)
+                _array[i] = object[i];
             return (*this);
         }
         
@@ -183,12 +183,14 @@ namespace ft
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         reference operator[] (size_type n)
         {
+            std::cout << "Index operator Called" << std::endl;
             return (_array[n]);
         }
         
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         const_reference operator[] (size_type n) const
         {
+            std::cout << "Const Index operator Called" << std::endl;
             return (_array[n]);
         }
 
