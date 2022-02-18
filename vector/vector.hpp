@@ -34,7 +34,7 @@ namespace ft
             typedef size_t                                      size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
-        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(nullptr)
+        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
         {
             std::cout << "Constructor of empty vector Called" << std::endl;
         }
@@ -62,7 +62,7 @@ namespace ft
         }
 
         // copy constructor 
-        vector(const vector& object) : _size(0), _capacity(0), _array(nullptr)
+        vector(const vector& object) : _size(0), _capacity(0), _array(NULL)
         {
             std::cout << "Copy Constructor Called" << std::endl;
             *this = object;
