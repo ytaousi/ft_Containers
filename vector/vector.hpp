@@ -55,7 +55,7 @@ namespace ft
         //  with each element constructed from its corresponding element in that range, in the same order.
         // template <class MyIterator>
         // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
-        template <class InputIterator, class =  typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
+        template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
         vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
             ;
