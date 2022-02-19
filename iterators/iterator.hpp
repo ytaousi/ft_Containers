@@ -87,8 +87,21 @@ namespace ft
     };
         // Non-member funcs
 
-    
+    // addition operator
+    template <class T>
+    random_access_iterator<T> operator + (typename random_access_iterator<T>::difference_type n, const random_access_iterator<T>& iter)
+    {
+        return (iter + n);
+    }
 
+    // susbstraction operator
+    template <class T>
+    typename random_access_iterator<T>::difference_type operator - (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
+    {
+        return (lhs.base() - rhs.base());
+    }
+
+    // relational operators
     template <class T>
     bool operator == (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
