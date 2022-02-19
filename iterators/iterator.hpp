@@ -85,41 +85,44 @@ namespace ft
         private:
             pointer iter;
     };
+        // Non-member funcs
+
+    
 
     template <class T>
     bool operator == (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() == rhs.base());
     }
 
     template <class T>
     bool operator != (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() != rhs.base());
     }
 
     template <class T>
     bool operator < (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() < rhs.base());
     }
 
     template <class T>
     bool operator <= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() <= rhs.base());
     }
 
     template <class T>
     bool operator > (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() > rhs.base());
     }
 
     template <class T>
     bool operator >= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
     {
-
+        return (lhs.base() >= rhs.base());
     }
 }
 
