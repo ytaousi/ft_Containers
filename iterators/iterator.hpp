@@ -21,6 +21,67 @@ namespace ft
             random_access_iterator(const random_access_iterator & instance);
             random_access_iterator & operator = (const random_access_iterator & instance);
 
+
+            pointer base() const
+            {
+
+            }
+
+            reference operator * () const
+            {
+
+            }
+
+            random_access_iterator operator + (difference_type n) const
+            {
+
+            }
+
+            random_access_iterator & operator ++ ()
+            {
+
+            }
+
+            random_access_iterator operator ++ (int)
+            {
+
+            }
+
+            random_access_iterator & operator += (difference_type n)
+            {
+
+            }
+
+            random_access_iterator operator - (difference_type n) const
+            {
+
+            }
+
+            random_access_iterator & operator -- ()
+            {
+
+            }
+
+            random_access_iterator operator -- (int)
+            {
+
+            }
+
+            random_access_iterator & operator -= (difference_type n)
+            {
+
+            }
+
+            pointer operator -> () const
+            {
+
+            }
+
+            reference operator [] (difference_type n) const
+            {
+
+            }
+
         private:
             pointer iter;
     };
