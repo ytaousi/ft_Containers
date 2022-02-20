@@ -3,6 +3,7 @@
 
 # include "iterator.hpp"
 # include "iterator_traits.hpp"
+# include <memory>
 // still need to define the iterator traits template done
 // so that typedef's takes in account done
 namespace ft
@@ -47,75 +48,83 @@ namespace ft
             //return base iterator
             iterator_type base() const
             {
-
+                return ;
             }
 
             //dereference iterator
             reference operator * () const
             {
-
+                return *rev_iter;
             }
 
             //addition operator
             reverse_iterator operator+ (difference_type n) const
             {
-
+                return reverse_iterator(base() - n);
             }
 
             //pre-increment iterator position
             // return the value after incrementation
             reverse_iterator& operator++()
             {
-
+                --(*this);
+                return (*this);
             }
 
             //post-incrementation
             // return the value before incrementation
             reverse_iterator operator++(int)
             {
-
+                reverse_iterator temp = *this;
+                ++(*this);
+                return temp;
             }
 
             //advance iterator
             reverse_iterator& operator+= (difference_type n)
             {
-
+                (*this) -= n;   // pretty sure frechnaha somewhere                
+                return (*this)
             }
 
             //substraction iterator
             reverse_iterator operator- (difference_type n) const
             {
-
+                return reverse_iterator(base() + n);
             }
 
             //pre-decrement iterator position
             reverse_iterator& operator--()
             {
-
+                ++(*this);
+                return (*this);
             }
 
             //post-decrementation
             reverse_iterator  operator--(int)
             {
-
+                reverse_iterator temp = *this;
+                --(*this);
+                return temp;
             }
 
             //retrocede iterator
             reverse_iterator& operator-= (difference_type n)
             {
-
+                (*this) += n;
+                return (*this);   // pretty sure frechnaha somewhere
             }
 
             //dereference iterator
             pointer operator->() const
             {
-
+                return ()
             }
 
             //dereference iterator with offset
             reference operator[] (difference_type n) const
             {
-
+                return (base()[-n-1]);
             }
         private:
             iterator_type rev_iter;
