@@ -54,7 +54,8 @@ namespace ft
             //dereference iterator
             reference operator * () const
             {
-                return *rev_iter;
+                Iterator temp = *this;
+                return *--temp;
             }
 
             //addition operator
@@ -118,7 +119,7 @@ namespace ft
             //dereference iterator
             pointer operator->() const
             {
-                return ()
+                return &(operator*());
             }
 
             //dereference iterator with offset
