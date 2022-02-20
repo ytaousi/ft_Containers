@@ -22,7 +22,7 @@ namespace ft
             // default Constructor
             // construct a reverse iterator that points to no object 
             //  the internal base iterator is value-initializaed
-            reverse_iterator()
+            reverse_iterator() : rev_iter(iterator_type())
             {
 
             }
