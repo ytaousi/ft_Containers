@@ -9,7 +9,7 @@
 //An empty range is lexicographically less than any non-empty range.
 //Two empty ranges are lexicographically equal. 
 
-// No need to implement the second template funcion : it compare element using binary comparaison  comp();
+// No need to implement the second template funcion : it compare element using binary comparaison  comp(); // need to 
 //https://www.cplusplus.com/reference/algorithm/lexicographical_compare/
 // piece of code te test
 namespace ft
@@ -30,6 +30,11 @@ namespace ft
             ++first2;
         }
         return (first2 != last2);
+    }
+    template< class InputIterator1, class InputIterator2, class Compare >
+    bool lexicographical_compare( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp = std::equal())
+    {
+
     }
 }
 

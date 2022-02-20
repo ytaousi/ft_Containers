@@ -37,18 +37,24 @@ namespace ft
             // Copy
             // construct a reverse iterator from some other reverse iterator 
             // the constructed object keeps the same sense pf iteration as re_it
-            template <class Iterator>
-            reverse_iterator (const reverse_iterator<Iterator>& rev_it)
+            template <class IIterator>
+            reverse_iterator (const reverse_iterator<IIterator>& rev_it)
             {
-
+                *this = rev_it;
             }
-
+            // Assignement Operator
+            template< class IIterator >
+            reverse_iterator& operator =( const reverse_iterator<IIterator>& instance)
+            {
+                this->rev_iter = instance.base();
+                return *this;
+            }
         // Member Function's
 
             //return base iterator
             iterator_type base() const
             {
-                return ;
+                return rev_iter; // ??
             }
 
             //dereference iterator
@@ -85,7 +91,7 @@ namespace ft
             reverse_iterator& operator+= (difference_type n)
             {
                 (*this) -= n;   // pretty sure frechnaha somewhere                
-                return (*this)
+                return (*this);
             }
 
             //substraction iterator
