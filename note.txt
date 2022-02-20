@@ -39,3 +39,10 @@ https://stackoverflow.com/questions/3582608/how-to-correctly-implement-custom-it
 */
 
 *************************************************************
+
+
+
+
+SFINAE (Substitution Failure Is Not An Error) 
+est un mécanisme du compilateur pour ignorer certaines instanciations de fonction ou de classe qui ne compilent pas, 
+sans pour autant émettre une erreur de compilation.
