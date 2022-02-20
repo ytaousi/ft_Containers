@@ -2,7 +2,7 @@
 #include <iterator>     // std::iterator, std::input_iterator_tag
 #include <vector>
 
-class MyIterator : public std::iterator<std::input_iterator_tag, int>
+class MyIterator : public std::iterator<std::random_access_iterator_tag, int> // only input iterator featurs implemented
 {
     int* p;
     public:
