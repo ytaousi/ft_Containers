@@ -12,7 +12,8 @@ class MyIterator : public std::iterator<std::random_access_iterator_tag, int> //
     public:
       MyIterator() : p(nullptr)
       {
-        std::cout << "*p = nullptr";
+        std::cout << "Empty constructor Called" << std::endl;
+        std::cout << "*p = nullptr\n";
       };
       MyIterator(int* x) :p(x)
       {
@@ -98,6 +99,6 @@ int main () {
   int value = 5;
 
   int * pointer = &value;
-  std::cout << "object.getBasePointer() -> p: *p = " << *(pointer) << std::endl;
+  //std::cout << "object.getBasePointer() -> p: *p = " << *(pointer) << std::endl;
   return 0;
 }
