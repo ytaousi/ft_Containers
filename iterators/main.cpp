@@ -10,21 +10,31 @@ class MyIterator : public std::iterator<std::random_access_iterator_tag, int> //
   typedef int * iterator_type;
   iterator_type p;
     public:
-      MyIterator() : p(nullptr)
+    ~MyIterator() {std::cout << "Destructor Called" << std::endl;};
+      MyIterator() : p(NULL)
       {
-        std::cout << "Empty constructor Called" << std::endl;
-        std::cout << "*p = nullptr\n";
+        std::cout << "Empty constructor Called MyIterator() :" << std::endl;
+        std::cout << "value of p (& object pointed to)= " << p << std::endl;
       };
       MyIterator(int* x) :p(x)
       {
-        std::cout << " x = p / \n";
-        std::cout << "address of x: ["<< x << "] " << "address of p(object constructed from x) [" << p << "]" << std::endl;  
+        std::cout << "Constructor with parameter Called MyIterator(int * x)" << std::endl;
+        std::cout << "value of x (&value) = ["<< x << "] " << "\naddress of x (pointer passed to construct) = [" << &x << " <= this is an address of the copy passed as a prameter]" << std::endl;  
+        std::cout << "value of p (object constructed from int *x , p(x) ) = [" << p << "]" << "\naddress of p (&p) = [" << &p << "]" << std::endl;
+        std::cout << "value of this (address of internal  pointer  p) = [" << this << "]" << std::endl;
+      
       }
-      MyIterator(const MyIterator& mit) : p(mit.p)
+      MyIterator(const MyIterator& instance) : p(instance.p)
       {
         std::cout << "Copy constructor Called" << '\n';
+        *this = instance;
       }
 
+      MyIterator & operator = (const MyIterator & instance)
+      {
+        std::cout << "Assignement Operator Called" << '\n'; 
+        return *this;
+      }
       const iterator_type & getBasePointer() const
       {
         return p;
@@ -63,11 +73,11 @@ std::ostream &        operator << (std::ostream & out , const MyIterator & objec
 
 
 int main () {
-//   int numbers[]={10,20,30,40,50};
-//   MyIterator from(numbers);
-//   MyIterator until(numbers+5);
-//   for (MyIterator it=from; it!=until; it++)
-//     std::cout << *it << ' ';
+  int numbers[]={10,20,30,40,50};
+  MyIterator from(numbers);
+  MyIterator until(numbers+5);
+  for (MyIterator it=from; it!=until; it++)
+    std::cout << *it << ' ';
   std::cout << "\n******************************************\n";
 
   //   std::vector<int> myvector;
@@ -93,12 +103,21 @@ int main () {
   // ++from;
   // ++until;
   // std::cout << "*form/*until:[" << *from << "/" << *until << "]\n" ;
-
-  MyIterator iterator;
   
   int value = 5;
-
+  std::cout << "value = " << value << "\naddress of value(&value) = [" << &value << "]" << std::endl;
+  
   int * pointer = &value;
-  //std::cout << "object.getBasePointer() -> p: *p = " << *(pointer) << std::endl;
+  std::cout << "*pointer = " << *pointer << "\naddress of pointer(&pointer) = [" << &pointer << "]" << "\nvalue of pointer (pointer = &value) = [" << pointer << "]" << std::endl;
+
+  std::cout << "\n******************************************\n";
+  MyIterator iterator(pointer);
+  std::cout << "\n******************************************\n";
+
+  std::vector<int> array;
+
+  for (MyIterator it = array.begin(); it != array.end(); it ++)
+    array.push_back(*it);
+  
   return 0;
 }
