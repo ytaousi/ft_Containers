@@ -97,6 +97,7 @@ namespace ft
         {
             return iterator(_array);
         }
+        
 
         const_iterator begin() const
         {
@@ -278,13 +279,13 @@ namespace ft
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last)
         {
-
+            
         }
 
         // fill
         void assign (size_type n, const value_type& val)
         {
-
+            
         }
 
         //
@@ -345,7 +346,7 @@ namespace ft
     template <class T, class Alloc>
     bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-
+        
     }
 
     template <class T, class Alloc>
