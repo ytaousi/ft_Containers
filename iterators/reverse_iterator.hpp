@@ -22,7 +22,7 @@ namespace ft
             // default Constructor
             // construct a reverse iterator that points to no object 
             //  the internal base iterator is value-initializaed
-            reverse_iterator() : rev_iter(iterator_type())
+            reverse_iterator() : rev_iter(iterator_type()) // ??
             {
 
             }
@@ -42,19 +42,19 @@ namespace ft
             {
                 *this = rev_it;
             }
-            // Assignement Operator
-            template< class IIterator >
-            reverse_iterator& operator =( const reverse_iterator<IIterator>& instance)
-            {
-                this->rev_iter = instance.base();
-                return *this;
-            }
+            // Assignement Operator    this is C++11 dont really need it
+            // template< class IIterator >
+            // reverse_iterator& operator =( const reverse_iterator<IIterator>& instance)
+            // {
+            //     this->rev_iter = instance.base();
+            //     return *this;
+            // }
         // Member Function's
 
-            //return base iterator
+            //return base iterator that was initialized with ??
             iterator_type base() const
             {
-                return rev_iter; // ??
+                return rev_iter; // !!
             }
 
             //dereference iterator
@@ -125,7 +125,8 @@ namespace ft
             //dereference iterator
             pointer operator->() const
             {
-                return std::addressof(operator*());
+                //return std::addressof(operator*());
+                return &(operator*());
             }
 
             //dereference iterator with offset
@@ -133,6 +134,21 @@ namespace ft
             {
                 return (base()[-n-1]);
             }
+
+            // friend function to the class implementation
+                template <class Iterator>
+            friend bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class Iterator>
+            friend bool operator!= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class Iterator>
+            friend bool operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class Iterator>
+            friend bool operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class Iterator>
+            friend bool operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class Iterator>
+            friend bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+
         private:
             iterator_type rev_iter;
     };

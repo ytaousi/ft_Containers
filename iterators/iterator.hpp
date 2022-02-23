@@ -83,6 +83,21 @@ namespace ft
 
             }
 
+            // friend function for random_access_iterator class
+                template <class T>
+            friend bool operator == (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class T>
+            friend bool operator != (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class T>
+            friend bool operator < (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class T>
+            friend bool operator <= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class T>
+            friend bool operator > (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class T>
+            friend bool operator >= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+
+
         private:
             pointer iter;
     };
