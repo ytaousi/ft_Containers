@@ -14,33 +14,33 @@
 namespace ft
 {
     template <class T, class Alloc = std::allocator<T> >
-    class vector
+    class Vector
     {
         public:
-            typedef T                                           value_type;
-            typedef Alloc                                       allocator_type;
+            typedef T                                               value_type;
+            typedef Alloc                                           allocator_type;
 
-            typedef	typename allocator_type::reference			reference;
-            typedef	typename allocator_type::const_reference	const_reference;
-            typedef	typename allocator_type::pointer			pointer;
-            typedef	typename allocator_type::const_pointer		const_pointer;
+            typedef	typename allocator_type::reference			    reference;
+            typedef	typename allocator_type::const_reference	    const_reference;
+            typedef	typename allocator_type::pointer			    pointer;
+            typedef	typename allocator_type::const_pointer		    const_pointer;
 
-            typedef ft::random_access_iterator<value_type>                                         iterator;
-            typedef ft::random_access_iterator<const value_type>                                   const_iterator;
-            typedef ft::reverse_iterator<iterator>              reverse_iterator;
-            typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
+            typedef ft::random_access_iterator<value_type>          iterator;
+            typedef ft::random_access_iterator<const value_type>    const_iterator;
+            typedef ft::reverse_iterator<iterator>                  reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
-            typedef ptrdiff_t                                   difference_type;
-            typedef size_t                                      size_type;
+            typedef ptrdiff_t                                       difference_type;
+            typedef size_t                                          size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
-        explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
+        explicit Vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
         {
             std::cout << "Constructor of empty vector Called" << std::endl;
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
-        explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
             std::cout << "Constructor of multi-element of vector called" << std::endl;
             _array = nullptr;
@@ -56,20 +56,20 @@ namespace ft
         // template <class MyIterator>
         // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
         template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
-        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+        Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
             std::cout << "Range Constructor with iterators Called" << std::endl;
         }
 
         // copy constructor 
-        vector(const vector& object) : _size(0), _capacity(0), _array(NULL)
+        Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL)
         {
             std::cout << "Copy Constructor Called" << std::endl;
             *this = object;
         }
 
         // assignement operator overloading
-        vector & operator=(const vector& object)
+        Vector & operator=(const Vector& object)
         {
             std::cout << " Assignement Operator Called " << std::endl; 
             _size = object.size();
@@ -81,7 +81,7 @@ namespace ft
         }
         
         // destructor
-        ~vector()
+        ~Vector()
         {
             std::cout << "vector Destructor Called" << std::endl;
             // for (size_t i = 0 ; i < _size; i++)
@@ -253,7 +253,7 @@ namespace ft
 
         //Exchanges the contents of the container with those of other. Does not invoke any move, copy, or swap operations on individual elements.
         //All iterators and references remain valid. The past-the-end iterator is invalidated.
-        void swap (vector& x)
+        void swap (Vector& x)
         {
             // sizes may differ ?? so capacity also ?? hmmm
         }
@@ -326,6 +326,24 @@ namespace ft
         {
             return (_alloc);
         }
+
+            // friend function for vector
+            template <class TT, class AAlloc>
+        friend bool operator== (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator!= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator<  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator<= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator>  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator>= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            
+            template <class TT, class AAlloc>
+        friend void swap (Vector<TT,AAlloc>& x, Vector<TT,AAlloc>& y);
+
         private:
             allocator_type _alloc;
             size_type      _size;
@@ -337,44 +355,44 @@ namespace ft
 
     //
     template <class T, class Alloc>
-    void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+    void swap (Vector<T,Alloc>& x, Vector<T,Alloc>& y)
     {
         x.swap(y);
     }
 
     // 
     template <class T, class Alloc>
-    bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
         
     }
 
     template <class T, class Alloc>
-    bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator<  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator<= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator>  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
 
     }
 
     template <class T, class Alloc>
-    bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    bool operator>= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
 
     }

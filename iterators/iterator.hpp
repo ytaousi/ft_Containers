@@ -93,18 +93,23 @@ namespace ft
             }
 
             // friend function for random_access_iterator class
-                template <class T>
-            friend bool operator == (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-                template <class T>
-            friend bool operator != (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-                template <class T>
-            friend bool operator < (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-                template <class T>
-            friend bool operator <= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-                template <class T>
-            friend bool operator > (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-                template <class T>
-            friend bool operator >= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
+                template <class TT>
+            friend bool operator == (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+                template <class TT>
+            friend bool operator != (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+                template <class TT>
+            friend bool operator < (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+                template <class TT>
+            friend bool operator <= (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+                template <class TT>
+            friend bool operator > (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+                template <class TT>
+            friend bool operator >= (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
+
+                template <class TT>
+            friend random_access_iterator<TT> operator + (typename random_access_iterator<TT>::difference_type n, const random_access_iterator<TT>& iter);
+                template <class TT>
+            friend typename random_access_iterator<TT>::difference_type operator - (const random_access_iterator<TT>& lhs, const random_access_iterator<TT>& rhs);
 
         private:
             pointer iter;

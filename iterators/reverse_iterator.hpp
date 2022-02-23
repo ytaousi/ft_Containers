@@ -136,18 +136,18 @@ namespace ft
             }
 
             // friend function to the class implementation
-                template <class Iterator>
-            friend bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
-                template <class Iterator>
-            friend bool operator!= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
-                template <class Iterator>
-            friend bool operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
-                template <class Iterator>
-            friend bool operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
-                template <class Iterator>
-            friend bool operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
-                template <class Iterator>
-            friend bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs);
+                template <class IIterator>
+            friend bool operator== (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
+                template <class IIterator>
+            friend bool operator!= (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
+                template <class IIterator>
+            friend bool operator<  (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
+                template <class IIterator>
+            friend bool operator<= (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
+                template <class IIterator>
+            friend bool operator>  (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
+                template <class IIterator>
+            friend bool operator>= (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
 
         private:
             iterator_type rev_iter;
