@@ -24,12 +24,12 @@ namespace ft
 
             pointer base() const
             {
-
+                return iter;
             }
 
             reference operator * () const
             {
-
+                return *iter;
             }
 
             random_access_iterator operator + (difference_type n) const
@@ -40,47 +40,56 @@ namespace ft
             // pre incremented
             random_access_iterator & operator ++ ()
             {
-
+                ++(*this);
+                return *this;
             }
             // post incremented
             random_access_iterator operator ++ (int)
             {
-
+                random_access_iterator temp = *this;
+                ++(*this);
+                return temp;
             }
 
             random_access_iterator & operator += (difference_type n)
             {
-
+                (*this) += n;
+                return (*this);
             }
 
             random_access_iterator operator - (difference_type n) const
             {
-
+                return random_access_iterator(base() - n);
             }
 
             random_access_iterator & operator -- ()
             {
-
+                --(*this);
+                return *this;
             }
 
             random_access_iterator operator -- (int)
             {
-
+                random_access_iterator temp = *this;
+                --(*this);
+                return temp;
             }
 
             random_access_iterator & operator -= (difference_type n)
             {
-
+                (*this) -= n;
+                return (*this);
             }
 
             pointer operator -> () const
             {
-
+                //return std::addressof(operator*());
+                return &(operator*());
             }
 
             reference operator [] (difference_type n) const
             {
-
+                return (base()[+n]);
             }
 
             // friend function for random_access_iterator class
@@ -96,7 +105,6 @@ namespace ft
             friend bool operator > (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
                 template <class T>
             friend bool operator >= (const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs);
-
 
         private:
             pointer iter;
