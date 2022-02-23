@@ -125,7 +125,7 @@ namespace ft
             //dereference iterator
             pointer operator->() const
             {
-                return &(operator*());
+                return std::addressof(operator*());
             }
 
             //dereference iterator with offset
