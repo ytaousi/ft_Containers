@@ -114,10 +114,7 @@ int main () {
   MyIterator iterator(pointer);
   std::cout << "\n******************************************\n";
 
-  std::vector<int> array;
 
-  for (MyIterator it = array.begin(); it != array.end(); it ++)
-    array.push_back(*it);
   
   return 0;
 }

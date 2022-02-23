@@ -37,11 +37,12 @@ namespace ft
 
             }
 
+            // pre incremented
             random_access_iterator & operator ++ ()
             {
 
             }
-
+            // post incremented
             random_access_iterator operator ++ (int)
             {
 
