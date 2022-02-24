@@ -30,7 +30,7 @@ namespace ft
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
-            typedef ptrdiff_t                                       difference_type;
+            typedef iterator_traits<iterator>                       difference_type;
             typedef size_t                                          size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
@@ -176,7 +176,12 @@ namespace ft
         //
         void reserve(size_type n)
         {
-
+            if (n > this->max_size())
+                throw std::length_error("lenght of container is greater than maximum allowed");
+            if (n > this->_capacity)
+            {
+                
+            }
         }
 
             // element access function's

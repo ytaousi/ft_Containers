@@ -100,8 +100,7 @@ namespace ft
             //substraction iterator
             reverse_iterator operator- (difference_type n) const
             {
-                //return reverse_iterator(base() + n);
-                return 
+                return reverse_iterator(base() + n);
             }
 
             //pre-decrement iterator position
