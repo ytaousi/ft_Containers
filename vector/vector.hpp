@@ -145,7 +145,7 @@ namespace ft
         // return 
         size_type max_size() const
         {
-            return SIZE_MAX; // more logical thats the maximum possible value for size_t object's
+            return _alloc.max_size(); // more logical thats the maximum possible value for size_t object's
         }
 
         //
@@ -256,6 +256,9 @@ namespace ft
         void swap (Vector& x)
         {
             // sizes may differ ?? so capacity also ?? hmmm
+            std::swap(_capacity, x._capacity);
+            std::swap(_size, x._size);
+            std::swap(_array, x._array); 
         }
 
         //

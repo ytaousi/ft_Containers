@@ -26,7 +26,10 @@ namespace ft
             {
 
             }
+            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
+            {
 
+            }
             // initialization
             // construct a reverse iterator from some original iterator it the behavior of the constructed object replicates the original
             // exept it iterates through its pointed elements in  the reverse order  
@@ -97,7 +100,8 @@ namespace ft
             //substraction iterator
             reverse_iterator operator- (difference_type n) const
             {
-                return reverse_iterator(base() + n);
+                //return reverse_iterator(base() + n);
+                return 
             }
 
             //pre-decrement iterator position
