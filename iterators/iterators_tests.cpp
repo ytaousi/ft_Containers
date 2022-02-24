@@ -58,29 +58,30 @@ void iterator_tests(void)
         c_it = my_it;
         EQUAL(&(*my_it) == &(*c_it) && (&(*my_it) == &(*c_ob)));
     }
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " == operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it == it1) == (my_it == my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " != operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it != it1) == (my_it != my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " > operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it > it1) == (my_it > my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " >= operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it >= it1) == (my_it >= my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " < operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it < it1) == (my_it < my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " <= operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL((it <= it1) == (my_it <= my_it1));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " * operator "
-              << "] --------------------]\t\t\033[0m";
-    EQUAL(((*my_it = 6) == 6) && (*my_it == *(my_v.begin())));
-    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " -> operator "
-              << "] --------------------]\t\t\033[0m";
+    /*-----------------------------------------*/
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " == operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it == it1) == (my_it == my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " != operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it != it1) == (my_it != my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " > operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it > it1) == (my_it > my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " >= operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it >= it1) == (my_it >= my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " < operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it < it1) == (my_it < my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " <= operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL((it <= it1) == (my_it <= my_it1));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " * operator "
+    //           << "] --------------------]\t\t\033[0m";
+    // EQUAL(((*my_it = 6) == 6) && (*my_it == *(my_v.begin())));
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " -> operator "
+    //           << "] --------------------]\t\t\033[0m";
     // {
     //     /*--------------- std::vector-------------------- */
     //     std::vector<std::string> v(3, "hello");
