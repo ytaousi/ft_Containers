@@ -16,10 +16,17 @@ namespace ft
             typedef typename ft::Iterator<std::random_access_iterator_tag, T>::reference         reference;
             typedef typename ft::Iterator<std::random_access_iterator_tag, T>::iterator_category iterator_category;
         
-            random_access_iterator();
-            ~random_access_iterator();
-            random_access_iterator(const random_access_iterator & instance);
-            random_access_iterator & operator = (const random_access_iterator & instance);
+            random_access_iterator(){};
+            ~random_access_iterator(){};
+            random_access_iterator(const random_access_iterator & instance) : iter(instance.base())
+            {
+                *this = instance;
+            }
+            random_access_iterator & operator = (const random_access_iterator & instance)
+            {
+                *this = instance;
+                return *this;
+            }
 
 
             pointer base() const
