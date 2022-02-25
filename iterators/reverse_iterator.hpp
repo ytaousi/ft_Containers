@@ -26,7 +26,7 @@ namespace ft
             {
 
             }
-            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
+            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base() - 1)
             {
             }
             // initialization
@@ -57,15 +57,14 @@ namespace ft
             //dereference iterator
             reference operator * () const
             {
-                reverse_iterator temp = *this;
-                --temp;
+                iterator_type temp = rev_iter;  // segf found bitch
                 return *temp;
             }
 
             //addition operator
             reverse_iterator operator+ (difference_type n) const
             {
-                return reverse_iterator(base() - n);
+                return reverse_iterator(rev_iter - (n - 1));
             }
 
             //pre-increment iterator position
@@ -81,7 +80,8 @@ namespace ft
             reverse_iterator operator++(int)
             {
                 reverse_iterator temp = *this;
-                --(this->rev_iter);
+                //--(this->rev_iter);
+                ++(*this);
                 return temp;
             }
 
@@ -95,7 +95,7 @@ namespace ft
             //substraction iterator
             reverse_iterator operator- (difference_type n) const
             {
-                return reverse_iterator(base() + n);
+                return reverse_iterator(rev_iter + (n + 1));
             }
 
             //pre-decrement iterator position
@@ -109,7 +109,8 @@ namespace ft
             reverse_iterator  operator--(int)
             {
                 reverse_iterator temp = *this;
-                --(this->rev_iter);
+                //--(this->rev_iter);
+                --(*this);
                 return temp;
             }
 
@@ -130,7 +131,7 @@ namespace ft
             //dereference iterator with offset
             reference operator[] (difference_type n) const
             {
-                return (base()[-n-1]);
+                return (rev_iter[-n]);
             }
 
             // friend function to the class implementation
