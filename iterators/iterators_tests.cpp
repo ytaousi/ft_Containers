@@ -240,7 +240,7 @@ void reverse_iterator_tests(void)
               << "] --------------------]\t\t\033[0m";
     {
         ft::reverse_iterator<std::vector<int>::iterator> ob(my_rit);
-        // EQUAL(&(*my_rit) == &(*ob));
+        EQUAL(&(*my_rit) == &(*ob));
     }
 //     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " riterator to const_riterator "
 //               << "] --------------------]\t\t\033[0m";
