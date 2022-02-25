@@ -193,6 +193,14 @@ namespace ft
             {
                 
             }
+            // if (n <= m_capacity)
+			// 	    return ;
+            //     value_type *tmp = m_alloc.allocate(n);
+            //     for (size_type i = 0; i < m_size; i++) 
+            //         tmp[i] = m_data[i];
+            //     m_alloc.deallocate(m_data, m_capacity);
+            //     m_data = tmp;
+            //     m_capacity = n;
         }
 
             // element access function's
@@ -392,7 +400,7 @@ namespace ft
     template <class T, class Alloc>
     bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-
+        return !(lhs == rhs);
     }
 
     template <class T, class Alloc>
