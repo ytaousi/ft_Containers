@@ -55,20 +55,21 @@ namespace ft
             // pre incremented
             random_access_iterator & operator ++ ()
             {
-                ++(*this);
+                ++(this->iter);
                 return *this;
             }
             // post incremented
             random_access_iterator operator ++ (int)
             {
                 random_access_iterator temp = *this;
-                ++(*this);
+                ++(this->iter);
                 return temp;
             }
 
             random_access_iterator & operator += (difference_type n)
             {
-                (*this) += n;
+                //(*this) += n;
+                this->iter += n;
                 return (*this);
             }
 
@@ -79,20 +80,21 @@ namespace ft
 
             random_access_iterator & operator -- ()
             {
-                --(*this);
+                --(this->iter);
                 return *this;
             }
 
             random_access_iterator operator -- (int)
             {
                 random_access_iterator temp = *this;
-                --(*this);
+                --(this->iter);
                 return temp;
             }
 
             random_access_iterator & operator -= (difference_type n)
             {
-                (*this) -= n;
+                //(*this) -= n;
+                this->iter -= n;
                 return (*this);
             }
 

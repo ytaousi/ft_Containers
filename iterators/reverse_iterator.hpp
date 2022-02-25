@@ -22,10 +22,11 @@ namespace ft
             // default Constructor
             // construct a reverse iterator that points to no object 
             //  the internal base iterator is value-initializaed
-            reverse_iterator() // ??
+            reverse_iterator() : rev_iter(NULL) // ??
             {
 
             }
+            
             reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
             {
 
@@ -52,6 +53,7 @@ namespace ft
                 this->rev_iter = instance.base();
                 return *this;
             }
+
         // Member Function's
 
             //return base iterator that was initialized with ??
