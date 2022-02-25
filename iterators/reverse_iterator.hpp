@@ -26,10 +26,13 @@ namespace ft
             {
 
             }
-            
-            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
+            ~reverse_iterator()
             {
 
+            }
+            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
+            {
+                *this = other;
             }
             // initialization
             // construct a reverse iterator from some original iterator it the behavior of the constructed object replicates the original
@@ -65,8 +68,9 @@ namespace ft
             //dereference iterator
             reference operator * () const
             {
-                Iterator temp = *this;
-                return *--temp;
+                reverse_iterator temp = *this;
+                --temp;
+                return *temp;
             }
 
             //addition operator

@@ -58,7 +58,7 @@ namespace ft
         template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
         Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
-            std::cout << "Range Constructor with iterators Called" << std::endl;
+            
         }
         
         // copy constructor 
