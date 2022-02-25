@@ -39,7 +39,6 @@ namespace ft
         // Constructs an empty container, with no elements.
         explicit Vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
         {
-            std::cout << "Constructor of empty vector Called" << std::endl;
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
@@ -79,14 +78,12 @@ namespace ft
         // copy constructor 
         Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL)
         {
-            std::cout << "Copy Constructor Called" << std::endl;
             *this = object;
         }
 
         // assignement operator overloading
         Vector & operator=(const Vector& object)
         {
-            std::cout << " Assignement Operator Called " << std::endl; 
             _size = object.size();
             _capacity = object.capacity();
             _array = _alloc.allocate(_capacity);

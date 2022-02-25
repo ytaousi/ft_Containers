@@ -496,95 +496,95 @@ void vector_tests(void)
             ft::Vector<std::string> my_v(1e5, "fill constructor test");
             ualarm(0, 0);
         }
-        // /*----------------------------------------------------------------------------------------------*/
-        // /*--------------- fill tow vectors with a 10 strings ------*/
-        // ft::Vector<std::string> my_v(10, "fill constructor test");
-        // std::vector<std::string> v(10, "fill constructor test");
-        // /*---------------------------------------------------------*/
-        // /*--------------- declare tow strings to store the results ------*/
-        // std::string res, my_res;
-        // /*---------------------------------------------------------*/
-        // for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
-        //     res += *it;
+        /*----------------------------------------------------------------------------------------------*/
+        /*--------------- fill tow vectors with a 10 strings ------*/
+        ft::Vector<std::string> my_v(10, "fill constructor test");
+        std::vector<std::string> v(10, "fill constructor test");
+        /*---------------------------------------------------------*/
+        /*--------------- declare tow strings to store the results ------*/
+        std::string res, my_res;
+        /*---------------------------------------------------------*/
+        for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
+            res += *it;
 
-        // for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
-        //     my_res += *it;
-        // EQUAL(res == my_res);
+        for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
+            my_res += *it;
+        EQUAL(res == my_res);
     }
-    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " range constructor "
-    //           << "] --------------------]\t\t\033[0m";
-    // {
-    //     /*---------------------------------- time limit test --------------------------------------------*/
-    //     {
-    //         time_t start, end, diff;
-    //         std::vector<std::string> v(1e5, "range constructor test");
-    //         start = get_time();
-    //         std::vector<std::string> v1(v.begin(), v.end());
-    //         end = get_time();
-    //         diff = end - start;
-    //         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " range constructor "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*---------------------------------- time limit test --------------------------------------------*/
+        {
+            time_t start, end, diff;
+            std::vector<std::string> v(1e5, "range constructor test");
+            start = get_time();
+            std::vector<std::string> v1(v.begin(), v.end());
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
 
-    //         ualarm(diff * 1e3, 0);
-    //         ft::Vector<std::string> my_v(v.begin(), v.end());
-    //         ualarm(0, 0);
-    //     }
+            ualarm(diff * 1e3, 0);
+            ft::Vector<std::string> my_v(v.begin(), v.end());
+            ualarm(0, 0);
+        }
     
-    //     /*-----------------------------------------------------------------------------------------------*/
-    //     /*--------------- fill std::vector with 10 strings and ft::vector with range of iterators ------*/
-    //     std::vector<std::string> v(10, "range constructor test");
-    //     ft::Vector<std::string> my_v(10, "range constructor test");
-    //     ft::Vector<std::string> my_v1(my_v.begin(), my_v.end()); // this one is to check if the range works with ft::vector
-    //     /*----------------------------------------------------------------------------------------------*/
-    //     /*--------------- declare tow strings to store the results ------*/
-    //     std::string res, my_res, my_res1;
-    //     /*--------------------------------------------------------*/
-    //     for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
-    //         res += *it;
+        /*-----------------------------------------------------------------------------------------------*/
+        /*--------------- fill std::vector with 10 strings and ft::vector with range of iterators ------*/
+        std::vector<std::string> v(10, "range constructor test");
+        ft::Vector<std::string> my_v(10, "range constructor test");
+        ft::Vector<std::string> my_v1(my_v.begin(), my_v.end()); // this one is to check if the range works with ft::vector
+        /*----------------------------------------------------------------------------------------------*/
+        /*--------------- declare tow strings to store the results ------*/
+        std::string res, my_res, my_res1;
+        /*--------------------------------------------------------*/
+        for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
+            res += *it;
 
-    //     for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
-    //         my_res += *it;
+        for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
+            my_res += *it;
 
-    //     for (ft::Vector<std::string>::iterator it = my_v1.begin(); it != my_v1.end(); ++it) // fill my_res1 from ft::vector
-    //         my_res1 += *it;
-    //     EQUAL(res == my_res && my_res == my_res1);
-    // }
-    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
-    //           << "] --------------------]\t\t\033[0m";
-    // {
-    //     /*---------------------------------- time limit test --------------------------------------------*/
-    //     {
-    //         time_t start, end, diff;
-    //         std::vector<char> v(1e7, 'a');
-    //         start = get_time();
-    //         std::vector<char> copy_v(v);
-    //         end = get_time();
-    //         diff = end - start;
-    //         diff = (diff) ? (diff * 20) : 20;
+        for (ft::Vector<std::string>::iterator it = my_v1.begin(); it != my_v1.end(); ++it) // fill my_res1 from ft::vector
+            my_res1 += *it;
+        EQUAL(res == my_res && my_res == my_res1);
+    }
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*---------------------------------- time limit test --------------------------------------------*/
+        {
+            time_t start, end, diff;
+            std::vector<char> v(1e7, 'a');
+            start = get_time();
+            std::vector<char> copy_v(v);
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * 20) : 20;
 
-    //         ft::Vector<char> my_v(1e7, 'a');
-    //         alarm(diff);
-    //         ft::Vector<char> my_copy_v(my_v);
-    //         alarm(0);
-    //     }
-    //     /*---------------------------------------------------------------------------------------------*/
-    //     /*---------------------------- declare a vector and fill with 'a', and create a copy of it ------------------*/
-    //     ft::Vector<char> v1(10, 'a');
-    //     ft::Vector<char> copy_v(v1);
-    //     /*-----------------------------------------------------------------------------------------------------------*/
-    //     /*--------------- declare tow strings to store the results ------*/
-    //     std::string res, res1;
-    //     /*--------------------------------------------------------*/
-    //     for (ft::Vector<char>::iterator it = v1.begin(); it != v1.end(); ++it) // fill res from v1
-    //         res += *it;
+            ft::Vector<char> my_v(1e7, 'a');
+            alarm(diff);
+            ft::Vector<char> my_copy_v(my_v);
+            alarm(0);
+        }
+        /*---------------------------------------------------------------------------------------------*/
+        /*---------------------------- declare a vector and fill with 'a', and create a copy of it ------------------*/
+        ft::Vector<char> v1(10, 'a');
+        ft::Vector<char> copy_v(v1);
+        /*-----------------------------------------------------------------------------------------------------------*/
+        /*--------------- declare tow strings to store the results ------*/
+        std::string res, res1;
+        /*--------------------------------------------------------*/
+        for (ft::Vector<char>::iterator it = v1.begin(); it != v1.end(); ++it) // fill res from v1
+            res += *it;
 
-    //     for (ft::Vector<char>::iterator it = copy_v.begin(); it != copy_v.end(); ++it) // fill res from copy_v
-    //         res1 += *it;
-    //     EQUAL(res == res1);
-    // }
-    // /*------------------------------------------ = operator tests --------------------------------------------------------------------------------------------*/
-    // /*------------------------------------------ test 1 : test with equale size vecotrs ----------------------------------------------------------------------*/
-    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " = operator (lhs.size = rhs.size) "
-    //           << "] --------------------]\t\t\033[0m";
+        for (ft::Vector<char>::iterator it = copy_v.begin(); it != copy_v.end(); ++it) // fill res from copy_v
+            res1 += *it;
+        EQUAL(res == res1);
+    }
+    /*------------------------------------------ = operator tests --------------------------------------------------------------------------------------------*/
+    /*------------------------------------------ test 1 : test with equale size vecotrs ----------------------------------------------------------------------*/
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " = operator (lhs.size = rhs.size) "
+              << "] --------------------]\t\t\033[0m";
     // {
     //     /*-------------------------------------- time limit test -----------------------------------*/
     //     {
@@ -722,7 +722,7 @@ void vector_tests(void)
 
     //     EQUAL(res == ft_res);
     // }
-    // /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/
     // /*------------------------------------------ test 4 : test with one empty vector ----------------------------------------------------------------------*/
     // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " = operator (lhs.size = 0) "
     //           << "] --------------------]\t\t\033[0m";
@@ -816,7 +816,7 @@ void vector_tests(void)
 
     //     EQUAL(res == ft_res);
     // }
-    // /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/
     // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " begin and end methods "
     //           << "] --------------------]\t\t\033[0m";
     // {
