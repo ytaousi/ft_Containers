@@ -22,32 +22,27 @@ namespace ft
             // default Constructor
             // construct a reverse iterator that points to no object 
             //  the internal base iterator is value-initializaed
-            reverse_iterator() : rev_iter(NULL) // ??
-            {
-
-            }
-            ~reverse_iterator()
+            reverse_iterator() : rev_iter(iterator_type()) // ??
             {
 
             }
             reverse_iterator(const reverse_iterator & other) : rev_iter(other.base())
             {
-                *this = other;
             }
             // initialization
             // construct a reverse iterator from some original iterator it the behavior of the constructed object replicates the original
             // exept it iterates through its pointed elements in  the reverse order  
-            explicit reverse_iterator (iterator_type it) : rev_iter(it)
+            explicit reverse_iterator (const iterator_type & it)
             {
-
+                iterator_type tmp = it;
+                rev_iter = --tmp;
             }
             // Copy
             // construct a reverse iterator from some other reverse iterator 
             // the constructed object keeps the same sense pf iteration as re_it
             template <class IIterator>
-            reverse_iterator (const reverse_iterator<IIterator>& rev_it)
+            reverse_iterator (const reverse_iterator<IIterator>& rev_it) : rev_iter(--rev_iter.base())
             {
-                *this = rev_it;
             }
             // Assignement Operator    this is C++11 dont really need it
             template< class IIterator >
@@ -62,7 +57,8 @@ namespace ft
             //return base iterator that was initialized with ??
             iterator_type base() const
             {
-                return rev_iter; // !!
+                iterator_type tmp = rev_iter;
+                return ++tmp; // !!
             }
 
             //dereference iterator
