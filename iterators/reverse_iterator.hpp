@@ -44,14 +44,7 @@ namespace ft
             reverse_iterator (const reverse_iterator<IIterator>& rev_it) : rev_iter(--rev_iter.base())
             {
             }
-            // Assignement Operator    this is C++11 dont really need it
-            template< class IIterator >
-            reverse_iterator& operator =( const reverse_iterator<IIterator>& instance)
-            {
-                this->rev_iter = instance.base();
-                return *this;
-            }
-
+            
         // Member Function's
 
             //return base iterator that was initialized with ??
