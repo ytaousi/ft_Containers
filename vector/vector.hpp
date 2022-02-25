@@ -13,7 +13,7 @@
 // VECTOR is implemented as sequence container representing arrays that can change in size
 
 namespace ft
-{
+{  
     template <class T, class Alloc = std::allocator<T> >
     class Vector
     {
@@ -58,7 +58,19 @@ namespace ft
         template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
         Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
         {
-            
+            // construct vector from input iterator(random_access_iterator)
+            size_t i = 0;
+            for (InputIterator it = first; it != last; it++)
+                i++;
+            _array = _alloc.allocate(i + 1);
+            _alloc.construct(_array);
+            for(size_t j = 0; i > j; j++)
+            {
+                _size++;
+                _array[j] = *first;
+                first++;
+            }
+            _capacity = i;
         }
         
         // copy constructor 
@@ -275,7 +287,8 @@ namespace ft
         //
         void push_back (const value_type& val)
         {
-
+            //if size is 0 reserve space for 1 unit
+            // else if capacity equal size then reserve capacity * 2
         }
 
         // need to declare  fuction's  assign()/erase()/insert() : done
