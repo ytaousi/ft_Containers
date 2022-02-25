@@ -211,14 +211,12 @@ namespace ft
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         reference operator[] (size_type n)
         {
-            std::cout << "Index operator Called" << std::endl;
             return (_array[n]);
         }
         
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         const_reference operator[] (size_type n) const
         {
-            std::cout << "Const Index operator Called" << std::endl;
             return (_array[n]);
         }
 
@@ -405,35 +403,37 @@ namespace ft
     template <class T, class Alloc>
     bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        return !(lhs.size() == rhs.size());
+        if (lhs == rhs)
+            return false;
+        return true;
     }
 
     template <class T, class Alloc>
     bool operator<  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        if (lhs.size() == rhs.size())
-		    return false;
 	    return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
     }
 
     template <class T, class Alloc>
     bool operator<= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        return (lhs.size() == rhs.size() || lhs.size() < rhs.size());
+        if (lhs == rhs || lhs < rhs)
+            return true;
+        return false;
     }
 
     template <class T, class Alloc>
     bool operator>  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        if (lhs.size() == rhs.size())
-		    return false;
-	    return (!(lhs.size() < rhs.size()));
+	    return (ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()));
     }
 
     template <class T, class Alloc>
     bool operator>= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        return (lhs.size() == rhs.size() || lhs.size() > rhs.size());
+        if (lhs == rhs || lhs > rhs)
+            return true;
+        return false;
     }
 }
 #endif
