@@ -39,9 +39,9 @@ namespace ft
             }
             // Copy
             // construct a reverse iterator from some other reverse iterator 
-            // the constructed object keeps the same sense pf iteration as re_it
+            // the constructed object keeps the same sense pf iteration as rev_it
             template <class IIterator>
-            reverse_iterator (const reverse_iterator<IIterator>& rev_it) : rev_iter(--rev_iter.base())
+            reverse_iterator (const reverse_iterator<IIterator>& rev_it) : rev_iter(rev_it.base() - 1)
             {
             }
             
@@ -166,7 +166,7 @@ namespace ft
     template <class Iterator>
     typename reverse_iterator<Iterator>::difference_type operator- (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
     {
-        return (lhs.base() - rhs.base());
+        return (rhs.base() - lhs.base());
     }
 
     // relational operators
@@ -185,25 +185,25 @@ namespace ft
     template <class Iterator>
     bool operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
     {
-        return (lhs.base() < rhs.base());
+        return (lhs.base() > rhs.base());
     }
 
     template <class Iterator>
     bool operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
     {
-        return (lhs.base() <= rhs.base());
+        return (lhs.base() >= rhs.base());
     }
 
     template <class Iterator>
     bool operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
     {
-        return (lhs.base() > rhs.base());
+        return (lhs.base() < rhs.base());
     }
 
     template <class Iterator>
     bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
     {
-        return (lhs.base() >= rhs.base());
+        return (lhs.base() <= rhs.base());
     }
 }
 #endif
