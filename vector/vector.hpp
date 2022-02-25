@@ -289,6 +289,8 @@ namespace ft
         {
             //if size is 0 reserve space for 1 unit
             // else if capacity equal size then reserve capacity * 2
+            // insert element at index size
+            // increment size by 1
         }
 
         // need to declare  fuction's  assign()/erase()/insert() : done
