@@ -4,6 +4,7 @@
 # include <memory>
 # include "../iterators/reverse_iterator.hpp"
 # include "../iterators/iterator.hpp"
+# include "../iterators/iterator_traits.hpp"
 # include <exception>
 # include <iostream>
 # include "../enable_if.hpp"
@@ -25,12 +26,12 @@ namespace ft
             typedef	typename allocator_type::pointer			    pointer;
             typedef	typename allocator_type::const_pointer		    const_pointer;
 
-            typedef ft::random_access_iterator<T>                   iterator;
-            typedef ft::random_access_iterator<const T>             const_iterator;
+            typedef ft::random_access_iterator<value_type>                   iterator;
+            typedef ft::random_access_iterator<const value_type>             const_iterator;
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
-            typedef iterator_traits<iterator>                       difference_type;
+            typedef ptrdiff_t                                       difference_type;
             typedef size_t                                          size_type;
         // need to define the default/fill/range constructors : done    
         // Constructs an empty container, with no elements.
@@ -60,7 +61,7 @@ namespace ft
         {
             std::cout << "Range Constructor with iterators Called" << std::endl;
         }
-
+        
         // copy constructor 
         Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL)
         {
@@ -84,9 +85,9 @@ namespace ft
         ~Vector()
         {
             std::cout << "vector Destructor Called" << std::endl;
-            // for (size_t i = 0 ; i < _size; i++)
-            //     _alloc.destroy(&_array[i]);
-            //_alloc.deallocate(_array, _capacity);
+            for (size_t i = 0 ; i < _size; i++)
+                 _alloc.destroy(&_array[i]);
+            _alloc.deallocate(_array, _capacity);
         }
         
         // Member Fuctions
