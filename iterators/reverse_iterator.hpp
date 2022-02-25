@@ -22,7 +22,7 @@ namespace ft
             // default Constructor
             // construct a reverse iterator that points to no object 
             //  the internal base iterator is value-initializaed
-            reverse_iterator() : rev_iter(NULL) // ??
+            reverse_iterator() : rev_iter(iterator_type()) // ??
             {
 
             }
@@ -45,7 +45,7 @@ namespace ft
             // construct a reverse iterator from some other reverse iterator 
             // the constructed object keeps the same sense pf iteration as re_it
             template <class IIterator>
-            reverse_iterator (const reverse_iterator<IIterator>& rev_it)
+            reverse_iterator (const reverse_iterator<IIterator>& rev_it) : rev_iter(rev_it)
             {
                 *this = rev_it;
             }
