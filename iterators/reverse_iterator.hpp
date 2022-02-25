@@ -83,7 +83,7 @@ namespace ft
             // return the value after incrementation
             reverse_iterator& operator++()
             {
-                --(*this);
+                --(this->rev_iter);
                 return (*this);
             }
 
@@ -92,14 +92,14 @@ namespace ft
             reverse_iterator operator++(int)
             {
                 reverse_iterator temp = *this;
-                ++(*this);
+                --(this->rev_iter);
                 return temp;
             }
 
             //advance iterator
             reverse_iterator& operator+= (difference_type n)
             {
-                (*this) -= n;   // pretty sure frechnaha somewhere                
+                (this->rev_iter) -= n;   // pretty sure frechnaha somewhere                
                 return (*this);
             }
 
@@ -112,7 +112,7 @@ namespace ft
             //pre-decrement iterator position
             reverse_iterator& operator--()
             {
-                ++(*this);
+                ++(this->rev_iter);
                 return (*this);
             }
 
@@ -120,14 +120,14 @@ namespace ft
             reverse_iterator  operator--(int)
             {
                 reverse_iterator temp = *this;
-                --(*this);
+                --(this->rev_iter);
                 return temp;
             }
 
             //retrocede iterator
             reverse_iterator& operator-= (difference_type n)
             {
-                (*this) += n;
+                (this->rev_iter) += n;
                 return (*this);   // pretty sure frechnaha somewhere
             }
 
