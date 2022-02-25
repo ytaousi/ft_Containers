@@ -55,8 +55,9 @@ namespace ft
         //  with each element constructed from its corresponding element in that range, in the same order.
         // template <class MyIterator>
         // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
-        template <class InputIterator, typename ft::enable_if<ft::is_integral<InputIterator>::value>::value_type>
-        Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+        
+        template <class InputIterator>
+        Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL), _alloc(alloc) 
         {
             // construct vector from input iterator(random_access_iterator)
             size_t i = 0;
@@ -225,7 +226,7 @@ namespace ft
         {
             if (n < 0 || n >= _size)
                 throw std::out_of_range("Out of Range");
-            return (_array + n);
+            return (_array[n]);
         }
 
         //Returns a reference to the element at specified location pos, with bounds checking.
@@ -234,7 +235,7 @@ namespace ft
         {
             if (n < 0 || n >= _size)
                 throw std::out_of_range("Out of Range");
-            return (_array + n);
+            return (_array[n]);
         }
 
         //Returns a reference to the first element in the container.
