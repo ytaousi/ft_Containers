@@ -1,6 +1,7 @@
 #ifndef LEXICOGRAPHICAL_COMPARE_HPP
 # define LEXICOGRAPHICAL_COMPARE_HPP
 
+# include "./equal.hpp"
 //Lexicographical comparison is a operation with the following properties:
 //Two ranges are compared element by element.
 //The first mismatching element defines which range is lexicographically less or greater than the other.
@@ -31,10 +32,17 @@ namespace ft
         }
         return (first2 != last2);
     }
-    template< class InputIterator1, class InputIterator2, class Compare >
-    bool lexicographical_compare( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp = std::equal())
+    template< class InputIterator1, class InputIterator2, class Compare>
+    bool lexicographical_compare( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp = ft::equal)
     {
-
+        for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
+        {
+            if (comp(*first1, *first2))
+                return true;
+            if (comp(*first2, *first1))
+                return false;
+        }
+        return (first1 == last1) && (first2 != last2);
     }
 }
 

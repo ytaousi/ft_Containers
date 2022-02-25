@@ -9,6 +9,8 @@
 # include <iostream>
 # include "../enable_if.hpp"
 # include "../is_integral.hpp"
+# include "../lexicographical_compare.hpp"
+# include "../equal.hpp"
 
 // VECTOR is implemented as sequence container representing arrays that can change in size
 
@@ -242,28 +244,28 @@ namespace ft
         //Calling front on an empty container is undefined.
         reference front()
         {
-            return (_array);
+            return (_array[0]);
         }
 
         //Returns a reference to the first element in the container.
         //Calling front on an empty container is undefined.
         const_reference front() const
         {
-            return (_array);
+            return (_array[0]);
         }
 
         //Returns a reference to the last element in the container.
         //Calling back on an empty container causes undefined behavior.
         reference back()
         {
-            return (_array + _size - 1);
+            return (_array[_size - 1]);
         }
 
         //Returns a reference to the last element in the container.
         //Calling back on an empty container causes undefined behavior.
         const_reference back() const
         {
-            return (_array + _size - 1);
+            return (_array[_size - 1]);
         }
 
             // Element Modifiers function's
@@ -358,22 +360,22 @@ namespace ft
             return (_alloc);
         }
 
-            // friend function for vector
-            template <class TT, class AAlloc>
-        friend bool operator== (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-            template <class TT, class AAlloc>
-        friend bool operator!= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-            template <class TT, class AAlloc>
-        friend bool operator<  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-            template <class TT, class AAlloc>
-        friend bool operator<= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-            template <class TT, class AAlloc>
-        friend bool operator>  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-            template <class TT, class AAlloc>
-        friend bool operator>= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     // friend function for vector
+        //     template <class TT, class AAlloc>
+        // friend bool operator== (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     template <class TT, class AAlloc>
+        // friend bool operator!= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     template <class TT, class AAlloc>
+        // friend bool operator<  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     template <class TT, class AAlloc>
+        // friend bool operator<= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     template <class TT, class AAlloc>
+        // friend bool operator>  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+        //     template <class TT, class AAlloc>
+        // friend bool operator>= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
             
-            template <class TT, class AAlloc>
-        friend void swap (Vector<TT,AAlloc>& x, Vector<TT,AAlloc>& y);
+        //     template <class TT, class AAlloc>
+        // friend void swap (Vector<TT,AAlloc>& x, Vector<TT,AAlloc>& y);
 
         private:
             allocator_type _alloc;
@@ -395,37 +397,43 @@ namespace ft
     template <class T, class Alloc>
     bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        
+        if (lhs.size() != rhs.size())
+		    return false;
+	    return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
     }
 
     template <class T, class Alloc>
     bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-        return !(lhs == rhs);
+        return !(lhs.size() == rhs.size());
     }
 
     template <class T, class Alloc>
     bool operator<  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-
+        if (lhs.size() == rhs.size())
+		    return false;
+	    return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
     }
 
     template <class T, class Alloc>
     bool operator<= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-
+        return (lhs.size() == rhs.size() || lhs.size() < rhs.size());
     }
 
     template <class T, class Alloc>
     bool operator>  (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-
+        if (lhs.size() == rhs.size())
+		    return false;
+	    return (!(lhs.size() < rhs.size()));
     }
 
     template <class T, class Alloc>
     bool operator>= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
     {
-
+        return (lhs.size() == rhs.size() || lhs.size() > rhs.size());
     }
 }
 #endif
