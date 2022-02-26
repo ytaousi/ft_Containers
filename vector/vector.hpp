@@ -88,6 +88,8 @@ namespace ft
             _array = _alloc.allocate(_capacity);
             for (size_type i = 0; i < _size ; i++)
                 _array[i] = object[i];
+            for (random_access_iterator i = begin(); i != end(); i++)
+                
             return (*this);
         }
         
