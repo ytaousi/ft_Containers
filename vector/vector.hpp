@@ -39,15 +39,13 @@ namespace ft
         // Constructs an empty container, with no elements.
         explicit Vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
         {
+            std::cout << "Empty constructor Called" << std::endl;
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
-        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _array(NULL), _capacity(n), _size(n)
         {
-            std::cout << "fill constructor called" << std::endl;
-            _array = nullptr;
-            _size = n;
-            _capacity = n;
+            std::cout << "fill constructor Called" << std::endl;
             _array = _alloc.allocate(n);
             for (size_type i = 0; i < n; i++)
                 _alloc.construct(_array + i, val);
@@ -58,14 +56,14 @@ namespace ft
         template <class InputIterator>
         Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL), _alloc(alloc) 
         {
-            std::cout << "range constructor called" << std::endl;
+            std::cout << "range contructor called" << std::endl;
             // construct vector from input iterator(random_access_iterator)
             size_t i = 0;
             for (InputIterator it = first; it != last; it++)
                 i++;
-            _array = _alloc.allocate(i + 1);
+            _array = _alloc.allocate(i);
             _alloc.construct(_array);
-            for(size_t j = 0; i > j; j++)
+            for(size_type j = 0; i > j; j++)
             {
                 _size++;
                 _array[j] = *first;
@@ -84,21 +82,22 @@ namespace ft
         Vector & operator=(const Vector& object)
         {
             _size = object.size();
-            _capacity = object.capacity();
-            _array = _alloc.allocate(_capacity);
-            for (size_type i = 0; i < _size ; i++)
-                _array[i] = object[i];
-            for (random_access_iterator i = begin(); i != end(); i++)
-                
+            if (_size != 0)
+            {
+                _capacity = object.capacity();
+                _array = _alloc.allocate(_capacity);
+                for (size_type i = 0; i < _size ; i++)
+                    _array[i] = object[i];
+            }
             return (*this);
         }
         
         // destructor
         ~Vector()
         {
-            for (size_t i = 0 ; i < _size; i++)
-                 _alloc.destroy(&_array[i]);
-            _alloc.deallocate(_array, _capacity);
+            std::cout << "Vector Destructor Called " << std::endl;
+            if (_array)
+                _alloc.deallocate(_array, _capacity);
         }
         
         // Member Fuctions
