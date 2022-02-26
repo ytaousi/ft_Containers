@@ -44,6 +44,7 @@ namespace ft
         // Constructs a container with n elements. Each element is a copy of val.
         explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
+            std::cout << "fill constructor called" << std::endl;
             _array = nullptr;
             _size = n;
             _capacity = n;
@@ -54,12 +55,10 @@ namespace ft
 
         // Constructs a container with as many elements as the range [first,last), 
         //  with each element constructed from its corresponding element in that range, in the same order.
-        // template <class MyIterator>
-        // vector (MyIterator first, MyIterator last, const allocator_type& alloc = allocator_type())
-        
         template <class InputIterator>
         Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL), _alloc(alloc) 
         {
+            std::cout << "range constructor called" << std::endl;
             // construct vector from input iterator(random_access_iterator)
             size_t i = 0;
             for (InputIterator it = first; it != last; it++)
