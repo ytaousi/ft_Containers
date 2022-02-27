@@ -182,20 +182,7 @@ namespace ft
         //
         void reserve(size_type n)
         {
-            if (n > this->max_size())
-                throw std::length_error("lenght of container is greater than maximum allowed");
-            if (n > this->_capacity)
-            {
-                
-            }
-            // if (n <= m_capacity)
-			// 	    return ;
-            //     value_type *tmp = m_alloc.allocate(n);
-            //     for (size_type i = 0; i < m_size; i++) 
-            //         tmp[i] = m_data[i];
-            //     m_alloc.deallocate(m_data, m_capacity);
-            //     m_data = tmp;
-            //     m_capacity = n;
+            
         }
 
             // element access function's
@@ -266,6 +253,8 @@ namespace ft
             //Erases all elements from the container. After this call, size() returns zero.
             //Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated.  
             //Leaves the capacity() of the vector unchanged (note: the standard's restriction on the changes to capacity is in the specification of vector::reserve
+            for (; _size > 0; _size--)
+                _alloc.destroy(_array + (_size - 1));
         }
 
         //Exchanges the contents of the container with those of other. Does not invoke any move, copy, or swap operations on individual elements.
@@ -283,6 +272,8 @@ namespace ft
         {
             //Removes the last element in the vector, effectively reducing the container size by one.
             //This destroys the removed element.
+            _alloc.destroy(_array + (_size - 1));
+            _size -= 1;
         }
 
         //
@@ -292,6 +283,23 @@ namespace ft
             // else if capacity equal size then reserve capacity * 2
             // insert element at index size
             // increment size by 1
+            if (_size == 0)
+            {
+                reserve(1);
+                _array[_size] = val;
+                _size++;
+            }
+            else if (_size <= _capacity)
+            {
+                _array[_size] = val;
+                _size += 1;
+            }
+            else
+            {
+                reserve(_capacity * 2);
+                _array[_size] = val;
+                _size += 1;
+            }
         }
 
         // need to declare  fuction's  assign()/erase()/insert() : done
