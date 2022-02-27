@@ -43,10 +43,11 @@ namespace ft
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
-        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _array(NULL), _capacity(n), _size(n)
+        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _array(NULL), _alloc(alloc), _size(n), _capacity(n * 2)
         {
-            std::cout << "fill constructor Called" << std::endl;
-            _array = _alloc.allocate(n);
+            std::cout << "Vector fill Constructor Called" << std::endl;
+            //std::cout << "fill constructor Called" << std::endl;
+            _array = _alloc.allocate(_capacity);
             for (size_type i = 0; i < n; i++)
                 _alloc.construct(_array + i, val);
         }
@@ -54,41 +55,35 @@ namespace ft
         // Constructs a container with as many elements as the range [first,last), 
         //  with each element constructed from its corresponding element in that range, in the same order.
         template <class InputIterator>
-        Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL), _alloc(alloc) 
+        Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL) 
         {
             std::cout << "range contructor called" << std::endl;
             // construct vector from input iterator(random_access_iterator)
-            size_t i = 0;
-            for (InputIterator it = first; it != last; it++)
-                i++;
-            _array = _alloc.allocate(i);
-            _alloc.construct(_array);
-            for(size_type j = 0; i > j; j++)
-            {
-                _size++;
-                _array[j] = *first;
-                first++;
-            }
-            _capacity = i;
+            size_type difference = last - first;
+            _size = difference;
+            _capacity = difference;
+            _array = _alloc.allocate(difference);
+            for (size_type i = 0; i < difference; i++, first++)
+                _alloc.construct(_array + i, *first); 
         }
         
         // copy constructor 
-        Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL)
+        Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL), _alloc(allocator_type())
         {
+            std::cout << "Copy constructor Called" << std::endl;
             *this = object;
         }
 
         // assignement operator overloading
         Vector & operator=(const Vector& object)
         {
+            std::cout << "assignment operator overloading Called" << std::endl;
+            
             _size = object.size();
-            if (_size != 0)
-            {
-                _capacity = object.capacity();
-                _array = _alloc.allocate(_capacity);
-                for (size_type i = 0; i < _size ; i++)
-                    _array[i] = object[i];
-            }
+            _capacity = object.capacity();
+            _array = _alloc.allocate(_capacity);
+            for (size_type i = 0; i < _size; ++i)
+                _alloc.construct(_array + i, object[i]);
             return (*this);
         }
         
@@ -117,11 +112,11 @@ namespace ft
 
         reverse_iterator rbegin()
         {
-            return reverse_iterator(_array + (_size - 1));
+            return reverse_iterator(_array + (_size + 1));
         }
         const_reverse_iterator rbegin() const
         {
-            return const_reverse_iterator(_array + (_size - 1));
+            return const_reverse_iterator(_array + (_size + 1));
         }
 
         iterator end()
@@ -136,12 +131,12 @@ namespace ft
 
         reverse_iterator rend()
         {
-            return reverse_iterator(_array - 1); // stupid but fun or wrong
+            return reverse_iterator(_array); // stupid but fun or wrong
         }
 
         const_reverse_iterator rend() const
         {
-            return const_reverse_iterator(_array - 1); //
+            return const_reverse_iterator(_array); //
         }
             
             // Capacity Function's
@@ -150,7 +145,7 @@ namespace ft
         // necessarily equal to vector capacity        
         size_type size() const
         {
-            return _size;
+            return this->_size;
         }
 
         // return 
@@ -172,7 +167,7 @@ namespace ft
         //
         size_type capacity() const
         {
-            return _capacity ;
+            return this->_capacity ;
         }
 
         //

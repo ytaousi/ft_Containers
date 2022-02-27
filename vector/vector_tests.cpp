@@ -504,45 +504,45 @@ void vector_tests(void)
             my_res += *it;
         EQUAL(res == my_res);
     }
-    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " range constructor "
-    //           << "] --------------------]\t\t\033[0m";
-    // {
-    //     /*---------------------------------- time limit test --------------------------------------------*/
-    //     {
-    //         time_t start, end, diff;
-    //         std::vector<std::string> v(1e5, "range constructor test");
-    //         start = get_time();
-    //         std::vector<std::string> v1(v.begin(), v.end());
-    //         end = get_time();
-    //         diff = end - start;
-    //         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " range constructor "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*---------------------------------- time limit test --------------------------------------------*/
+        {
+            time_t start, end, diff;
+            std::vector<std::string> v(1e5, "range constructor test");
+            start = get_time();
+            std::vector<std::string> v1(v.begin(), v.end());
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
 
-    //         ualarm(diff * 1e3, 0);
-    //         ft::Vector<std::string> my_v(v.begin(), v.end());
-    //         ualarm(0, 0);
-    //     }
-    //     /*-----------------------------------------------------------------------------------------------*/
-    //     /*--------------- fill std::vector with 10 strings and ft::vector with range of iterators ------*/
-    //     std::vector<std::string> v(10, "range constructor test");
-    //     ft::Vector<std::string> my_v(10, "range constructor test");
+            ualarm(diff * 1e3, 0);
+            ft::Vector<std::string> my_v(v.begin(), v.end());
+            ualarm(0, 0);
+        }
+        /*-----------------------------------------------------------------------------------------------*/
+        /*--------------- fill std::vector with 10 strings and ft::vector with range of iterators ------*/
+        std::vector<std::string> v(10, "range constructor test");
+        ft::Vector<std::string> my_v(10, "range constructor test");
         
-    //     // Error   here because i dont deallocate my object before filling it again;
+        // Error   here because i dont deallocate my object before filling it again;
        
-    //     ft::Vector<std::string> my_v1(my_v.begin(), my_v.end()); // this one is to check if the range works with ft::vector
-    //     /*----------------------------------------------------------------------------------------------*/
-    //     /*--------------- declare tow strings to store the results ------*/
-    //     std::string res, my_res, my_res1;
-    //     /*--------------------------------------------------------*/
-    //     for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
-    //         res += *it;
+        ft::Vector<std::string> my_v1(my_v.begin(), my_v.end()); // this one is to check if the range works with ft::vector
+        /*----------------------------------------------------------------------------------------------*/
+        /*--------------- declare tow strings to store the results ------*/
+        std::string res, my_res, my_res1;
+        /*--------------------------------------------------------*/
+        for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) // fill res from std::vector
+            res += *it;
 
-    //     for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
-    //         my_res += *it;
+        for (ft::Vector<std::string>::iterator it = my_v.begin(); it != my_v.end(); ++it) // fill my_res from ft::vector
+            my_res += *it;
 
-    //     for (ft::Vector<std::string>::iterator it = my_v1.begin(); it != my_v1.end(); ++it) // fill my_res1 from ft::vector
-    //         my_res1 += *it;
-    //     EQUAL(res == my_res && my_res == my_res1);
-    // }
+        for (ft::Vector<std::string>::iterator it = my_v1.begin(); it != my_v1.end(); ++it) // fill my_res1 from ft::vector
+            my_res1 += *it;
+        EQUAL(res == my_res && my_res == my_res1);
+    }
     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " copy constructor "
               << "] --------------------]\t\t\033[0m";
     {
@@ -907,292 +907,292 @@ void vector_tests(void)
 
         EQUAL(res == ft_res && c_ft_res == c_res);
     }
-//     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " size method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         /*-------------------------------------- time limit test -----------------------------------*/
-//         {
-//             time_t start, end, diff;
-//             /*------------------ std::vectors ---------------------*/
-//             std::vector<std::string> v1(1e6, "string2");
-//             start = get_time();
-//             v1.size();
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*-----------------------------------------------------*/
-//             /*------------------ ft::vectors ---------------------*/
-//             ft::Vector<std::string> ft_v1(1e6, "string2");
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.size();
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//         }
-//         /*------------------------------------------------------------------------------------------*/
-//         /*------------------ std::vectors ---------------------*/
-//         std::vector<std::string> v1(10, "string2");          // fill constructor
-//         std::vector<std::string> v2;                         // empty constructor
-//         std::vector<std::string> v3(v1.begin(), v1.end());   // range constructor with normal iterators
-//         std::vector<std::string> v4(v3);                     // copy constructor
-//         std::vector<std::string> v5(v1.rbegin(), v1.rend()); // range constructor with reverse iterators
-//         /*-----------------------------------------------------*/
-//         /*------------------ ft::vectors ---------------------*/
-//         ft::Vector<std::string> ft_v1(10, "string2");
-//         ft::Vector<std::string> ft_v2;
-//         ft::Vector<std::string> ft_v3(ft_v1.begin(), ft_v1.end());
-//         ft::Vector<std::string> ft_v4(ft_v1);
-//         ft::Vector<std::string> ft_v5(ft_v1.rbegin(), ft_v1.rend());
-//         /*----------------------------------------------------*/
-//         EQUAL(v1.size() == ft_v1.size() && v2.size() == ft_v2.size() && v3.size() == ft_v3.size() && v4.size() == ft_v4.size() && v5.size() == ft_v5.size());
-//     }
-//     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " capacity method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         /*-------------------------------------- time limit test -----------------------------------*/
-//         {
-//             time_t start, end, diff;
-//             /*------------------ std::vectors ---------------------*/
-//             std::vector<std::string> v1(1e6, "string2");
-//             start = get_time();
-//             v1.capacity();
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*-----------------------------------------------------*/
-//             /*------------------ ft::vectors ---------------------*/
-//             ft::Vector<std::string> ft_v1(1e6, "string2");
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.capacity();
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//         }
-//         /*------------------------------------------------------------------------------------------*/
-//         /*------------------ std::vectors ---------------------*/
-//         std::vector<std::string> v1(10, "string2");          // fill constructor
-//         std::vector<std::string> v2;                         // empty constructor
-//         std::vector<std::string> v3(v1.begin(), v1.end());   // range constructor with normal iterators
-//         std::vector<std::string> v4(v3);                     // copy constructor
-//         std::vector<std::string> v5(v1.rbegin(), v1.rend()); // range constructor with reverse iterators
-//         /*-----------------------------------------------------*/
-//         /*------------------ ft::vectors ---------------------*/
-//         ft::Vector<std::string> ft_v1(10, "string2");
-//         ft::Vector<std::string> ft_v2;
-//         ft::Vector<std::string> ft_v3(ft_v1.begin(), ft_v1.end());
-//         ft::Vector<std::string> ft_v4(ft_v1);
-//         ft::Vector<std::string> ft_v5(ft_v1.rbegin(), ft_v1.rend());
-//         /*----------------------------------------------------*/
-//         EQUAL(v1.capacity() == ft_v1.capacity() && v2.capacity() == ft_v2.capacity() && v3.capacity() == ft_v3.capacity() && v4.capacity() == ft_v4.capacity() && v5.capacity() == ft_v5.capacity());
-//     }
-//     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " max_size method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         /*-------------------------------------- time limit test -----------------------------------*/
-//         {
-//             time_t start, end, diff;
-//             /*------------------ std::vectors ---------------------*/
-//             std::vector<std::string> v1(1e6, "string2");
-//             start = get_time();
-//             v1.max_size();
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*-----------------------------------------------------*/
-//             /*------------------ ft::vectors ---------------------*/
-//             ft::Vector<std::string> ft_v1(1e6, "string2");
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.max_size();
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//         }
-//         /*------------------------------------------------------------------------------------------*/
-//         /*------------------ std::vectors ---------------------*/
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " size method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*-------------------------------------- time limit test -----------------------------------*/
+        {
+            time_t start, end, diff;
+            /*------------------ std::vectors ---------------------*/
+            std::vector<std::string> v1(1e6, "string2");
+            start = get_time();
+            v1.size();
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+            /*-----------------------------------------------------*/
+            /*------------------ ft::vectors ---------------------*/
+            ft::Vector<std::string> ft_v1(1e6, "string2");
+            ualarm(diff * 1e3, 0);
+            ft_v1.size();
+            ualarm(0, 0);
+            /*----------------------------------------------------*/
+        }
+        /*------------------------------------------------------------------------------------------*/
+        /*------------------ std::vectors ---------------------*/
+        std::vector<std::string> v1(10, "string2");          // fill constructor
+        std::vector<std::string> v2;                         // empty constructor
+        std::vector<std::string> v3(v1.begin(), v1.end());   // range constructor with normal iterators
+        std::vector<std::string> v4(v3);                     // copy constructor
+        std::vector<std::string> v5(v1.rbegin(), v1.rend()); // range constructor with reverse iterators
+        /*-----------------------------------------------------*/
+        /*------------------ ft::vectors ---------------------*/
+        ft::Vector<std::string> ft_v1(10, "string2");
+        ft::Vector<std::string> ft_v2;
+        ft::Vector<std::string> ft_v3(ft_v1.begin(), ft_v1.end());
+        ft::Vector<std::string> ft_v4(ft_v1);
+        ft::Vector<std::string> ft_v5(ft_v1.rbegin(), ft_v1.rend());
+        /*----------------------------------------------------*/
+        EQUAL(v1.size() == ft_v1.size() && v2.size() == ft_v2.size() && v3.size() == ft_v3.size() && v4.size() == ft_v4.size() && v5.size() == ft_v5.size());
+    }
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " capacity method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*-------------------------------------- time limit test -----------------------------------*/
+        {
+            time_t start, end, diff;
+            /*------------------ std::vectors ---------------------*/
+            std::vector<std::string> v1(1e6, "string2");
+            start = get_time();
+            v1.capacity();
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+            /*-----------------------------------------------------*/
+            /*------------------ ft::vectors ---------------------*/
+            ft::Vector<std::string> ft_v1(1e6, "string2");
+            ualarm(diff * 1e3, 0);
+            ft_v1.capacity();
+            ualarm(0, 0);
+            /*----------------------------------------------------*/
+        }
+        /*------------------------------------------------------------------------------------------*/
+        /*------------------ std::vectors ---------------------*/
+        std::vector<std::string> v1(10, "string2");          // fill constructor
+        std::vector<std::string> v2;                         // empty constructor
+        std::vector<std::string> v3(v1.begin(), v1.end());   // range constructor with normal iterators
+        std::vector<std::string> v4(v3);                     // copy constructor
+        std::vector<std::string> v5(v1.rbegin(), v1.rend()); // range constructor with reverse iterators
+        /*-----------------------------------------------------*/
+        /*------------------ ft::vectors ---------------------*/
+        ft::Vector<std::string> ft_v1(10, "string2");
+        ft::Vector<std::string> ft_v2;
+        ft::Vector<std::string> ft_v3(ft_v1.begin(), ft_v1.end());
+        ft::Vector<std::string> ft_v4(ft_v1);
+        ft::Vector<std::string> ft_v5(ft_v1.rbegin(), ft_v1.rend());
+        /*----------------------------------------------------*/
+        EQUAL(v1.capacity() == ft_v1.capacity() && v2.capacity() == ft_v2.capacity() && v3.capacity() == ft_v3.capacity() && v4.capacity() == ft_v4.capacity() && v5.capacity() == ft_v5.capacity());
+    }
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " max_size method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*-------------------------------------- time limit test -----------------------------------*/
+        {
+            time_t start, end, diff;
+            /*------------------ std::vectors ---------------------*/
+            std::vector<std::string> v1(1e6, "string2");
+            start = get_time();
+            v1.max_size();
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+            /*-----------------------------------------------------*/
+            /*------------------ ft::vectors ---------------------*/
+            ft::Vector<std::string> ft_v1(1e6, "string2");
+            ualarm(diff * 1e3, 0);
+            ft_v1.max_size();
+            ualarm(0, 0);
+            /*----------------------------------------------------*/
+        }
+        /*------------------------------------------------------------------------------------------*/
+        /*------------------ std::vectors ---------------------*/
 
-//         std::vector<std::string> v1(10, "string");
-//         std::vector<int> v2;
-//         std::vector<double> v4;
-//         /*-----------------------------------------------------*/
-//         /*------------------ ft::vectors ---------------------*/
-//         ft::Vector<std::string> ft_v1(10, "string2");
-//         ft::Vector<int> ft_v2;
-//         ft::Vector<double> ft_v4;
-//         /*----------------------------------------------------*/
-//         EQUAL(v1.max_size() == ft_v1.max_size() && v2.max_size() == ft_v2.max_size() && v4.max_size() == ft_v4.max_size());
-//     }
-//     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " resize method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         /*-------------------------------------- time limit test -----------------------------------*/
-//         {
-//             time_t start, end, diff;
-//             /*
-//              * test with n greater than vector capacity
-//              */
-//             /*------------------ std::vectors ---------------------*/
-//             std::vector<std::string> v1(10, "string2");
-//             start = get_time();
-//             v1.resize(1e6);
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*------------------ ft::vectors ---------------------*/
-//             ft::Vector<std::string> ft_v1(10, "string2");
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.resize(1e6);
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//             /*
-//              *	test with n lesser than capacity and greater than size
-//              */
-//             /*------------------ std::vectors ---------------------*/
-//             v1.resize(20);
-//             start = get_time();
-//             v1.resize(1e5);
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*------------------ ft::vectors ---------------------*/
-//             ft_v1.resize(20);
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.resize(1e5);
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//             /*
-//              * test with n lesser than capacity and lesser an size
-//              */
-//             /*------------------ std::vectors ---------------------*/
-//             v1.resize(100);
-//             start = get_time();
-//             v1.resize(50);
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*------------------ ft::vectors ---------------------*/
-//             ft_v1.resize(100);
-//             ualarm(diff * 1e3, 0);
-//             ft_v1.resize(50);
-//             ualarm(0, 0);
-//             /*----------------------------------------------------*/
-//         }
-//         /*
-//          * Strings to store the results
-//          */
-//         std::string s1, s2, s3, s4, ft_s1, ft_s2, ft_s3, ft_s4;
-//         std::string sit1, sit2, sit3, ft_sit1, ft_sit2, ft_sit3; // strings to store the result by iterators
-//         /*
-//          * Var to store the size and the capacity
-//          */
-//         size_t z1, z2, z3, z4, ft_z1, ft_z2, ft_z3, ft_z4;
-//         size_t c1, c2, c3, c4, ft_c1, ft_c2, ft_c3, ft_c4;
-//         /*
-//          * iterators to check the iterator validity
-//          *  it : iterator, eit : iterator to the end
-//          */
-//         std::vector<std::string>::iterator valid_it, valid_eit;
-//         ft::Vector<std::string>::iterator ft_valid_it, ft_valid_eit;
-//         /*
-//          * test with n greater than vector capacity
-//          */
-//         /*------------------ std::vectors ---------------------*/
-//         std::vector<std::string> v1(10, "string2");
-//         v1.resize(1e6, "hello");
-//         /*------------------ ft::vectors ---------------------*/
-//         ft::Vector<std::string> ft_v1(10, "string2");
-//         ft_v1.resize(1e6, "hello");
+        std::vector<std::string> v1(10, "string");
+        std::vector<int> v2;
+        std::vector<double> v4;
+        /*-----------------------------------------------------*/
+        /*------------------ ft::vectors ---------------------*/
+        ft::Vector<std::string> ft_v1(10, "string2");
+        ft::Vector<int> ft_v2;
+        ft::Vector<double> ft_v4;
+        /*----------------------------------------------------*/
+        EQUAL(v1.max_size() == ft_v1.max_size() && v2.max_size() == ft_v2.max_size() && v4.max_size() == ft_v4.max_size());
+    }
+    // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " resize method "
+    //           << "] --------------------]\t\t\033[0m";
+    // {
+    //     /*-------------------------------------- time limit test -----------------------------------*/
+    //     {
+    //         time_t start, end, diff;
+    //         /*
+    //          * test with n greater than vector capacity
+    //          */
+    //         /*------------------ std::vectors ---------------------*/
+    //         std::vector<std::string> v1(10, "string2");
+    //         start = get_time();
+    //         v1.resize(1e6);
+    //         end = get_time();
+    //         diff = end - start;
+    //         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+    //         /*------------------ ft::vectors ---------------------*/
+    //         ft::Vector<std::string> ft_v1(10, "string2");
+    //         ualarm(diff * 1e3, 0);
+    //         ft_v1.resize(1e6);
+    //         ualarm(0, 0);
+    //         /*----------------------------------------------------*/
+    //         /*
+    //          *	test with n lesser than capacity and greater than size
+    //          */
+    //         /*------------------ std::vectors ---------------------*/
+    //         v1.resize(20);
+    //         start = get_time();
+    //         v1.resize(1e5);
+    //         end = get_time();
+    //         diff = end - start;
+    //         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+    //         /*------------------ ft::vectors ---------------------*/
+    //         ft_v1.resize(20);
+    //         ualarm(diff * 1e3, 0);
+    //         ft_v1.resize(1e5);
+    //         ualarm(0, 0);
+    //         /*----------------------------------------------------*/
+    //         /*
+    //          * test with n lesser than capacity and lesser an size
+    //          */
+    //         /*------------------ std::vectors ---------------------*/
+    //         v1.resize(100);
+    //         start = get_time();
+    //         v1.resize(50);
+    //         end = get_time();
+    //         diff = end - start;
+    //         diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+    //         /*------------------ ft::vectors ---------------------*/
+    //         ft_v1.resize(100);
+    //         ualarm(diff * 1e3, 0);
+    //         ft_v1.resize(50);
+    //         ualarm(0, 0);
+    //         /*----------------------------------------------------*/
+    //     }
+    //     /*
+    //      * Strings to store the results
+    //      */
+    //     std::string s1, s2, s3, s4, ft_s1, ft_s2, ft_s3, ft_s4;
+    //     std::string sit1, sit2, sit3, ft_sit1, ft_sit2, ft_sit3; // strings to store the result by iterators
+    //     /*
+    //      * Var to store the size and the capacity
+    //      */
+    //     size_t z1, z2, z3, z4, ft_z1, ft_z2, ft_z3, ft_z4;
+    //     size_t c1, c2, c3, c4, ft_c1, ft_c2, ft_c3, ft_c4;
+    //     /*
+    //      * iterators to check the iterator validity
+    //      *  it : iterator, eit : iterator to the end
+    //      */
+    //     std::vector<std::string>::iterator valid_it, valid_eit;
+    //     ft::Vector<std::string>::iterator ft_valid_it, ft_valid_eit;
+    //     /*
+    //      * test with n greater than vector capacity
+    //      */
+    //     /*------------------ std::vectors ---------------------*/
+    //     std::vector<std::string> v1(10, "string2");
+    //     v1.resize(1e6, "hello");
+    //     /*------------------ ft::vectors ---------------------*/
+    //     ft::Vector<std::string> ft_v1(10, "string2");
+    //     ft_v1.resize(1e6, "hello");
 
-//         z1 = v1.size();
-//         ft_z1 = ft_v1.size();
-//         c1 = v1.capacity();
-//         ft_c1 = ft_v1.capacity();
-//         for (size_t i = 0; i < v1.size(); ++i)
-//             s1 += v1[i];
+    //     z1 = v1.size();
+    //     ft_z1 = ft_v1.size();
+    //     c1 = v1.capacity();
+    //     ft_c1 = ft_v1.capacity();
+    //     for (size_t i = 0; i < v1.size(); ++i)
+    //         s1 += v1[i];
 
-//         for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
-//             ft_s1 += *it;
-//         /*----------------------------------------------------*/
-//         /*
-//          *	test with n lesser than capacity and greater than size
-//          */
-//         /*------------------ std::vectors ---------------------*/
-//         v1.resize(20);
-//         valid_it = v1.begin();
-//         valid_eit = v1.end();
-//         v1.resize(1e5);
-//         /*------------------ ft::vectors ---------------------*/
-//         ft_v1.resize(20);
-//         ft_valid_it = ft_v1.begin();
-//         ft_valid_eit = ft_v1.end();
-//         ft_v1.resize(1e5);
+    //     for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
+    //         ft_s1 += *it;
+    //     /*----------------------------------------------------*/
+    //     /*
+    //      *	test with n lesser than capacity and greater than size
+    //      */
+    //     /*------------------ std::vectors ---------------------*/
+    //     v1.resize(20);
+    //     valid_it = v1.begin();
+    //     valid_eit = v1.end();
+    //     v1.resize(1e5);
+    //     /*------------------ ft::vectors ---------------------*/
+    //     ft_v1.resize(20);
+    //     ft_valid_it = ft_v1.begin();
+    //     ft_valid_eit = ft_v1.end();
+    //     ft_v1.resize(1e5);
 
-//         z2 = v1.size();
-//         ft_z2 = ft_v1.size();
-//         c2 = v1.capacity();
-//         ft_c2 = ft_v1.capacity();
-//         for (size_t i = 0; i < v1.size(); ++i)
-//             s2 += v1[i];
+    //     z2 = v1.size();
+    //     ft_z2 = ft_v1.size();
+    //     c2 = v1.capacity();
+    //     ft_c2 = ft_v1.capacity();
+    //     for (size_t i = 0; i < v1.size(); ++i)
+    //         s2 += v1[i];
 
-//         for (; valid_it != valid_eit; ++valid_it)
-//             sit1 += *valid_it;
+    //     for (; valid_it != valid_eit; ++valid_it)
+    //         sit1 += *valid_it;
 
-//         for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
-//             ft_s2 += *it;
+    //     for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
+    //         ft_s2 += *it;
 
-//         for (; ft_valid_it != ft_valid_eit; ++ft_valid_it)
-//             ft_sit1 += *ft_valid_it;
-//         /*----------------------------------------------------*/
-//         /*
-//          * test with n lesser than capacity and lesser an size
-//          */
-//         /*------------------ std::vectors ---------------------*/
-//         valid_it = v1.begin();
-//         v1.resize(50);
-//         /*------------------ ft::vectors ---------------------*/
-//         ft_valid_it = ft_v1.begin();
-//         ft_v1.resize(50);
+    //     for (; ft_valid_it != ft_valid_eit; ++ft_valid_it)
+    //         ft_sit1 += *ft_valid_it;
+    //     /*----------------------------------------------------*/
+    //     /*
+    //      * test with n lesser than capacity and lesser an size
+    //      */
+    //     /*------------------ std::vectors ---------------------*/
+    //     valid_it = v1.begin();
+    //     v1.resize(50);
+    //     /*------------------ ft::vectors ---------------------*/
+    //     ft_valid_it = ft_v1.begin();
+    //     ft_v1.resize(50);
 
-//         z3 = v1.size();
-//         ft_z3 = ft_v1.size();
-//         c3 = v1.capacity();
-//         ft_c3 = ft_v1.capacity();
-//         for (size_t i = 0; i < v1.size(); ++i)
-//             s3 += v1[i];
+    //     z3 = v1.size();
+    //     ft_z3 = ft_v1.size();
+    //     c3 = v1.capacity();
+    //     ft_c3 = ft_v1.capacity();
+    //     for (size_t i = 0; i < v1.size(); ++i)
+    //         s3 += v1[i];
 
-//         for (; valid_it != v1.end(); ++valid_it)
-//             sit2 += *valid_it;
+    //     for (; valid_it != v1.end(); ++valid_it)
+    //         sit2 += *valid_it;
 
-//         for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
-//             ft_s3 += *it;
+    //     for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
+    //         ft_s3 += *it;
 
-//         for (; ft_valid_it != ft_v1.end(); ++ft_valid_it)
-//             ft_sit2 += *ft_valid_it;
-//         /*----------------------------------------------------*/
-//         /*
-//          * test with n = 0
-//          */
-//         /*------------------ std::vectors ---------------------*/
-//         valid_it = v1.begin();
-//         v1.resize(0, "string4");
-//         /*------------------ ft::vectors ---------------------*/
-//         ft_valid_it = ft_v1.begin();
-//         ft_v1.resize(0, "string4");
+    //     for (; ft_valid_it != ft_v1.end(); ++ft_valid_it)
+    //         ft_sit2 += *ft_valid_it;
+    //     /*----------------------------------------------------*/
+    //     /*
+    //      * test with n = 0
+    //      */
+    //     /*------------------ std::vectors ---------------------*/
+    //     valid_it = v1.begin();
+    //     v1.resize(0, "string4");
+    //     /*------------------ ft::vectors ---------------------*/
+    //     ft_valid_it = ft_v1.begin();
+    //     ft_v1.resize(0, "string4");
 
-//         z4 = v1.size();
-//         ft_z4 = ft_v1.size();
-//         c4 = v1.capacity();
-//         ft_c4 = ft_v1.capacity();
-//         for (size_t i = 0; i < v1.size(); ++i)
-//             s4 += v1[i];
+    //     z4 = v1.size();
+    //     ft_z4 = ft_v1.size();
+    //     c4 = v1.capacity();
+    //     ft_c4 = ft_v1.capacity();
+    //     for (size_t i = 0; i < v1.size(); ++i)
+    //         s4 += v1[i];
 
-//         for (; valid_it != v1.end(); ++valid_it)
-//             sit3 += *valid_it;
+    //     for (; valid_it != v1.end(); ++valid_it)
+    //         sit3 += *valid_it;
 
-//         for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
-//             ft_s4 += *it;
+    //     for (ft::Vector<std::string>::iterator it = ft_v1.begin(); it != ft_v1.end(); ++it)
+    //         ft_s4 += *it;
 
-//         for (; ft_valid_it != ft_v1.end(); ++ft_valid_it)
-//             ft_sit3 += *ft_valid_it;
-//         /*----------------------------------------------------*/
-//         EQUAL((s1 == ft_s1 && z1 == ft_z1 && c1 == ft_c1 && sit1 == ft_sit1) && (s2 == ft_s2 && z2 == ft_z2 && c2 == ft_c2) && (s3 == ft_s3 && z3 == ft_z3 && c3 == ft_c3 && sit2 == ft_sit2) && (s4 == ft_s4 && z4 == ft_z4 && c4 == ft_c4 && sit3 == ft_sit3));
-//     }
+    //     for (; ft_valid_it != ft_v1.end(); ++ft_valid_it)
+    //         ft_sit3 += *ft_valid_it;
+    //     /*----------------------------------------------------*/
+    //     EQUAL((s1 == ft_s1 && z1 == ft_z1 && c1 == ft_c1 && sit1 == ft_sit1) && (s2 == ft_s2 && z2 == ft_z2 && c2 == ft_c2) && (s3 == ft_s3 && z3 == ft_z3 && c3 == ft_c3 && sit2 == ft_sit2) && (s4 == ft_s4 && z4 == ft_z4 && c4 == ft_c4 && sit3 == ft_sit3));
+    // }
 //     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " empty method "
 //               << "] --------------------]\t\t\033[0m";
 //     {
