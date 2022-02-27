@@ -172,7 +172,15 @@ namespace ft
             //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
             if ( n > _size)
             {
-
+                if (n >= _capacity)
+                {
+                    reserve(capacity);
+                }
+                for (size_type i = _size ; i < n ; i++)
+                {
+                    _alloc.construct(_array + i, val);
+                    _size++;
+                }
             }
             //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
         } 
@@ -199,10 +207,9 @@ namespace ft
                 throw std::length_error("cannot allocat size_type requested");
             if (n >= _capacity)
             {
-                resize(n);
+                _array = _alloc.allocate(n);
+                _capacity = n;
             }
-            if (n < _capacity)
-                return ;
         }
 
             // element access function's
@@ -346,7 +353,7 @@ namespace ft
            }
            if (n >= _capacity)
            {
-
+               
            }
         }
 

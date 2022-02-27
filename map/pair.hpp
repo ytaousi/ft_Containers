@@ -39,9 +39,18 @@ namespace ft
                 second = pr.second;
                 return *this;
             }
-
-
-        private:
+                template <class U1, class U2>
+            friend bool operator== (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
+                template <class U1, class U2>
+            friend bool operator!= (const pair<U1,U2>& lhs, const pair<T1,U2>& rhs);
+                template <class U1, class U2>
+            friend bool operator<  (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
+                template <class U1, class U2>
+            friend bool operator<= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
+                template <class U1, class U2>
+            friend bool operator>  (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
+                template <class U1, class U2>
+            friend bool operator>= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
     };
 
             // Non-member function's
@@ -80,8 +89,6 @@ namespace ft
     {
         return (!(lhs < rhs));
     }
-
-
 
     //Constructs a pair object with its first element set to x and its second element set to y.
     //The template types can be implicitly deduced from the arguments passed to make_pair.
