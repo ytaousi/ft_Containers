@@ -154,14 +154,27 @@ namespace ft
             return _alloc.max_size(); // more logical thats the maximum possible value for size_t object's
         }
 
-        //
+        // Not done yet
         void resize(size_type n, value_type val = value_type())
         {
             //Resizes the container so that it contains n elements.
             //If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them)
-            //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
-            //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
             //Notice that this function changes the actual content of the container by inserting or erasing elements from it.
+            if (n < _size) 
+            {
+                size_type j = _size;
+                for (size_type i = _size; i > n; i--)
+                {
+                    _alloc.destroy(_array + _size);
+                    _size--;
+                }
+            }
+            //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
+            if ( n > _size)
+            {
+
+            }
+            //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
         } 
 
         //
@@ -179,10 +192,17 @@ namespace ft
                 return false ;
         }
 
-        //
+        // Not done yet
         void reserve(size_type n)
         {
-            
+            if (n > max_size())
+                throw std::length_error("cannot allocat size_type requested");
+            if (n >= _capacity)
+            {
+                resize(n);
+            }
+            if (n < _capacity)
+                return ;
         }
 
             // element access function's
@@ -192,7 +212,7 @@ namespace ft
         {
             return (_array[n]);
         }
-        
+        e
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         const_reference operator[] (size_type n) const
         {
@@ -276,7 +296,7 @@ namespace ft
             _size -= 1;
         }
 
-        //
+        // Not finished yet
         void push_back (const value_type& val)
         {
             //if size is 0 reserve space for 1 unit
@@ -310,13 +330,24 @@ namespace ft
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last)
         {
-            
+           
         }
 
-        // fill
+        // fill Not finished 
         void assign (size_type n, const value_type& val)
         {
-            
+           if (n < _capacity)
+           {
+               for (size_type i = _size; i < n; i++)
+               {
+                   _array[i] = val;
+                   _size ++;
+               }
+           }
+           if (n >= _capacity)
+           {
+
+           }
         }
 
         //

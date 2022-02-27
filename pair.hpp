@@ -16,25 +16,28 @@ namespace ft
             first_type  first;
             second_type second;
                     // Member function's
-            pair()
+            pair() : first(), second()
             {
 
             }
 
             template<class U, class V>
-            pair (const pair<U,V>& pr)
+            pair (const pair<U,V>& pr) : first(), second()
+            {
+                *this = pr;
+            }
+
+            pair (const first_type& a, const second_type& b) : first(a), second(b)
             {
 
             }
 
-            pair (const first_type& a, const second_type& b)
+            template<class U, class V>
+            pair& operator= (const pair<U,V>& pr)
             {
-
-            }
-
-            pair& operator= (const pair& pr)
-            {
-
+                first = pr.first;
+                second = pr.second;
+                return *this;
             }
 
 
