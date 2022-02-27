@@ -112,11 +112,11 @@ namespace ft
 
         reverse_iterator rbegin()
         {
-            return reverse_iterator(_array + (_size + 1));
+            return reverse_iterator(_array + _size);
         }
         const_reverse_iterator rbegin() const
         {
-            return const_reverse_iterator(_array + (_size + 1));
+            return const_reverse_iterator(_array + _size);
         }
 
         iterator end()
@@ -131,7 +131,7 @@ namespace ft
 
         reverse_iterator rend()
         {
-            return reverse_iterator(_array); // stupid but fun or wrong
+            return reverse_iterator(_array);
         }
 
         const_reverse_iterator rend() const
@@ -145,7 +145,7 @@ namespace ft
         // necessarily equal to vector capacity        
         size_type size() const
         {
-            return this->_size;
+            return _size;
         }
 
         // return 
@@ -167,7 +167,7 @@ namespace ft
         //
         size_type capacity() const
         {
-            return this->_capacity ;
+            return _capacity;
         }
 
         //
