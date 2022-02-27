@@ -39,13 +39,13 @@ namespace ft
         // Constructs an empty container, with no elements.
         explicit Vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0), _array(NULL)
         {
-            std::cout << "Empty constructor Called" << std::endl;
+            //std::cout << "Empty constructor Called" << std::endl;
         }
 
         // Constructs a container with n elements. Each element is a copy of val.
-        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _array(NULL), _alloc(alloc), _size(n), _capacity(n * 2)
+        explicit Vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _array(NULL), _alloc(alloc), _size(n), _capacity(n)
         {
-            std::cout << "Vector fill Constructor Called" << std::endl;
+            //std::cout << "Vector fill Constructor Called" << std::endl;
             //std::cout << "fill constructor Called" << std::endl;
             _array = _alloc.allocate(_capacity);
             for (size_type i = 0; i < n; i++)
@@ -57,7 +57,7 @@ namespace ft
         template <class InputIterator>
         Vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator()) : _size(0), _capacity(0), _array(NULL) 
         {
-            std::cout << "range contructor called" << std::endl;
+            //std::cout << "range contructor called" << std::endl;
             // construct vector from input iterator(random_access_iterator)
             size_type difference = last - first;
             _size = difference;
@@ -70,14 +70,14 @@ namespace ft
         // copy constructor 
         Vector(const Vector& object) : _size(0), _capacity(0), _array(NULL), _alloc(allocator_type())
         {
-            std::cout << "Copy constructor Called" << std::endl;
+            //std::cout << "Copy constructor Called" << std::endl;
             *this = object;
         }
 
         // assignement operator overloading
         Vector & operator=(const Vector& object)
         {
-            std::cout << "assignment operator overloading Called" << std::endl;
+            //std::cout << "assignment operator overloading Called" << std::endl;
             
             _size = object.size();
             _capacity = object.capacity();
@@ -90,7 +90,7 @@ namespace ft
         // destructor
         ~Vector()
         {
-            std::cout << "Vector Destructor Called " << std::endl;
+            //std::cout << "Vector Destructor Called " << std::endl;
             if (_array)
                 _alloc.deallocate(_array, _capacity);
         }
