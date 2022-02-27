@@ -358,22 +358,22 @@ namespace ft
             return (_alloc);
         }
 
-        //     // friend function for vector
-        //     template <class TT, class AAlloc>
-        // friend bool operator== (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-        //     template <class TT, class AAlloc>
-        // friend bool operator!= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-        //     template <class TT, class AAlloc>
-        // friend bool operator<  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-        //     template <class TT, class AAlloc>
-        // friend bool operator<= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-        //     template <class TT, class AAlloc>
-        // friend bool operator>  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
-        //     template <class TT, class AAlloc>
-        // friend bool operator>= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            // friend function for vector
+            template <class TT, class AAlloc>
+        friend bool operator== (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator!= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator<  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator<= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator>  (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
+            template <class TT, class AAlloc>
+        friend bool operator>= (const Vector<TT,AAlloc>& lhs, const Vector<TT,AAlloc>& rhs);
             
-        //     template <class TT, class AAlloc>
-        // friend void swap (Vector<TT,AAlloc>& x, Vector<TT,AAlloc>& y);
+            template <class TT, class AAlloc>
+        friend void swap (Vector<TT,AAlloc>& x, Vector<TT,AAlloc>& y);
 
         private:
             allocator_type _alloc;
