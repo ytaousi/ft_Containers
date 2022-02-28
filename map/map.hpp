@@ -90,6 +90,7 @@ namespace ft
             size_type size() const
             {
                 return (std::distance(begin(), end()));
+                // return (_size);
             }
             size_type max_size() const
             {
@@ -177,9 +178,9 @@ namespace ft
             friend void swap (map<KKey,TT>& x, map<KKey,TT>& y);
         
         private:
-            allocator_type  _alloc;      
-
-
+            allocator_type  _alloc;
+            value_type      _c;
+            size_type       _size;
     };
         template <class Key, class T>
     bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )
