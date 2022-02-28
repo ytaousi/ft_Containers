@@ -1,5 +1,5 @@
 #ifndef MAP_ITERATOR_HPP
-#define MAP_ITERATOR
+#define MAP_ITERATOR_HPP
 
 # include <iterator>
 #include "map_iterator_traits.hpp"

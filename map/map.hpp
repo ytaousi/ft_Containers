@@ -1,11 +1,11 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include "./pair.hpp"
+# include "pair.hpp"
 # include <memory>
-# include "./map_reverse_iterator.hpp"
-# include "./map_iterator.hpp"
-# include "./map_iterator_traits.hpp"
+# include "map_reverse_iterator.hpp"
+# include "map_iterator.hpp"
+# include "map_iterator_traits.hpp"
 # include <functional>
 
 namespace ft
@@ -32,7 +32,7 @@ namespace ft
             typedef bool        result_type;
         protected:
             //
-    }
+    };
 
     template < class Key, class T, class Compare = std::less<Key>, class
                     Alloc = std::allocator<ft::pair<const Key,T> > >
@@ -137,9 +137,7 @@ namespace ft
                 return (less<key_type>);
             }
             value_compare value_comp() const
-            {
-                return (less<>)
-            }
+            {}
                 // Operations functions
 
                 // 
@@ -215,5 +213,5 @@ namespace ft
     {
         x.swap(y);
     }
-};
+}
 #endif

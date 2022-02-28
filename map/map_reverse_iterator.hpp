@@ -1,8 +1,8 @@
 #ifndef MAP_REVERSE_ITERATOR_HPP
 #define MAP_REVERSE_ITERATOR_HPP
 
-#include "./map_iterator.hpp"
-#include "./map_iterator_tratis.hpp"
+#include "map_iterator.hpp"
+#include "map_iterator_traits.hpp"
 #include <memory>
 
 namespace ft
