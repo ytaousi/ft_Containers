@@ -2,6 +2,10 @@
 # define MAP_HPP
 
 # include "./pair.hpp"
+# include <memory>
+# include "../iterators/reverse_iterator.hpp"
+# include "../iterators/iterator.hpp"
+# include "../iterators/iterator_traits.hpp"
 
 namespace ft
 {
@@ -9,15 +13,16 @@ namespace ft
     class less : binary_function<T,T,bool> 
     {
         typedef T first_argument;
-        typedef T second argument;
+        typedef T second_argument;
         typedef bool result_type;
         bool operator() (const T& x, const T& y) const
         {
-            return x<y;
+            return x < y;
         }
-    }
+    };
 
-    template < class Key, class T, class Compare = ft::less<Key>, class Alloc = allocator<ft::pair<const Key,T> > >
+    template < class Key, class T, class Compare = ft::less<Key>, class
+                    Alloc = std::allocator<ft::pair<const Key,T> > >
     class map
     {
         public:
@@ -33,7 +38,7 @@ namespace ft
             typedef ft::biderectional_iterator<const value_type>    const_iterator;
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const iterator>            const_reverse_iterator;
-            typedef ptrdiff_t                                       difference_type;
+            typedef ft::iterator_traits<>                   difference_type;
             typedef size_t                                          size_type;
             typedef Alloc                                           allocator_type;
         
@@ -160,27 +165,28 @@ namespace ft
         
         
         private:
-            allocator_type _alloc;
+            allocator_type  _alloc;
+            value_type      
 
 
     };
             template <class Key, class T>
-        bool operator== ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
         template <class Key, class T>
-        bool operator!= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator!= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
         template <class Key, class T>
-        bool operator<  ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator<  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
         template <class Key, class T>
-        bool operator<= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator<= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
         template <class Key, class T>
-        bool operator>  ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator>  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
         template <class Key, class T>
-        bool operator>= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        bool operator>= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
         {}
-}
+};
 #endif

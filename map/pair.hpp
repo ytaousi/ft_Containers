@@ -16,13 +16,13 @@ namespace ft
             first_type  first;
             second_type second;
                     // Member function's
-            pair() : first(), second()
+            pair() : first(T1()), second(T2())
             {
 
             }
 
             template<class U, class V>
-            pair (const pair<U,V>& pr) : first(), second()
+            pair (const pair<U,V>& pr) : first(T1()), second(T2())
             {
                 *this = pr;
             }
@@ -42,7 +42,7 @@ namespace ft
                 template <class U1, class U2>
             friend bool operator== (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
                 template <class U1, class U2>
-            friend bool operator!= (const pair<U1,U2>& lhs, const pair<T1,U2>& rhs);
+            friend bool operator!= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
                 template <class U1, class U2>
             friend bool operator<  (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
                 template <class U1, class U2>
