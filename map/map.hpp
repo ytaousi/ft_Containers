@@ -11,7 +11,7 @@
 namespace ft
 {
     template <class T>
-    class less : std::binary_function<T,T,bool> // !! use it as the value_compare object of type value_type
+    class less : public std::binary_function<T,T,bool> // !! use it as the value_compare object of type value_type
     {
         public:
             typedef T first_argument;
@@ -24,7 +24,7 @@ namespace ft
     };
 
     template <class value_type>
-    class value_compare :
+    class value_compare : public std::binary_function<T,T,bool>
     {
         public:
             typedef value_type  first_argument_type;
