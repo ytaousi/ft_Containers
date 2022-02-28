@@ -143,19 +143,44 @@ namespace ft
             {
                 return (_alloc);
             }
-            
 
 
-
-
+                template <class KKey, class TT>
+            friend bool operator== ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+                template <class KKey, class TT>
+            friend bool operator!= ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+                template <class KKey, class TT>
+            friend bool operator<  ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+                template <class KKey, class TT>
+            friend bool operator<= ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+                template <class KKey, class TT>
+            friend bool operator>  ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+                template <class KKey, class TT>
+            friend bool operator>= ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
+        
+        
         private:
             allocator_type _alloc;
 
 
-
-
-
-    
-    }
+    };
+            template <class Key, class T>
+        bool operator== ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
+        template <class Key, class T>
+        bool operator!= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
+        template <class Key, class T>
+        bool operator<  ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
+        template <class Key, class T>
+        bool operator<= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
+        template <class Key, class T>
+        bool operator>  ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
+        template <class Key, class T>
+        bool operator>= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+        {}
 }
 #endif
