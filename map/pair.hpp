@@ -21,8 +21,8 @@ namespace ft
 
             }
 
-            template<class U, class V>
-            pair (const pair<U,V>& pr) : first(T1()), second(T2())
+            template<class T1, class T2>
+            pair (const pair<T1, T2>& pr) : first(T1()), second(T2())
             {
                 *this = pr;
             }
@@ -32,8 +32,8 @@ namespace ft
 
             }
 
-            template<class U, class V>
-            pair& operator= (const pair<U,V>& pr)
+            template<class T1, class T2>
+            pair& operator= (const pair<T1, T2>& pr)
             {
                 first = pr.first;
                 second = pr.second;

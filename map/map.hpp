@@ -6,23 +6,24 @@
 # include "./map_reverse_iterator.hpp"
 # include "./map_iterator.hpp"
 # include "./map_iterator_traits.hpp"
+# include <functional>
 
 namespace ft
 {
-    template <class T>
-    class less : binary_function<T,T,bool> // !!
-    {
-        public:
-            typedef T first_argument;
-            typedef T second_argument;
-            typedef bool result_type;
-            bool operator() (const T& x, const T& y) const
-            {
-                return x < y;
-            }
-    };
+    // template <class T>
+    // class less : std::binary_function<T,T,bool> // !!
+    // {
+    //     public:
+    //         typedef T first_argument;
+    //         typedef T second_argument;
+    //         typedef bool result_type;
+    //         bool operator() (const T& x, const T& y) const
+    //         {
+    //             return x < y;
+    //         }
+    // };
 
-    template < class Key, class T, class Compare = ft::less<Key>, class
+    template < class Key, class T, class Compare = std::less<Key>, class
                     Alloc = std::allocator<ft::pair<const Key,T> > >
     class map
     {
@@ -83,9 +84,13 @@ namespace ft
 
             // Capacity
             bool empty() const
-            {}
+            {
+                return (begin() == end());
+            }
             size_type size() const
-            {}
+            {
+                return (std::distance(begin(), end()));
+            }
             size_type max_size() const
             {
                 return (_alloc.max_size());
@@ -94,7 +99,7 @@ namespace ft
             mapped_type& operator[] (const key_type& k)
             {}
             // element Modifiers
-                // Insert
+                // 
             pair<iterator,bool> insert (const value_type& val)
             {}
             iterator insert (iterator position, const value_type& val)
@@ -102,7 +107,7 @@ namespace ft
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {}
-                // Erase
+                // 
             void erase (iterator position)
             {} 
             size_type erase (const key_type& k)
@@ -122,7 +127,7 @@ namespace ft
             {}
                 // Operations functions
 
-                // Find
+                // 
             iterator find (const key_type& k)
             {}
             const_iterator find (const key_type& k) const
@@ -151,7 +156,6 @@ namespace ft
                 return (_alloc);
             }
 
-
                 template <class KKey, class TT>
             friend bool operator== ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
                 template <class KKey, class TT>
@@ -165,30 +169,37 @@ namespace ft
                 template <class KKey, class TT>
             friend bool operator>= ( const map<KKey,TT>& lhs, const map<KKey,TT>& rhs );
         
+                template <class KKey, class TT>
+            friend void swap (map<KKey,TT>& x, map<KKey,TT>& y);
         
         private:
-            allocator_type  _alloc;
-            value_type      
+            allocator_type  _alloc;      
 
 
     };
-            template <class Key, class T>
-        bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
         template <class Key, class T>
-        bool operator!= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
+    bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
         template <class Key, class T>
-        bool operator<  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
+    bool operator!= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
         template <class Key, class T>
-        bool operator<= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
+    bool operator<  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
         template <class Key, class T>
-        bool operator>  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
+    bool operator<= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
         template <class Key, class T>
-        bool operator>= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
-        {}
+    bool operator>  ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
+        template <class Key, class T>
+    bool operator>= ( const map<Key,T>& lhs, const map<Key,T>& rhs )
+    {}
+
+        template <class Key, class T>
+    void swap (map<Key,T>& x, map<Key,T>& y)
+    {
+        x.swap(y);
+    }
 };
 #endif
