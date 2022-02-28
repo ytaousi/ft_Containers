@@ -10,18 +10,29 @@
 
 namespace ft
 {
-    // template <class T>
-    // class less : std::binary_function<T,T,bool> // !!
-    // {
-    //     public:
-    //         typedef T first_argument;
-    //         typedef T second_argument;
-    //         typedef bool result_type;
-    //         bool operator() (const T& x, const T& y) const
-    //         {
-    //             return x < y;
-    //         }
-    // };
+    template <class T>
+    class less : std::binary_function<T,T,bool> // !! use it as the value_compare object of type value_type
+    {
+        public:
+            typedef T first_argument;
+            typedef T second_argument;
+            typedef bool result_type;
+            bool operator() (const T& x, const T& y) const
+            {
+                return x < y;
+            }
+    };
+
+    template <class value_type>
+    class value_compare :
+    {
+        public:
+            typedef value_type  first_argument_type;
+            typedef value_type  second_argument_type;
+            typedef bool        result_type;
+        protected:
+            //
+    }
 
     template < class Key, class T, class Compare = std::less<Key>, class
                     Alloc = std::allocator<ft::pair<const Key,T> > >
@@ -30,9 +41,8 @@ namespace ft
         public: 
             typedef Key                                                                             key_type;
             typedef T                                                                               mapped_type;
-            typedef pair<const key_type, mapped_type>                                               value_type;
-            typedef less<key_type>                                                                  key_compare;
-            typedef /**/                                                                            value_compare;  
+            typedef ft::pair<const key_type, mapped_type>                                           value_type;
+            typedef Compare                                                                         key_compare;  
             typedef typename allocator_type::reference                                              reference;
             typedef typename allocator_type::const_reference                                        const_reference;
             typedef typename allocator_type::pointer                                                pointer;
@@ -41,7 +51,7 @@ namespace ft
             typedef ft::biderectional_iterator<const value_type>                                    const_iterator;
             typedef ft::reverse_iterator<iterator>                                                  reverse_iterator;
             typedef ft::reverse_iterator<const iterator>                                            const_reverse_iterator;
-            typedef typename ft::iterator_traits<Iterator>::difference_type                         difference_type;
+            typedef ptrdiff_t                                                                       difference_type;
             typedef size_t                                                                          size_type;
             typedef Alloc                                                                           allocator_type;
         
@@ -179,8 +189,7 @@ namespace ft
         
         private:
             allocator_type  _alloc;
-            value_type      _c;
-            size_type       _size;
+            
     };
         template <class Key, class T>
     bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )
