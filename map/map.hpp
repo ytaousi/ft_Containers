@@ -32,7 +32,7 @@ namespace ft
             typedef T                                                                               mapped_type;
             typedef pair<const key_type, mapped_type>                                               value_type;
             typedef less<key_type>                                                                  key_compare;
-            typedef less<key_type>                                                                  value_compare;  
+            typedef /**/                                                                            value_compare;  
             typedef typename allocator_type::reference                                              reference;
             typedef typename allocator_type::const_reference                                        const_reference;
             typedef typename allocator_type::pointer                                                pointer;
@@ -122,9 +122,13 @@ namespace ft
             {}
                 // Observers functions
             key_compare key_comp() const
-            {}
+            {
+                return (less<key_type>);
+            }
             value_compare value_comp() const
-            {}
+            {
+                return (less<>)
+            }
                 // Operations functions
 
                 // 
