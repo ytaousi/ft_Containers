@@ -160,28 +160,7 @@ namespace ft
             //Resizes the container so that it contains n elements.
             //If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them)
             //Notice that this function changes the actual content of the container by inserting or erasing elements from it.
-            if (n < _size) 
-            {
-                size_type j = _size;
-                for (size_type i = _size; i > n; i--)
-                {
-                    _alloc.destroy(_array + _size);
-                    _size--;
-                }
-            }
             //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
-            if ( n > _size)
-            {
-                if (n >= _capacity)
-                {
-                    reserve(capacity);
-                }
-                for (size_type i = _size ; i < n ; i++)
-                {
-                    _alloc.construct(_array + i, val);
-                    _size++;
-                }
-            }
             //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
         } 
 
@@ -204,11 +183,22 @@ namespace ft
         void reserve(size_type n)
         {
             if (n > max_size())
-                throw std::length_error("cannot allocat size_type requested");
-            if (n >= _capacity)
+                throw std::length_error("Invalid Request for vector capacity");
+            if (n > _size)
             {
-                _array = _alloc.allocate(n);
-                _capacity = n;
+                if (n > _capacity)
+                {
+                    pointer tmp = _alloc.allocate(n);
+                    
+                }
+                else
+                {
+                    for (size_type i = _size; i < n; ++i)
+                    {
+                        _alloc.construct(_array, sizeof(_array[i]));
+                        _size++;
+                    }
+                }
             }
         }
 
@@ -219,7 +209,6 @@ namespace ft
         {
             return (_array[n]);
         }
-        e
         //Returns a reference to the element at specified location pos. No bounds checking is performed.
         const_reference operator[] (size_type n) const
         {
@@ -313,18 +302,18 @@ namespace ft
             if (_size == 0)
             {
                 reserve(1);
-                _array[_size] = val;
+                _alloc.construct(_array + _size, val);
                 _size++;
             }
             else if (_size <= _capacity)
             {
-                _array[_size] = val;
+                _alloc.construct(_array + _size, val);
                 _size += 1;
             }
             else
             {
                 reserve(_capacity * 2);
-                _array[_size] = val;
+                _alloc.construct(_array + _size, val);
                 _size += 1;
             }
         }
