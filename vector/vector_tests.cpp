@@ -1545,87 +1545,87 @@ void vector_tests(void)
 
         EQUAL((s1 == ft_s1 && z1 == ft_z1 && c1 == ft_c1) && (s2 == ft_s2 && z2 == ft_z2 && c2 == ft_c2) && (s3 == ft_s3 && z3 == ft_z3 && c3 == ft_c3));
     }
-//     std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " assign(range) method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         /*-------------------------------------- time limit test -----------------------------------*/
-//         {
-//             time_t start, end, diff;
-//             /*------------------ std::vectors ---------------------*/
-//             ft::Vector<std::string> ft_v1(1e6, "string2");
-//             // std::vector<std::string>    v1(1e6, "string2");
-//             std::vector<std::string> v2(1e4, "string2");
-//             start = get_time();
-//             v2.assign(ft_v1.begin(), ft_v1.end());
-//             end = get_time();
-//             diff = end - start;
-//             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
-//             /*------------------ ft::vectors ---------------------*/
-//             // ft::Vector<std::string>    ft_v1(1e6, "string2");
-//             ft::Vector<std::string> ft_v2(1e4, "string2");
-//             ualarm(diff * 1e3, 0);
-//             ft_v2.assign(ft_v1.begin(), ft_v1.end());
-//             ualarm(0, 0);
-//         }
-//         /*------------------ std::vectors ---------------------*/
-//         std::vector<std::string> v1(20, "less");
-//         std::vector<std::string> v2;
-//         std::vector<std::string> v3(10, "string2");
-//         /*------------------ std::vectors ---------------------*/
-//         ft::Vector<std::string> ft_v1(20, "less");
-//         ft::Vector<std::string> ft_v2;
-//         ft::Vector<std::string> ft_v3(10, "string2");
-//         /*
-//          * Strings to store the results
-//          */
-//         std::string s1, s2, s3, ft_s1, ft_s2, ft_s3;
-//         /*
-//          * Var to store the size and the capacity
-//          */
-//         size_t z1, z2, z3, ft_z1, ft_z2, ft_z3;
-//         size_t c1, c2, c3, ft_c1, ft_c2, ft_c3;
-//         // test for n greater than the vector capactiy
-//         v3.assign(v1.begin(), v1.end());
-//         ft_v3.assign(v1.begin(), v1.end());
+    std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " assign(range) method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        /*-------------------------------------- time limit test -----------------------------------*/
+        {
+            time_t start, end, diff;
+            /*------------------ std::vectors ---------------------*/
+            ft::Vector<std::string> ft_v1(1e6, "string2");
+            // std::vector<std::string>    v1(1e6, "string2");
+            std::vector<std::string> v2(1e4, "string2");
+            start = get_time();
+            v2.assign(ft_v1.begin(), ft_v1.end());
+            end = get_time();
+            diff = end - start;
+            diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
+            /*------------------ ft::vectors ---------------------*/
+            // ft::Vector<std::string>    ft_v1(1e6, "string2");
+            ft::Vector<std::string> ft_v2(1e4, "string2");
+            ualarm(diff * 1e3, 0);
+            ft_v2.assign(ft_v1.begin(), ft_v1.end());
+            ualarm(0, 0);
+        }
+        /*------------------ std::vectors ---------------------*/
+        std::vector<std::string> v1(20, "less");
+        std::vector<std::string> v2;
+        std::vector<std::string> v3(10, "string2");
+        /*------------------ std::vectors ---------------------*/
+        ft::Vector<std::string> ft_v1(20, "less");
+        ft::Vector<std::string> ft_v2;
+        ft::Vector<std::string> ft_v3(10, "string2");
+        /*
+         * Strings to store the results
+         */
+        std::string s1, s2, s3, ft_s1, ft_s2, ft_s3;
+        /*
+         * Var to store the size and the capacity
+         */
+        size_t z1, z2, z3, ft_z1, ft_z2, ft_z3;
+        size_t c1, c2, c3, ft_c1, ft_c2, ft_c3;
+        // test for n greater than the vector capactiy
+        v3.assign(v1.begin(), v1.end());
+        ft_v3.assign(v1.begin(), v1.end());
 
-//         z1 = v3.size();
-//         c1 = v3.capacity();
-//         ft_z1 = ft_v3.size();
-//         ft_c1 = ft_v3.capacity();
-//         for (size_t i = 0; i < v3.size(); ++i)
-//             s1 += v3.at(i);
+        z1 = v3.size();
+        c1 = v3.capacity();
+        ft_z1 = ft_v3.size();
+        ft_c1 = ft_v3.capacity();
+        for (size_t i = 0; i < v3.size(); ++i)
+            s1 += v3.at(i);
 
-//         for (size_t i = 0; i < ft_v3.size(); ++i)
-//             ft_s1 += ft_v3.at(i);
-//         // test for n lesser than the vector capactiy
-//         v1.assign(v3.begin(), v3.end());
-//         ft_v1.assign(ft_v3.begin(), ft_v3.end());
+        for (size_t i = 0; i < ft_v3.size(); ++i)
+            ft_s1 += ft_v3.at(i);
+        // test for n lesser than the vector capactiy
+        v1.assign(v3.begin(), v3.end());
+        ft_v1.assign(ft_v3.begin(), ft_v3.end());
 
-//         z2 = v1.size();
-//         c2 = v1.capacity();
-//         ft_z2 = ft_v1.size();
-//         ft_c2 = ft_v1.capacity();
-//         for (size_t i = 0; i < v1.size(); ++i)
-//             s3 += v1.at(i);
+        z2 = v1.size();
+        c2 = v1.capacity();
+        ft_z2 = ft_v1.size();
+        ft_c2 = ft_v1.capacity();
+        for (size_t i = 0; i < v1.size(); ++i)
+            s3 += v1.at(i);
 
-//         for (size_t i = 0; i < ft_v1.size(); ++i)
-//             ft_s3 += ft_v1.at(i);
-//         // test for empty vectors
-//         v2.assign(v1.begin(), v1.end());
-//         ft_v2.assign(ft_v1.begin(), ft_v1.end());
+        for (size_t i = 0; i < ft_v1.size(); ++i)
+            ft_s3 += ft_v1.at(i);
+        // test for empty vectors
+        v2.assign(v1.begin(), v1.end());
+        ft_v2.assign(ft_v1.begin(), ft_v1.end());
 
-//         z3 = v2.size();
-//         c3 = v2.capacity();
-//         ft_z3 = ft_v2.size();
-//         ft_c3 = ft_v2.capacity();
-//         for (size_t i = 0; i < v2.size(); ++i)
-//             s2 += v2.at(i);
+        z3 = v2.size();
+        c3 = v2.capacity();
+        ft_z3 = ft_v2.size();
+        ft_c3 = ft_v2.capacity();
+        for (size_t i = 0; i < v2.size(); ++i)
+            s2 += v2.at(i);
 
-//         for (size_t i = 0; i < ft_v2.size(); ++i)
-//             ft_s2 += ft_v2.at(i);
+        for (size_t i = 0; i < ft_v2.size(); ++i)
+            ft_s2 += ft_v2.at(i);
 
-//         EQUAL((s1 == ft_s1 && z1 == ft_z1 && c1 == ft_c1) && (s2 == ft_s2 && z2 == ft_z2 && c2 == ft_c2) && (s3 == ft_s3 && z3 == ft_z3 && c3 == ft_c3));
-//     }
+        EQUAL((s1 == ft_s1 && z1 == ft_z1 && c1 == ft_c1) && (s2 == ft_s2 && z2 == ft_z2 && c2 == ft_c2) && (s3 == ft_s3 && z3 == ft_z3 && c3 == ft_c3));
+    }
     // std::cout << "\033[1;37m[-------------------- [" << std::setw(40) << std::left << " push_back method "
     //           << "] --------------------]\t\t\033[0m";
     // {

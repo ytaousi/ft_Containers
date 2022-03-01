@@ -307,7 +307,16 @@ namespace ft
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last)
         {
-           
+            size_type difference = last - first;
+
+            if (difference > _capacity)
+            {
+                reserve(difference);
+                _capacity = difference;
+            }
+            for (size_type i = 0; i < difference; i++, first++)
+                _array[i] = *first; //
+            _size = difference;
         }
 
         // fill Not finished 
