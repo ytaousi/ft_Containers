@@ -45,40 +45,34 @@ namespace ft
 
             reference operator * () const
             {
-                return *iter;
+                
             }
 
             pointer operator -> () const
             {
                 //return std::addressof(operator*());
-                return &(operator*());
+                
             }
 
             // pre incremented
             biderectional_iterator & operator ++ ()
             {
-                ++(this->iter);
-                return *this;
+                
             }
             // post incremented
             biderectional_iterator operator ++ (int)
             {
-                biderectional_iterator temp = *this;
-                ++(this->iter);
-                return temp;
+                
             }
 
             biderectional_iterator & operator -- ()
             {
-                --(this->iter);
-                return *this;
+                
             }
 
             biderectional_iterator operator -- (int)
             {
-                biderectional_iterator temp = *this;
-                --(this->iter);
-                return temp;
+                
             }
 
             template <class TT>

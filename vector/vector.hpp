@@ -179,20 +179,19 @@ namespace ft
                 return false ;
         }
 
-        // Not done yet
+        // SEGFAULT Sometimes
         void reserve(size_type n)
         {
-            if (n > max_size())
-                throw std::length_error("Invalid Request for vector capacity");
-            if (n > _capacity)
-            {
-                value_type *temp = _alloc.allocate(n * 2);
-                for (size_type i = 0; i < _size; ++i)
-                    temp[i] = _array[i];
-                _alloc.deallocate(_array, _capacity);
-                _array = temp;
-                _capacity = n;
-            }
+            // if (n > max_size())
+            //     throw std::length_error("Invalid Request for vector capacity");
+            if (n <= _capacity)
+                return ;
+            value_type *temp = _alloc.allocate(n);
+            for (size_type i = 0; i < _size; ++i)
+                temp[i] = _array[i];
+            _alloc.deallocate(_array, _capacity);
+            _array = temp;
+            _capacity = n;
         }
 
             // element access function's
@@ -294,7 +293,7 @@ namespace ft
             // increment size by 1
             if (_size == 0)
                 reserve (1);
-            else if (_capacity == _size)
+            if (_size == _capacity)
                 reserve(_capacity * 2);
             _array[_size] = val;
             _size++;
@@ -314,18 +313,20 @@ namespace ft
         // fill Not finished 
         void assign (size_type n, const value_type& val)
         {
-           if (n < _capacity)
-           {
-               for (size_type i = _size; i < n; i++)
-               {
-                   _array[i] = val;
-                   _size ++;
-               }
-           }
-           if (n >= _capacity)
-           {
-               
-           }
+            if ( n <= _capacity)
+            {
+                for (size_type i = 0; i < n; i++)
+                    _array[i] = val;
+                _size = n;
+            }
+            if (n > _capacity)
+            {
+                reserve(n);
+                for (size_type i = 0; i < n; i++)
+                    _array[i] = val;
+                _capacity = n;
+                _size = n;
+            }
         }
 
         //

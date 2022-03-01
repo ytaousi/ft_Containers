@@ -56,49 +56,39 @@ namespace ft
             //dereference iterator
             reference operator * () const
             {
-                iterator_type temp = rev_iter;  // segf found bitch
-                return *temp;
+                
             }
 
             //dereference iterator
             pointer operator->() const    //
             {
-                //return std::addressof(operator*());
-                return &(operator*());
+               
             }
 
             //pre-increment iterator position
             // return the value after incrementation
             reverse_iterator& operator++()
             {
-                --(this->rev_iter);
-                return (*this);
+                
             }
 
             //post-incrementation
             // return the value before incrementation
             reverse_iterator operator++(int)  //
             {
-                reverse_iterator temp = *this;
-                //--(this->rev_iter);
-                ++(*this);
-                return temp;
+                
             }
 
             //pre-decrement iterator position
             reverse_iterator& operator--()//
             {
-                ++(this->rev_iter);
-                return (*this);
+                
             }
 
             //post-decrementation
             reverse_iterator  operator--(int) //
             {
-                reverse_iterator temp = *this;
-                //--(this->rev_iter);
-                --(*this);
-                return temp;
+                
             }
 
             template <class IIterator>
