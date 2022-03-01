@@ -184,21 +184,14 @@ namespace ft
         {
             if (n > max_size())
                 throw std::length_error("Invalid Request for vector capacity");
-            if (n > _size)
+            if (n > _capacity)
             {
-                if (n > _capacity)
-                {
-                    pointer tmp = _alloc.allocate(n);
-                    
-                }
-                else
-                {
-                    for (size_type i = _size; i < n; ++i)
-                    {
-                        _alloc.construct(_array, sizeof(_array[i]));
-                        _size++;
-                    }
-                }
+                value_type *temp = _alloc.allocate(n * 2);
+                for (size_type i = 0; i < _size; ++i)
+                    temp[i] = _array[i];
+                _alloc.deallocate(_array, _capacity);
+                _array = temp;
+                _capacity = n;
             }
         }
 
@@ -300,22 +293,11 @@ namespace ft
             // insert element at index size
             // increment size by 1
             if (_size == 0)
-            {
-                reserve(1);
-                _alloc.construct(_array + _size, val);
-                _size++;
-            }
-            else if (_size <= _capacity)
-            {
-                _alloc.construct(_array + _size, val);
-                _size += 1;
-            }
-            else
-            {
+                reserve (1);
+            if (_capacity == _size)
                 reserve(_capacity * 2);
-                _alloc.construct(_array + _size, val);
-                _size += 1;
-            }
+            _array[_size] = val;
+            _size++;
         }
 
         // need to declare  fuction's  assign()/erase()/insert() : done
