@@ -7,6 +7,7 @@
 # include "map_iterator.hpp"
 # include "map_iterator_traits.hpp"
 # include <functional>
+# include "tree.hpp"
 
 namespace ft
 {
@@ -31,7 +32,7 @@ namespace ft
             typedef value_type  second_argument_type;
             typedef bool        result_type;
         protected:
-            //
+            Compare c;
     };
 
     template < class Key, class T, class Compare = std::less<Key>, class
@@ -42,7 +43,9 @@ namespace ft
             typedef Key                                                                             key_type;
             typedef T                                                                               mapped_type;
             typedef ft::pair<const key_type, mapped_type>                                           value_type;
-            typedef Compare                                                                         key_compare;  
+            typedef Compare                                                                         key_compare;
+            // dont know if correct typedef for class value_compare
+            typedef ft::value_compare<value_type>                                                   value_compare;
             typedef typename allocator_type::reference                                              reference;
             typedef typename allocator_type::const_reference                                        const_reference;
             typedef typename allocator_type::pointer                                                pointer;
@@ -187,6 +190,8 @@ namespace ft
         
         private:
             allocator_type  _alloc;
+            AVL_Node        *root;
+
             
     };
         template <class Key, class T>
