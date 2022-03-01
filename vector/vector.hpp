@@ -302,10 +302,9 @@ namespace ft
         // need to declare  fuction's  assign()/erase()/insert() : done
 
         // range
-        // template <class MyIterator>
-        // void assign (MyIterator first, MyIterator last)
+        // segfault 1 / 10 wtf 
         template <class InputIterator>
-        void assign (InputIterator first, InputIterator last)
+        void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
         {
             size_type difference = last - first;
 
@@ -319,7 +318,7 @@ namespace ft
             _size = difference;
         }
 
-        // fill Not finished 
+        // all good
         void assign (size_type n, const value_type& val)
         {
             if ( n <= _capacity)
