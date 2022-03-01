@@ -294,7 +294,7 @@ namespace ft
             // increment size by 1
             if (_size == 0)
                 reserve (1);
-            if (_capacity == _size)
+            else if (_capacity == _size)
                 reserve(_capacity * 2);
             _array[_size] = val;
             _size++;
