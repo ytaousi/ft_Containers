@@ -1,6 +1,57 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
+namespace ft
+{
+    class AVL_Node
+    {
+        protected:
+            int                 _data; // pair<key, value>
+            class AVL_Node *    _left;
+            class AVL_Node *    _right;
+            int                 _height;
+        
+        public:
+            AVL_Node() : _data(0), _left(NULL), _right(NULL), _height(0)
+            {
+
+            }
+            AVL_Node(int data) : _data(data), _left(NULL), _right(NULL), _height(0)
+            {
+
+            }
+            ~AVL_Node()
+            {
+                
+            }
+            AVL_Node(const AVL_Node & instance) : _data(0), _left(NULL), _right(NULL), _height(0)
+            {
+                *this = instance;
+            }
+            AVL_Node & operator=(const AVL_Node & instance)
+            {
+                _data = instance._data;
+                _left = instance._left;
+                _right = instance._right;
+                _height = instance._height;
+                return *this;
+            }
+
+            friend bool operator==(const AVL_Node &lhs, const AVL_Node &rhs);
+            friend bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs);
+
+    };
+
+    bool operator==(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+
+    }
+
+    bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+
+    }
+    // 
 
 /*
 1. Left Rotation 
@@ -23,7 +74,6 @@ In such a case first, perform left rotation on the subtree followed by a right r
         and the tree becomes imbalanced. In such a case, we first perform right rotation on the right subtree and then left rotation on the right tree.
 */
 
-
 /*
 Operations On AVL Tree :
 1-Search
@@ -32,42 +82,53 @@ Operations On AVL Tree :
 -
 3-deletion
 */
-namespace ft
-{
-    class AVL_Node
+
+    class AVL_Tree
     {
-        protected:
-            int                 _data; // pair<key, value>
-            class AVL_Node *    _left;
-            class AVL_Node *    _right;
-            int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition    " Balance Factor = height(left-subtree) − height(right-subtree) "   correct balance factor is 1, 0 and -1.
-        
+        private:
+            class AVL_Node *    root;
+            int                 _size;
+            int                 _height;
+            int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
+                                            //" (-1 <= Balance Factor >= 1) = height(left-subtree) − height(right-subtree) "   correct balance factor is 1, 0 and -1.
         public:
-            AVL_Node() : _data(0), _left(NULL), _right(NULL)
+            AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
-
+                root = new AVL_Node();
             }
-            AVL_Node(int data) : _data(data) , _balance_factor(0) , _left(NULL), _right(NULL)
+            ~AVL_Tree()
             {
-
             }
-            ~AVL_Node()
-            {
-                
-            }
-            AVL_Node(const AVL_Node & instance) : _data(0),  _balance_factor(0), _left(NULL), _right(NULL)
+            AVL_Tree(const AVL_Tree& instance) : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
                 *this = instance;
             }
-            AVL_Node & operator=(const AVL_Node & instance)
+            AVL_Tree& operator=(const AVL_Tree& instance)
             {
-                _data = instance._data;
-                _balance_factor = instance._balance_factor;
-                _left = instance._left;
-                _right = instance._right;    
-                return *this;
+
             }
+
+            friend bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs);
+            friend bool operator!=(const AVL_Tree&lhs, const AVL_Tree&rhs);
+        // Operations On a AVL_Tree
+
+            // Insertion
+
+            // Deletion
+
+            // Search
+
+            // Rotation
     };
+
+    bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs)
+    {
+
+    }
+    bool operator!=(const AVL_Tree&lhs, const AVL_Tree&rhs)
+    {
+
+    }
 }
 
 #endif
