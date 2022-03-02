@@ -6,9 +6,10 @@ namespace ft
     class AVL_Node
     {
         protected:
-            int                 _data; // pair<key, value>
+            int                 _data;      // pair<key, value>
             class AVL_Node *    _left;
             class AVL_Node *    _right;
+            class AVL_Node *    _parent;
             int                 _height;
         
         public:
@@ -33,23 +34,44 @@ namespace ft
                 _data = instance._data;
                 _left = instance._left;
                 _right = instance._right;
+                _parent = instance._parent;
                 _height = instance._height;
                 return *this;
             }
 
             friend bool operator==(const AVL_Node &lhs, const AVL_Node &rhs);
             friend bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs);
-
+            friend bool operator<(const AVL_Node &lhs, const AVL_Node &rhs);
+            friend bool operator>(const AVL_Node &lhs, const AVL_Node &rhs);
+            friend bool operator<=(const AVL_Node &lhs, const AVL_Node &rhs);
+            friend bool operator>=(const AVL_Node &lhs, const AVL_Node &rhs);
     };
 
     bool operator==(const AVL_Node &lhs, const AVL_Node &rhs)
     {
-
+        return (lhs._data == rhs._data)
     }
 
     bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs)
     {
+        return (!(lhs._data == rhs._data))
+    }
 
+    bool operator<(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+        return (lhs._data < rhs._data);
+    }
+    bool operator>(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+        return (lhs._data > rhs._data);
+    }
+    bool operator<=(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+        return (( (lhs._data < rhs._data) || (lhs._data == rhs._data) ))
+    }
+    bool operator>=(const AVL_Node &lhs, const AVL_Node &rhs)
+    {
+        return (( (lhs._data > rhs._data) || (lhs._data == rhs._data) ))
     }
     // 
 
@@ -91,27 +113,31 @@ Operations On AVL Tree :
             int                 _height;
             int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
                                             //" (-1 <= Balance Factor >= 1) = height(left-subtree) − height(right-subtree) "   correct balance factor is 1, 0 and -1.
+        
+        // Properties Of Binary tree  ( max nodes using level : 2^l / max node using height : 2^height - 1/ 
+        //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
+        
         public:
             AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
-                root = new AVL_Node();
+                root = new AVL_Node(42);
+                root.left = new AVL_Node(14);
+                root.right = new AVL_Node(43);
             }
             ~AVL_Tree()
             {
+                delete root.left;
+                delete root.right;
+                delete root;
             }
             AVL_Tree(const AVL_Tree& instance) : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
                 *this = instance;
             }
-            AVL_Tree& operator=(const AVL_Tree& instance)
-            {
-
-            }
 
             friend bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs);
             friend bool operator!=(const AVL_Tree&lhs, const AVL_Tree&rhs);
         // Operations On a AVL_Tree
-
             // Insertion
 
             // Deletion
@@ -119,6 +145,13 @@ Operations On AVL Tree :
             // Search
 
             // Rotation
+
+            // Print Tree
+
+            // types of traversal
+            // - inerdor traversal (root midlane)
+            // - preorder traversal (root at left then left then right)
+            // - postorder traversal (root at the right after left node and right node respectivly)
     };
 
     bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs)

@@ -11,28 +11,22 @@
 
 namespace ft
 {
-    template <class T>
-    class less : public std::binary_function<T,T,bool> // !! use it as the value_compare object of type value_type
-    {
-        public:
-            typedef T first_argument;
-            typedef T second_argument;
-            typedef bool result_type;
-            bool operator() (const T& x, const T& y) const
-            {
-                return x < y;
-            }
-    };
 
     template <class value_type>
-    class value_compare : public std::binary_function<T,T,bool>
+    class value_compare : public std::binary_function<value_type,value_type>,bool> // !! use it as the value_compare object of type value_type
     {
         public:
             typedef value_type  first_argument_type;
             typedef value_type  second_argument_type;
             typedef bool        result_type;
+
+            bool operator() (const first_argument_type& x, const second_argument_type& y) const
+            {
+                return x < y;
+            }
         protected:
-            Compare c;
+            Compare comp;
+            value_compare (Compare c) : comp(c) {}
     };
 
     template < class Key, class T, class Compare = std::less<Key>, class
@@ -44,7 +38,7 @@ namespace ft
             typedef T                                                                               mapped_type;
             typedef ft::pair<const key_type, mapped_type>                                           value_type;
             typedef Compare                                                                         key_compare;
-            // dont know if correct typedef for class value_compare
+            // dont know if correct typedef for class value_compare // done
             typedef ft::value_compare<value_type>                                                   value_compare;
             typedef typename allocator_type::reference                                              reference;
             typedef typename allocator_type::const_reference                                        const_reference;
@@ -190,7 +184,8 @@ namespace ft
         
         private:
             allocator_type  _alloc;
-            AVL_Node        *root;
+            AVL_Tree        _NotReadBlackTree;
+            key_compare     _Comp;
 
             
     };
