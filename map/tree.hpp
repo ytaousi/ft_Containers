@@ -34,6 +34,8 @@ Operations On AVL Tree :
 -
 3-deletion
 */
+namespace ft
+{
     typedef struct  s_node
     {
         int                data;      // pair<key, value>
@@ -58,24 +60,6 @@ Operations On AVL Tree :
         public:
             t_node * root;
 
-            t_node * CreateNode(int value = 0)
-            {
-                t_node * node = new t_node();
-                node->data = value;
-                node->height = 0;
-                node->left = NULL;
-                node->right = NULL;
-                node->parent = NULL;
-                return node;
-            }
-
-            t_node * insertNode(const t_node & Node)
-            {
-                if (root = NULL)
-                    return NULL;
-                
-                
-            }
             AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
                 std::cout << "Empty tree only one node with no data" << std::endl;
@@ -89,14 +73,28 @@ Operations On AVL Tree :
             }
 
 
+            t_node * CreateNode(int value = 0)
+            {
+                t_node * node = new t_node();
+                node->data = value;
+                node->height = 0;
+                node->left = NULL;
+                node->right = NULL;
+                node->parent = NULL;
+                return node;
+            }
         // Operations On a AVL_Tree
             // Insertion
-
+            t_node * insertNode(const t_node & Node, int key);
             // Deletion
 
             // Search
 
             // Rotation
+                // rotate key roted with y
+            t_node * RightRotate(const t_node & y);
+                // rotate key roted with y
+            t_node * LeftRotate(const t_node & x);
 
             // Print Tree
 
@@ -104,6 +102,10 @@ Operations On AVL Tree :
             // - inerdor traversal (root midlane)
             // - preorder traversal (root at left then left then right)
             // - postorder traversal (root at the right after left node and right node respectivly)
+    
+            // factor of balance should -1 0 1 height(left-subtree)-height(right-subtree)
+            int getBalanceFactor(t_node * N);
+
     };
 
 }
