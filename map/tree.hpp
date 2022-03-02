@@ -38,17 +38,18 @@ namespace ft
 {
     typedef struct  s_node
     {
-        int                data;      // pair<key, value>
-        struct s_node *    left;
-        struct s_node *    right;
-        struct s_node *    parent;
-        int                height;
+        int                 key;      // pair<key, value>
+        struct s_node *     left;
+        struct s_node *     right;
+        struct s_node *     parent;
+        int                 height;
+        int                 balanceFactor;
     }               t_node;
 
     class AVL_Tree
     {
         private:
-            
+            t_node *            root;
             int                 _size;
             int                 _height;
             int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
@@ -58,8 +59,6 @@ namespace ft
         //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
         
         public:
-            t_node * root;
-
             AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
                 std::cout << "Empty tree only one node with no data" << std::endl;
@@ -72,21 +71,38 @@ namespace ft
                 delete root; 
             }
 
+            const t_node & getNode() const
+            {
+                return *root;
+            }
 
             t_node * CreateNode(int value = 0)
             {
                 t_node * node = new t_node();
-                node->data = value;
-                node->height = 0;
+                node->key = value;
+                node->height = 1;
                 node->left = NULL;
                 node->right = NULL;
                 node->parent = NULL;
+                node->balanceFactor = 0;
                 return node;
             }
+            int getHeight(const t_node & Node) const;
         // Operations On a AVL_Tree
+            /*
+                y                                x
+               / \       Right Rotation         / \
+              x   T3     - - - - - - - >       T1  y 
+             / \         < - - - - - - -          / \
+            T1  T2       Left Rotation          T2  T3
+ 
+            following order  : keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
+            So BinarySearchTree property is not violated anywhere.
+            */
+
             // Insertion
             t_node * insertNode(const t_node & Node, int key);
-            // Deletion
+            // Deletion                                    
 
             // Search
 
@@ -95,6 +111,11 @@ namespace ft
             t_node * RightRotate(const t_node & y);
                 // rotate key roted with y
             t_node * LeftRotate(const t_node & x);
+                // 
+            t_node * LeftLeftRotate(const t_node &,const t_node &);
+            t_node * LeftRightRotate(const t_node &, const t_node &);
+            t_node * RightRightRotate(const t_node &, const t_node &);
+            t_node * RightLeftRotate(const t_node &, const t_node &);
 
             // Print Tree
 
@@ -104,7 +125,7 @@ namespace ft
             // - postorder traversal (root at the right after left node and right node respectivly)
     
             // factor of balance should -1 0 1 height(left-subtree)-height(right-subtree)
-            int getBalanceFactor(t_node * N);
+            int getBalanceFactor(t_node * N) const;
 
     };
 
