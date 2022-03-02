@@ -1,78 +1,8 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
-namespace ft
-{
-    class AVL_Node
-    {
-        protected:
-            int                 _data;      // pair<key, value>
-            class AVL_Node *    _left;
-            class AVL_Node *    _right;
-            class AVL_Node *    _parent;
-            int                 _height;
-        
-        public:
-            AVL_Node() : _data(0), _left(NULL), _right(NULL), _height(0)
-            {
+#include <iostream>
 
-            }
-            AVL_Node(int data) : _data(data), _left(NULL), _right(NULL), _height(0)
-            {
-
-            }
-            ~AVL_Node()
-            {
-                
-            }
-            AVL_Node(const AVL_Node & instance) : _data(0), _left(NULL), _right(NULL), _height(0)
-            {
-                *this = instance;
-            }
-            AVL_Node & operator=(const AVL_Node & instance)
-            {
-                _data = instance._data;
-                _left = instance._left;
-                _right = instance._right;
-                _parent = instance._parent;
-                _height = instance._height;
-                return *this;
-            }
-
-            friend bool operator==(const AVL_Node &lhs, const AVL_Node &rhs);
-            friend bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs);
-            friend bool operator<(const AVL_Node &lhs, const AVL_Node &rhs);
-            friend bool operator>(const AVL_Node &lhs, const AVL_Node &rhs);
-            friend bool operator<=(const AVL_Node &lhs, const AVL_Node &rhs);
-            friend bool operator>=(const AVL_Node &lhs, const AVL_Node &rhs);
-    };
-
-    bool operator==(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (lhs._data == rhs._data)
-    }
-
-    bool operator!=(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (!(lhs._data == rhs._data))
-    }
-
-    bool operator<(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (lhs._data < rhs._data);
-    }
-    bool operator>(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (lhs._data > rhs._data);
-    }
-    bool operator<=(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (( (lhs._data < rhs._data) || (lhs._data == rhs._data) ))
-    }
-    bool operator>=(const AVL_Node &lhs, const AVL_Node &rhs)
-    {
-        return (( (lhs._data > rhs._data) || (lhs._data == rhs._data) ))
-    }
     // 
 
 /*
@@ -104,11 +34,19 @@ Operations On AVL Tree :
 -
 3-deletion
 */
+    typedef struct  s_node
+    {
+        int                data;      // pair<key, value>
+        struct s_node *    left;
+        struct s_node *    right;
+        struct s_node *    parent;
+        int                height;
+    }               t_node;
 
     class AVL_Tree
     {
         private:
-            class AVL_Node *    root;
+            
             int                 _size;
             int                 _height;
             int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
@@ -118,25 +56,39 @@ Operations On AVL Tree :
         //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
         
         public:
+            t_node * root;
+
+            t_node * CreateNode(int value = 0)
+            {
+                t_node * node = new t_node();
+                node->data = value;
+                node->height = 0;
+                node->left = NULL;
+                node->right = NULL;
+                node->parent = NULL;
+                return node;
+            }
+
+            t_node * insertNode(const t_node & Node)
+            {
+                if (root = NULL)
+                    return NULL;
+                
+                
+            }
             AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
             {
-                root = new AVL_Node(42);
-                root.left = new AVL_Node(14);
-                root.right = new AVL_Node(43);
+                std::cout << "Empty tree only one node with no data" << std::endl;
+
+                root = CreateNode();
             }
             ~AVL_Tree()
             {
-                delete root.left;
-                delete root.right;
-                delete root;
-            }
-            AVL_Tree(const AVL_Tree& instance) : root(NULL), _size(0), _height(0), _balance_factor(0)
-            {
-                *this = instance;
+                std::cout << "Tree destructor Called" << std::endl;
+                delete root; 
             }
 
-            friend bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs);
-            friend bool operator!=(const AVL_Tree&lhs, const AVL_Tree&rhs);
+
         // Operations On a AVL_Tree
             // Insertion
 
@@ -154,14 +106,6 @@ Operations On AVL Tree :
             // - postorder traversal (root at the right after left node and right node respectivly)
     };
 
-    bool operator==(const AVL_Tree&lhs, const AVL_Tree&rhs)
-    {
-
-    }
-    bool operator!=(const AVL_Tree&lhs, const AVL_Tree&rhs)
-    {
-
-    }
 }
 
 #endif
