@@ -2,7 +2,7 @@
 #define TREE_HPP
 
 #include <iostream>
-
+#include <string>
     // 
 
 /*
@@ -305,27 +305,6 @@ namespace ft
                 //
             t_node *    getMinValueNode(t_node * Node) const;
                 //
-            
-            void        illuminate(t_node * Node, int spaces) const
-            {
-                if (Node == NULL)
-                    return;
-                
-                spaces += 5;
-
-                illuminate(Node->right, spaces);
-
-                std::cout << std::endl;
-                for (int i = 0; i < 5; i++)
-                    std::cout << " ";
-                std::cout << Node->key << "\n";
-                
-                illuminate(Node->left, spaces);
-            }
-            void print2D(t_node *Node) const
-            {
-                illuminate(Node, 2);
-            }
     };
 
             /*
