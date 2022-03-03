@@ -60,6 +60,19 @@ namespace ft
                         this->height = 1;
                         this->balanceFactor = 0;
                     }
+                    s_node(const s_node * instance)
+                    {
+                        this->key = instance->key;
+                        this->left = instance->left;
+                        this->right = instance->right;
+                        this->parent = instance->parent;
+                        this->height = instance->height;
+                        this->balanceFactor = instance->balanceFactor;
+                    }
+
+                        // Assignement operator overload on struct !!?
+                    //
+
                     ~s_node()
                     {
                         //std::cout << "struct Node Destructor Called" << std::endl;
@@ -73,10 +86,6 @@ namespace ft
             };
         private:
             int                 _size;
-            int                 _height;
-            int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
-                                            //" (-1 <= Balance Factor >= 1) = height(left-subtree) − height(right-subtree) "   correct balance factor is 1, 0 and -1.
-        
         // Properties Of Binary tree  ( max nodes using level : 2^l / max node using height : 2^height - 1/ 
         //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
         
@@ -88,18 +97,14 @@ namespace ft
                 //std::cout << "Empty tree only one node with no data" << std::endl;
                 this->root = NULL;
                 this->_size = 0;
-                this->_height = 1;
-                this->_balance_factor = 0;
             }
-            AVL_Tree(const AVL_Tree & instance) : root(NULL), _size(0), _height(1), _balance_factor(0)
+            AVL_Tree(const AVL_Tree & instance) : root(NULL), _size(0)
             {
                 *this = instance;
             }
             const AVL_Tree & operator = (const AVL_Tree & instance)
             {
                 this->_size = instance._size;
-                this->_height = instance._height;
-                this->_balance_factor = instance._balance_factor;
                 this->root = instance.root;
                 return *this;
             }
