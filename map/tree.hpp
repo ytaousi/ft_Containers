@@ -52,7 +52,7 @@ namespace ft
 
                     s_node(int key = 0)
                     {
-                        std::cout << "struct Node Constructor Called" << std::endl;
+                        //std::cout << "struct Node Constructor Called" << std::endl;
                         this->key = key;
                         this->left = NULL;
                         this->right = NULL;
@@ -62,7 +62,7 @@ namespace ft
                     }
                     ~s_node()
                     {
-                        std::cout << "struct Node Destructor Called" << std::endl;
+                        //std::cout << "struct Node Destructor Called" << std::endl;
                         if (this->left)
                             delete left;
                         if (this->right)
@@ -85,7 +85,7 @@ namespace ft
             t_node *            root;
             AVL_Tree()
             {
-                std::cout << "Empty tree only one node with no data" << std::endl;
+                //std::cout << "Empty tree only one node with no data" << std::endl;
                 this->root = NULL;
                 this->_size = 0;
                 this->_height = 1;
@@ -105,7 +105,7 @@ namespace ft
             }
             ~AVL_Tree()
             {
-                std::cout << "Tree destructor Called" << std::endl;
+                //std::cout << "Tree destructor Called" << std::endl;
                 if (root != NULL)
                     delete root;
             }
@@ -199,8 +199,8 @@ namespace ft
                 x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
 
                 // i can update balance factor after every movement
-                //y->balanceFactor = getBalanceFactor(y);
-                //x->balanceFactor = getBalanceFactor(x);
+                y->balanceFactor = getBalanceFactor(y);
+                x->balanceFactor = getBalanceFactor(x);
 
                 // return new root
                 return x;
@@ -220,8 +220,8 @@ namespace ft
                 y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
                 
                 // i can update balance factor after every movement
-                //x->balanceFactor = getBalanceFactor(x);
-                //y->balanceFactor = getBalanceFactor(y);
+                x->balanceFactor = getBalanceFactor(x);
+                y->balanceFactor = getBalanceFactor(y);
                 
                 
                 // return new root
@@ -263,25 +263,25 @@ namespace ft
                 }
             }
                 // - preorder traversal 
-            void printPreOrder(t_node * root) const
-            {
-                if (root != NULL)
-                {
-                    std::cout << root->key << " ";
-                    printPreOrder(root->left);
-                    printPreOrder(root->right);
-                }
-            }
+            // void printPreOrder(t_node * root) const
+            // {
+            //     if (root != NULL)
+            //     {
+            //         std::cout << root->key << " ";
+            //         printPreOrder(root->left);
+            //         printPreOrder(root->right);
+            //     }
+            // }
                 // - postorder traversal
-            void printPostOrder(t_node * root) const
-            {
-                if (root != NULL)
-                {
-                    printPostOrder(root->left);
-                    printPostOrder(root->right);
-                    std::cout << root->key << " ";
-                }
-            }
+            // void printPostOrder(t_node * root) const
+            // {
+            //     if (root != NULL)
+            //     {
+            //         printPostOrder(root->left);
+            //         printPostOrder(root->right);
+            //         std::cout << root->key << " ";
+            //     }
+            // }
 
             int max(int a, int b) const
             { 
@@ -306,6 +306,26 @@ namespace ft
             t_node *    getMinValueNode(t_node * Node) const;
                 //
             
+            void        illuminate(t_node * Node, int spaces) const
+            {
+                if (Node == NULL)
+                    return;
+                
+                spaces += 5;
+
+                illuminate(Node->right, spaces);
+
+                std::cout << std::endl;
+                for (int i = 0; i < 5; i++)
+                    std::cout << " ";
+                std::cout << Node->key << "\n";
+                
+                illuminate(Node->left, spaces);
+            }
+            void print2D(t_node *Node) const
+            {
+                illuminate(Node, 2);
+            }
     };
 
             /*
