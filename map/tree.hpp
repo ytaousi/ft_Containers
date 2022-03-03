@@ -36,20 +36,42 @@ Operations On AVL Tree :
 */
 namespace ft
 {
-    typedef struct  s_node
-    {
-        int                 key;      // pair<key, value>
-        struct s_node *     left;
-        struct s_node *     right;
-        struct s_node *     parent;
-        int                 height;
-        int                 balanceFactor;
-    }               t_node;
-
     class AVL_Tree
     {
+        public:
+            struct  s_node
+            {
+                public:
+                    int                 key;      // pair<key, value>
+                    struct s_node *     left;
+                    struct s_node *     right;
+                    struct s_node *     parent; // predecessor node
+                    //struct s_node *     child; // successor node
+                    int                 height;
+                    int                 balanceFactor;
+
+                    s_node(int key = 0)
+                    {
+                        std::cout << "struct Node Constructor Called" << std::endl;
+                        this->key = key;
+                        this->left = NULL;
+                        this->right = NULL;
+                        this->parent = NULL;
+                        this->height = 1;
+                        this->balanceFactor = 0;
+                    }
+                    ~s_node()
+                    {
+                        std::cout << "struct Node Destructor Called" << std::endl;
+                        if (this->left)
+                            delete left;
+                        if (this->right)
+                            delete right;
+                        if (this->parent)
+                            delete parent;
+                    }
+            };
         private:
-            t_node *            root;
             int                 _size;
             int                 _height;
             int                 _balance_factor; // balancing happen when balance factor does not satisfy <=1 condition     
@@ -59,91 +81,250 @@ namespace ft
         //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
         
         public:
-            AVL_Tree() : root(NULL), _size(0), _height(0), _balance_factor(0)
+        typedef struct s_node t_node;
+            t_node *            root;
+            AVL_Tree()
             {
                 std::cout << "Empty tree only one node with no data" << std::endl;
-
-                root = CreateNode();
+                this->root = NULL;
+                this->_size = 0;
+                this->_height = 1;
+                this->_balance_factor = 0;
+            }
+            AVL_Tree(const AVL_Tree & instance) : root(NULL), _size(0), _height(1), _balance_factor(0)
+            {
+                *this = instance;
+            }
+            const AVL_Tree & operator = (const AVL_Tree & instance)
+            {
+                this->_size = instance._size;
+                this->_height = instance._height;
+                this->_balance_factor = instance._balance_factor;
+                this->root = instance.root;
+                return *this;
             }
             ~AVL_Tree()
             {
                 std::cout << "Tree destructor Called" << std::endl;
-                delete root; 
+                if (root != NULL)
+                    delete root;
             }
-
-            const t_node & getNode() const
-            {
-                return *root;
-            }
-
             t_node * CreateNode(int value = 0)
             {
-                t_node * node = new t_node();
-                node->key = value;
-                node->height = 1;
-                node->left = NULL;
-                node->right = NULL;
-                node->parent = NULL;
-                node->balanceFactor = 0;
+                t_node * node = new t_node(value);
                 return node;
             }
-        // Operations On a AVL_Tree
-            /*
-                y                                x
-               / \       Right Rotation         / \
-              x   T3     - - - - - - - >       T1  y 
-             / \         < - - - - - - -          / \
-            T1  T2       Left Rotation          T2  T3
- 
-            following order  : keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
-            So BinarySearchTree property is not violated anywhere.
-            
-            -AVL trees follow all properties of Binary Search Trees.
-            -The left subtree has nodes that are lesser than the root node. The right subtree has nodes that are always greater than the root node.
-            -AVL trees are self-balancing binary search trees.
-            -The insert and delete operation require rotations to be performed after violating the balance factor.
-            -The time complexity of insert, delete, and search operation is O(log N).
-            
-            */
-
+            // Operations On a AVL_Tree
             // Insertion
-            t_node * insertNode(t_node * Node, int key);
+            t_node * insertNode(t_node * Node, int key)
+            {
+                if (Node == NULL)
+                    return new t_node(key);
+                if (key > Node->key)
+                    Node->right = insertNode(Node->right, key);
+                else if (key < Node->key)
+                    Node->left = insertNode(Node->left, key);
+                else
+                    return Node;
+                
+                // update height of this ancestor node
+                Node->height = 1 + max(getHeight(Node->left), getHeight(Node->right));
+
+                
+/*                                                      
+         z                                      y 
+        / \                                   /   \
+       y   T4      Right Rotate (z)          x      z
+      / \          - - - - - - - - ->      /  \    /  \ 
+     x   T3                               T1  T2  T3  T4
+    / \
+  T1   T2
+*/             // Left Left Case
+                if (Node->balanceFactor > 1 && key < Node->left->key)
+                    return LeftLeftRotate(Node);
+                
+                
+/*
+                    z                               y
+                   /  \                            / \ 
+                  T1   y      Left Rotate(z)      z    x
+                      /  \    - - - - - - - ->   / \   / \
+                     T2   x                     T1 T2 T3  T4
+                        / \
+                       T3  T4
+*/              // Right Right Case
+                if (Node->balanceFactor < -1 && key > Node->right->key)
+                    return RightRightRotate(Node);
+/*
+        z                               z                         x
+       / \                            /   \                      /  \ 
+      y   T4   Left Rotate (y)       x    T4  Right Rotate(z)   y    z
+     / \       - - - - - - - - ->   / \      - - - - - - - ->  / \   / \
+    T1  x                          y   T3                    T1  T2 T3 T4
+        / \                       / \
+       T2  T3                    T1  T2
+*/              // Left Right Case 
+                if (Node->balanceFactor > 1 && key > Node->left->key)
+                    return LeftRightRotate(Node);
+/*
+            z                             z                            x
+            / \                          / \                          /  \ 
+           T1   y   Right Rotate (y)    T1  x      Left Rotate(z)    z     y
+               / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \   / \
+              x   T4                      T2   y                  T1  T2 T3 T4
+             / \                              /  \
+            T2  T3                           T3   T4
+*/                // Right Left Case
+                if (Node->balanceFactor < -1 && key < Node->right->key)
+                    return RightLeftRotate(Node);
+                return Node;
+            }
             // Deletion                                    
             t_node * deleteNode(t_node * Node, int key);
             // Search
             t_node* SearchKey(t_node * root, int key);
             // Rotation
                 // rotate key roted with y
-            t_node * RightRotate(t_node * y);
+            t_node * RightRotate(t_node * y)      // i can update balance factor after every movement
+            {
+                t_node * x = y->left;
+                t_node * tmp = x->right;
+
+                // perform rotation
+                x->right = y;
+                y->left = tmp;
+
+                // update heights
+                y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+                x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+
+                // i can update balance factor after every movement
+                //y->balanceFactor = getBalanceFactor(y);
+                //x->balanceFactor = getBalanceFactor(x);
+
+                // return new root
+                return x;
+            }
                 // rotate key roted with x
-            t_node * LeftRotate(t_node * x);
+            t_node * LeftRotate(t_node * x) 
+            {
+                t_node * y = x->right;
+                t_node * tmp = y->left;
+
+                // perform rotation
+                y->left = x;
+                x->right = tmp;
+
+                // update heights
+                x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+                y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+                
+                // i can update balance factor after every movement
+                //x->balanceFactor = getBalanceFactor(x);
+                //y->balanceFactor = getBalanceFactor(y);
+                
+                
+                // return new root
+                return y;
+            }
                 // right rotate 
-            t_node * LeftLeftRotate(t_node *x,t_node *y);
+            t_node * LeftLeftRotate(t_node *Node)
+            {
+                return (RightRotate(Node));
+            }
                 // left rotate then right rotate
-            t_node * LeftRightRotate(t_node *x, t_node *y);
+            t_node * LeftRightRotate(t_node *Node)
+            {
+                Node->left = LeftRotate(Node);
+                return (RightRotate(Node));
+            }
                 // left rotate
-            t_node * RightRightRotate(t_node *x, t_node *y);
+            t_node * RightRightRotate(t_node *Node)
+            {
+                return (LeftRotate(Node));
+            }
                 // right rotate then left rotate
-            t_node * RightLeftRotate(t_node *x, t_node *y);
+            t_node * RightLeftRotate(t_node *Node)
+            {
+                Node->right = RightRotate(Node);
+                return (LeftRotate(Node));
+            }
 
                 // Print Tree
                     // types of traversal
                 // - inerdor traversal
-            void printInOrder(t_node * root) const;
+            void printInOrder(t_node * root) const
+            {
+                if (root != NULL)
+                {
+                    printInOrder(root->left);
+                    std::cout << root->key << " ";
+                    printInOrder(root->right);
+                }
+            }
                 // - preorder traversal 
-            void printPreOrder(t_node * root) const;
+            void printPreOrder(t_node * root) const
+            {
+                if (root != NULL)
+                {
+                    std::cout << root->key << " ";
+                    printPreOrder(root->left);
+                    printPreOrder(root->right);
+                }
+            }
                 // - postorder traversal
-            void printPostOrder(t_node * root) const;
+            void printPostOrder(t_node * root) const
+            {
+                if (root != NULL)
+                {
+                    printPostOrder(root->left);
+                    printPostOrder(root->right);
+                    std::cout << root->key << " ";
+                }
+            }
+
+            int max(int a, int b) const
+            { 
+                return (a > b) ? a : b;
+            }
                 // factor of balance should be -1 0 +1 :  height(left-subtree)-height(right-subtree)
-            int getBalanceFactor(t_node * N) const;
+            int getBalanceFactor(t_node * Node) const
+            {
+                if (Node == NULL)
+                    return 0;
+                return (getHeight(Node->left) - getHeight(Node->right));
+            }
+                
                 //
-            int         getHeight(t_node * Node) const;
+            int         getHeight(t_node * Node) const
+            {
+                if (Node == NULL)
+                    return 0;
+                return (Node->height);
+            }
                 //
             t_node *    getMinValueNode(t_node * Node) const;
                 //
             
     };
 
+            /*
+                y                                x
+               / \       Right Rotation         / \
+              x   T3     - - - - - - - >       T1  y 
+             / \         < - - - - - - -          / \
+            T1  T2       Left Rotation          T2  T3
+        
+                following order  : keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
+                So BinarySearchTree property is not violated anywhere.
+                
+                -AVL trees follow all properties of Binary Search Trees.
+                -The left subtree has nodes that are lesser than the root node. The right subtree has nodes that are always greater than the root node.
+                -AVL trees are self-balancing binary search trees.
+                -The insert and delete operation require rotations to be performed after violating the balance factor.
+                -The time complexity of insert, delete, and search operation is O(log N).
+            
+            */
 }
 
 #endif
