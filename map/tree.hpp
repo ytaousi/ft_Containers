@@ -180,12 +180,27 @@ namespace ft
              / \                              /  \
             T2  T3                           T3   T4
 */                // Right Left Case
-                if (Node->balanceFactor < -1 && key < Node->right->key)
+                if (Node->balanceFactor < -1 && key < Node->right->key)ß
                     return RightLeftRotate(Node);
                 return Node;
             }
             // Deletion                                    
-            t_node * deleteNode(t_node * Node, int key);
+            t_node * deleteNode(t_node * Node, int key)
+            {
+                if (Node == NULL)
+                    return Node;
+                if (key < Node->key)
+                    deleteNode(Node->left);
+                else if (key > Node->key)
+                    deleteNode(Node->right);
+                else
+                {
+                    if (Node->left == NULL || Node->right == NULL)
+                        ;
+                    
+                }
+                return Node;
+            }
             // Search
             t_node* SearchKey(t_node * root, int key);
             // Rotation
@@ -308,7 +323,21 @@ namespace ft
                 return (Node->height);
             }
                 //
-            t_node *    getMinValueNode(t_node * Node) const;
+            t_node *    getMinValueNode(t_node * Node) const
+            {
+                if (Node == NULL)
+                    return Node;
+                else
+                {
+                    t_node * min_node; 
+                    min_node = Node;
+                    
+                    while (min_node && min_node->left != NULL)
+                        min_node = min_node->left;
+
+                    return min_node;
+                }
+            }
                 //
     };
 
