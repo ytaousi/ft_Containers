@@ -392,7 +392,7 @@ namespace ft
         // fill
         void insert (iterator position, size_type n, const value_type& val)
         {
-
+            
         }
         // range
         // template <class MyIterator>
