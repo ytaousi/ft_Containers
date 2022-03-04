@@ -28,8 +28,8 @@ namespace ft
             typedef	typename allocator_type::pointer			    pointer;
             typedef	typename allocator_type::const_pointer		    const_pointer;
 
-            typedef ft::random_access_iterator<value_type>                   iterator;
-            typedef ft::random_access_iterator<const value_type>             const_iterator;
+            typedef ft::random_access_iterator<value_type>          iterator;
+            typedef ft::random_access_iterator<const value_type>    const_iterator;
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
@@ -104,7 +104,6 @@ namespace ft
             return iterator(_array);
         }
         
-
         const_iterator begin() const
         {
             return const_iterator(_array);
@@ -153,7 +152,6 @@ namespace ft
         {
             return _alloc.max_size(); // more logical thats the maximum possible value for size_t object's
         }
-
         // Not done yet
         void resize(size_type n, value_type val = value_type())
         {
@@ -162,8 +160,21 @@ namespace ft
             //Notice that this function changes the actual content of the container by inserting or erasing elements from it.
             //If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
             //If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
-            
-        
+            if (n <= _size)
+            {
+				for (size_type i = n + 1; i < _size ; i++)
+					_alloc.destroy(&_array[i]);
+				_size = n;
+			}
+            else 
+            {
+				//reserve for new capacity
+                if (n > _capacity)
+					reserve(n);
+				for (size_type i = _size; i < n; i++)
+					_alloc.construct(&_array[i], val);
+				_size = n;
+			}
         } 
 
         //
@@ -184,16 +195,20 @@ namespace ft
         // SEGFAULT Sometimes
         void reserve(size_type n)
         {
-            if (n > max_size())
-                throw std::length_error("Invalid Request for vector capacity");
-            if (n <= _capacity)
-                return ;
-            value_type *temp = _alloc.allocate(n);
-            for (size_type i = 0; i < _size; ++i)
-                temp[i] = _array[i];
-            _alloc.deallocate(_array, _capacity);
-            _array = temp;
-            _capacity = n;
+            if (n > _capacity)
+            {
+				value_type *tmp = _alloc.allocate(n);
+				for (size_type i = 0; i < _size ; i++)
+                {
+					_alloc.construct(&tmp[i], _array[i]);
+					_alloc.destroy(&_array[i]);
+				}
+                //check if 0 do not deallocate
+				if (_capacity != 0)
+					_alloc.deallocate(_array, _capacity);
+				_array = tmp;
+				_capacity = n;
+			}
         }
 
             // element access function's
@@ -286,7 +301,7 @@ namespace ft
             _size -= 1;
         }
 
-        // segfault 3 / 10 wtf
+        // segfault 3 / 10 wtf : fixed segfault
         void push_back (const value_type& val)
         {
             //if size is 0 reserve space for 1 unit
@@ -297,7 +312,7 @@ namespace ft
                 reserve (1);
             if (_size == _capacity)
                 reserve(_capacity * 2);
-            _array[_size] = val;
+            _alloc.construct(&_array[_size], val);
             _size++;
         }
 
@@ -310,52 +325,68 @@ namespace ft
         {
             size_type difference = last - first;
 
-            if (difference > _capacity)
+            if (difference > _size)
             {
                 reserve(difference);
                 _capacity = difference;
             }
-            for (size_type i = 0; i < difference; i++, first++)
-                _array[i] = *first; //
+            for (size_type i = 0; first != last;first++)
+                _alloc.construct(&_array[i++], *first);
+            for (size_type i = 0; i < _size; i++)
+                _alloc.destroy(&_array[i]);
             _size = difference;
         }
 
         // all good
         void assign (size_type n, const value_type& val)
         {
-            if ( n <= _capacity)
+            if ( n <= _size)
             {
                 for (size_type i = 0; i < n; i++)
-                    _array[i] = val;
+                    _alloc.construct(&_array[i] , val);
                 _size = n;
             }
-            if (n > _capacity)
+            if (n > _size)
             {
                 reserve(n);
                 for (size_type i = 0; i < n; i++)
-                    _array[i] = val;
+                    _alloc.construct(&_array[i] , val);
                 _capacity = n;
                 _size = n;
             }
         }
 
-        //
+        // erase single element using iterator
         iterator erase (iterator position)
         {
             return (erase(position, position + 1));
         }
 
-        //
+        // erase range of elemets
         iterator erase (iterator first, iterator last)
         {
-
+            size_type difference = last - first;
+			size_type begin = first - this->begin();
+            size_type end = last - this->begin();
+ 
+            for(size_type i = begin; i < end; i++)
+                _alloc.destroy(&_array[i]);
+            size_type j = 0;
+            for(size_type i = end; i < _size; i++)
+            {
+                _alloc.construct(&_array[begin + j], _array[end]);
+                j++;
+                end++;
+            }
+            _size -= difference;
+			return (first);
         }
 
         //single element
         iterator insert (iterator position, const value_type& val)
         {
             insert(position, 1, val);
-            return (pos);
+            return (position);
         }
 
         // fill

@@ -131,7 +131,7 @@ namespace ft
                 // Observers functions
             key_compare key_comp() const
             {
-                return (key_compare);
+                return (_Comp);
             }
             value_compare value_comp() const
             {}
@@ -183,9 +183,10 @@ namespace ft
             friend void swap (map<KKey,TT>& x, map<KKey,TT>& y);
         
         private:
-            allocator_type  _alloc;
-            AVL_Tree        _NotReadBlackTree;
-            key_compare     _Comp;
+            allocator_type                                          _alloc;
+            //AVL_Tree<value_type, key_compare, allocator_type>        _NotReadBlackTree;
+            AVL_Tree                                                _NotReadBlackTree;
+            key_compare                                             _Comp;
 
             
     };
