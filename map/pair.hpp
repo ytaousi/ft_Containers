@@ -16,21 +16,15 @@ namespace ft
             first_type  first;
             second_type second;
                     // Member function's
-            pair() : first(T1()), second(T2())
-            {
-
-            }
+            pair() : first(), second()
+            {}
 
             template<class T1, class T2>
-            pair (const pair<T1, T2>& pr) : first(T1()), second(T2())
-            {
-                *this = pr;
-            }
+            pair (const pair<T1, T2>& pr) : first(pr.first), second(pr.second)
+            {}
 
             pair (const first_type& a, const second_type& b) : first(a), second(b)
-            {
-
-            }
+            {}
 
             template<class T1, class T2>
             pair& operator= (const pair<T1, T2>& pr)
@@ -39,18 +33,6 @@ namespace ft
                 second = pr.second;
                 return *this;
             }
-                template <class U1, class U2>
-            friend bool operator== (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
-                template <class U1, class U2>
-            friend bool operator!= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
-                template <class U1, class U2>
-            friend bool operator<  (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
-                template <class U1, class U2>
-            friend bool operator<= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
-                template <class U1, class U2>
-            friend bool operator>  (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
-                template <class U1, class U2>
-            friend bool operator>= (const pair<U1,U2>& lhs, const pair<U1,U2>& rhs);
     };
 
             // Non-member function's

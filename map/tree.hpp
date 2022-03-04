@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include "map_reverse_iterator.hpp"
+#include "map_iterator.hpp"
+#include "map_iterator_traits.hpp"
     // 
 
 /*
@@ -36,23 +39,24 @@ Operations On AVL Tree :
 */
 namespace ft
 {
+    template<class _T, class _Compare, class _Alloc>
     class AVL_Tree
     {
         public:
+            //template<typename T>
             struct  s_node
             {
-                public:
-                    int                 key;      // pair<key, value>
-                    struct s_node *     left;
-                    struct s_node *     right;
-                    struct s_node *     parent; // predecessor node
-                    //struct s_node *     child; // successor node
+                public:                                       // pair<key, value>
+                    int                 key;   // T will be typedefed as value_type
+                    s_node *            left;
+                    s_node *            right;
+                    s_node *            parent; // predecessor node
+                    //struct s_node *     child; // descendent
                     int                 height;
                     int                 balanceFactor;
 
                     s_node(int key = 0)
                     {
-                        //std::cout << "struct Node Constructor Called" << std::endl;
                         this->key = key;
                         this->left = NULL;
                         this->right = NULL;
@@ -69,23 +73,21 @@ namespace ft
                         this->height = instance->height;
                         this->balanceFactor = instance->balanceFactor;
                     }
-
-                        // Assignement operator overload on struct !!?
-                    //
-
                     ~s_node()
-                    {
-                        //std::cout << "struct Node Destructor Called" << std::endl;
-                        if (this->left)
-                            delete left;
-                        if (this->right)
-                            delete right;
-                        if (this->parent)
-                            delete parent;
-                    }
+                    {}
             };
         private:
-            int                 _size;
+            int                 _size; // allocator_type::size_type size_type
+        public:
+            // typedef _T                                               value_type;
+            // typedef _Compare                                        comp_value;
+            // typedef ft::biderectional_iterator<value_type>          iterator;
+            // typedef ft::biderectional_iterator<const value_type>    const_iterator;
+            // typedef ft::reverse_iterator<iterator>                  reverse_iterator;
+            // typedef ft::reverse_iterator<const iterator>            const_reverse_iterator;
+            // typedef _Alloc                                          allocator_type;
+            // typedef allocator_type::size_type                       size_type;
+            // typedef allocator_type::difference_type                 difference_type;
         // Properties Of Binary tree  ( max nodes using level : 2^l / max node using height : 2^height - 1/ 
         //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
         
@@ -180,7 +182,7 @@ namespace ft
              / \                              /  \
             T2  T3                           T3   T4
 */                // Right Left Case
-                if (Node->balanceFactor < -1 && key < Node->right->key)ß
+                if (Node->balanceFactor < -1 && key < Node->right->key)
                     return RightLeftRotate(Node);
                 return Node;
             }
@@ -190,9 +192,9 @@ namespace ft
                 if (Node == NULL)
                     return Node;
                 if (key < Node->key)
-                    deleteNode(Node->left);
+                    deleteNode(Node->left, key);
                 else if (key > Node->key)
-                    deleteNode(Node->right);
+                    deleteNode(Node->right, key);
                 else
                 {
                     if (Node->left == NULL || Node->right == NULL)

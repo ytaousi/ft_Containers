@@ -342,7 +342,7 @@ namespace ft
         //
         iterator erase (iterator position)
         {
-
+            return (erase(position, position + 1));
         }
 
         //
@@ -354,7 +354,8 @@ namespace ft
         //single element
         iterator insert (iterator position, const value_type& val)
         {
-
+            insert(position, 1, val);
+            return (pos);
         }
 
         // fill
