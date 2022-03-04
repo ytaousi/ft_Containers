@@ -3,15 +3,22 @@
 
 # include <iterator>
 #include "map_iterator_traits.hpp"
+#include "map_iterator.hpp"
 #include "pair.hpp"
 #include "tree.hpp"
 
 namespace ft
 {
     template <class T>
-    class biderectional_map_iterator : public ft::Iterator<std::biderectional_iterator_tag, T>
+    class biderectional_map_iterator : public ft::Iterator<std::bidirectional_iterator_tag, T>
     {
         public:
+            typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::value_type        value_type;
+            typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::difference_type   difference_type;
+            typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::pointer           pointer;
+            typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::reference         reference;
+            typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+
             biderectional_map_iterator() : iter(NULL)
             {
 
@@ -75,6 +82,10 @@ namespace ft
             friend bool operator == (const biderectional_map_iterator<TT>& lhs, const biderectional_map_iterator<TT>& rhs);
                 template <class TT>
             friend bool operator != (const biderectional_map_iterator<TT>& lhs, const biderectional_map_iterator<TT>& rhs);
+
+
+            private:
+            pointer iter;
     };
 
     template <class T>

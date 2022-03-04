@@ -96,6 +96,8 @@ namespace ft
                 template <class IIterator>
             friend bool operator!= (const reverse_iterator<IIterator>& lhs, const reverse_iterator<IIterator>& rhs);
         
+        private:
+            pointer rev_iter;
     };
 
 

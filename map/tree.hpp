@@ -39,7 +39,7 @@ Operations On AVL Tree :
 */
 namespace ft
 {
-    template<class _T, class _Compare, class _Alloc>
+    //template<class _T, class _Compare, class _Alloc>
     class AVL_Tree
     {
         public:
@@ -77,20 +77,7 @@ namespace ft
                     {}
             };
         private:
-            int                 _size; // allocator_type::size_type size_type
-        public:
-            // typedef _T                                               value_type;
-            // typedef _Compare                                        comp_value;
-            // typedef ft::biderectional_iterator<value_type>          iterator;
-            // typedef ft::biderectional_iterator<const value_type>    const_iterator;
-            // typedef ft::reverse_iterator<iterator>                  reverse_iterator;
-            // typedef ft::reverse_iterator<const iterator>            const_reverse_iterator;
-            // typedef _Alloc                                          allocator_type;
-            // typedef allocator_type::size_type                       size_type;
-            // typedef allocator_type::difference_type                 difference_type;
-        // Properties Of Binary tree  ( max nodes using level : 2^l / max node using height : 2^height - 1/ 
-        //                            / minimum possible height or minimum possible level with N Nodes : Log2(N+1)
-        
+            int                 _size;
         public:
         typedef struct s_node t_node;
             t_node *            root;
@@ -137,51 +124,17 @@ namespace ft
                 // update height of this ancestor node
                 Node->height = 1 + max(getHeight(Node->left), getHeight(Node->right));
 
-                
-/*                                                      
-         z                                      y 
-        / \                                   /   \
-       y   T4      Right Rotate (z)          x      z
-      / \          - - - - - - - - ->      /  \    /  \ 
-     x   T3                               T1  T2  T3  T4
-    / \
-  T1   T2
-*/             // Left Left Case
+             // Left Left Case
                 if (Node->balanceFactor > 1 && key < Node->left->key)
                     return LeftLeftRotate(Node);
                 
-                
-/*
-                    z                               y
-                   /  \                            / \ 
-                  T1   y      Left Rotate(z)      z    x
-                      /  \    - - - - - - - ->   / \   / \
-                     T2   x                     T1 T2 T3  T4
-                        / \
-                       T3  T4
-*/              // Right Right Case
+                // Right Right Case
                 if (Node->balanceFactor < -1 && key > Node->right->key)
                     return RightRightRotate(Node);
-/*
-        z                               z                         x
-       / \                            /   \                      /  \ 
-      y   T4   Left Rotate (y)       x    T4  Right Rotate(z)   y    z
-     / \       - - - - - - - - ->   / \      - - - - - - - ->  / \   / \
-    T1  x                          y   T3                    T1  T2 T3 T4
-        / \                       / \
-       T2  T3                    T1  T2
-*/              // Left Right Case 
+              // Left Right Case 
                 if (Node->balanceFactor > 1 && key > Node->left->key)
                     return LeftRightRotate(Node);
-/*
-            z                             z                            x
-            / \                          / \                          /  \ 
-           T1   y   Right Rotate (y)    T1  x      Left Rotate(z)    z     y
-               / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \   / \
-              x   T4                      T2   y                  T1  T2 T3 T4
-             / \                              /  \
-            T2  T3                           T3   T4
-*/                // Right Left Case
+                // Right Left Case
                 if (Node->balanceFactor < -1 && key < Node->right->key)
                     return RightLeftRotate(Node);
                 return Node;
@@ -274,7 +227,9 @@ namespace ft
 
                 // Print Tree
                     // types of traversal
-                // - inerdor traversal
+                        // PreOrder traversal
+                        // PostOrder traversal
+                // - InOrder traversal
             void printInOrder(t_node * root) const
             {
                 if (root != NULL)
@@ -284,27 +239,6 @@ namespace ft
                     printInOrder(root->right);
                 }
             }
-                // - preorder traversal 
-            // void printPreOrder(t_node * root) const
-            // {
-            //     if (root != NULL)
-            //     {
-            //         std::cout << root->key << " ";
-            //         printPreOrder(root->left);
-            //         printPreOrder(root->right);
-            //     }
-            // }
-                // - postorder traversal
-            // void printPostOrder(t_node * root) const
-            // {
-            //     if (root != NULL)
-            //     {
-            //         printPostOrder(root->left);
-            //         printPostOrder(root->right);
-            //         std::cout << root->key << " ";
-            //     }
-            // }
-
             int max(int a, int b) const
             { 
                 return (a > b) ? a : b;
@@ -342,14 +276,46 @@ namespace ft
             }
                 //
     };
+/*                                                      
+         z                                      y 
+        / \                                   /   \
+       y   T4      Right Rotate (z)          x      z
+      / \          - - - - - - - - ->      /  \    /  \ 
+     x   T3                               T1  T2  T3  T4
+    / \
+  T1   T2
+*/
 
-            /*
-                y                                x
-               / \       Right Rotation         / \
-              x   T3     - - - - - - - >       T1  y 
-             / \         < - - - - - - -          / \
-            T1  T2       Left Rotation          T2  T3
-        
+/*
+                    z                               y
+                   /  \                            / \ 
+                  T1   y      Left Rotate(z)      z    x
+                      /  \    - - - - - - - ->   / \   / \
+                     T2   x                     T1 T2 T3  T4
+                        / \
+                       T3  T4
+*/
+
+/*
+        z                               z                         x
+       / \                            /   \                      /  \ 
+      y   T4   Left Rotate (y)       x    T4  Right Rotate(z)   y    z
+     / \       - - - - - - - - ->   / \      - - - - - - - ->  / \   / \
+    T1  x                          y   T3                    T1  T2 T3 T4
+        / \                       / \
+       T2  T3                    T1  T2
+*/
+
+/*
+            z                             z                            x
+            / \                          / \                          /  \ 
+           T1   y   Right Rotate (y)    T1  x      Left Rotate(z)    z     y
+               / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \   / \
+              x   T4                      T2   y                  T1  T2 T3 T4
+             / \                              /  \
+            T2  T3                           T3   T4
+*/
+            /*     
                 following order  : keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
                 So BinarySearchTree property is not violated anywhere.
                 

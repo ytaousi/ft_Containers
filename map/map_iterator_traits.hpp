@@ -3,6 +3,7 @@
 
 # include <cstddef>
 # include <iterator>
+# include "map_iterator.hpp"
 namespace ft
 {
     template <class Category, class T, class Distance = ptrdiff_t,
@@ -35,7 +36,7 @@ namespace ft
             typedef ptrdiff_t                           difference_type;
             typedef T*                                  pointer;
             typedef T&                                  reference;
-            typedef std::biderectional_iterator_tag     iterator_category;
+            typedef std::bidirectional_iterator_tag     iterator_category;
     };
 
     template< class T >
@@ -46,7 +47,7 @@ namespace ft
             typedef ptrdiff_t                           difference_type;
             typedef T*                                  pointer;
             typedef T&                                  reference;
-            typedef std::biderectional_iterator_tag     iterator_category;
+            typedef std::bidirectional_iterator_tag     iterator_category;
     };
 }
 
