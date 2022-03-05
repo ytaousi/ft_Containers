@@ -73,21 +73,37 @@ namespace ft
             {}
                 // Iterator functions
             iterator begin()
-            {}
+            {
+                return _NotReadBlackTree.begin();
+            }
             const_iterator begin() const
-            {}
+            {
+                return _NotReadBlackTree.begin();
+            }
             iterator end()
-            {}
+            {
+                return _NotReadBlackTree.end();
+            }
             const_iterator end() const
-            {}
+            {
+                return _NotReadBlackTree.end();
+            }
             reverse_iterator rbegin()
-            {}
+            {
+                return _NotReadBlackTree.rbegin();
+            }
             const_reverse_iterator rbegin() const
-            {}
+            {
+                return _NotReadBlackTree.rbegin();
+            }
             reverse_iterator rend()
-            {}
+            {
+                return _NotReadBlackTree.rend();
+            }
             const_reverse_iterator rend() const
-            {}
+            {
+                return _NotReadBlackTree.rend();
+            }
 
             // Capacity
             bool empty() const
@@ -105,61 +121,98 @@ namespace ft
             }
             // element access is
             mapped_type& operator[] (const key_type& k)
-            {}
+            {
+
+            }
             // element Modifiers
                 // 
             pair<iterator,bool> insert (const value_type& val)
-            {}
+            {
+                
+            }
             iterator insert (iterator position, const value_type& val)
-            {}
+            {
+                return _NotReadBlackTree.insert(position, val);
+            }
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
-            {}
+            {
+                _NotReadBlackTree.insert(first, last);
+            }
                 // 
             void erase (iterator position)
-            {} 
+            {
+                _NotReadBlackTree.erase(position);
+            }
             size_type erase (const key_type& k)
-            {}
+            {
+                return _NotReadBlackTree.erase(k);
+            }
             void erase (iterator first, iterator last)
-            {}
+            {
+                _NotReadBlackTree.erase(first, last);
+            }
                 //
             void swap (map& x)
-            {}
+            {
+
+            }
                 //
             void clear()
-            {}
+            {
+
+            }
                 // Observers functions
             key_compare key_comp() const
             {
-                return (_Comp);
+                return (key_comp(key_type)); // not sure if correct
             }
             value_compare value_comp() const
-            {}
+            {
+                return (value_compare(value_type)); // not sure if correct
+            }
                 // Operations functions
-
                 // 
             iterator find (const key_type& k)
-            {}
+            {
+                return _NotReadBlackTree.find(k);
+            }
             const_iterator find (const key_type& k) const
-            {}
+            {
+                return _NotReadBlackTree.find(k);
+            }
                 //
             size_type count (const key_type& k) const
-            {}
+            {
+                return _NotReadBlackTree.count(k);
+            }
                 // 
             iterator lower_bound (const key_type& k)
-            {}
+            {
+                return _NotReadBlackTree.lower_bound(k);
+            }
             const_iterator lower_bound (const key_type& k) const
-            {}
+            {
+                return _NotReadBlackTree.lower_bound(k);
+            }
                 //
             iterator upper_bound (const key_type& k)
-            {}
+            {
+                return _NotReadBlackTree.upper_bound(k);
+            }
             const_iterator upper_bound (const key_type& k) const
-            {}
+            {
+                return _NotReadBlackTree.upper_bound(k);
+            }
                 //
             pair<iterator,iterator>             equal_range (const key_type& k)
-            {}
+            {
+                return _NotReadBlackTree.equal_range(k);
+            }
             pair<const_iterator,const_iterator> equal_range (const key_type& k) const
-            {}
+            {
+                return _NotReadBlackTree.equal_range(k);
+            }
                 // get_allocator
             allocator_type get_allocator () const
             {
