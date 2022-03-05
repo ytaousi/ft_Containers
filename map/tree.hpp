@@ -345,6 +345,11 @@ namespace ft
         const_iterator upper_bound(const key_type& k) const;
         value_type equal_range(const key_type& k);
         const value_type equal_range(const key_type& k) const;
+        /*----------------------------------------------------------*/
+        /*----------------------------------------------------------*/
+        bool empty() const;
+        size_type size() const;
+        size_type max_size() const;
 
     };
 /*                                                      
