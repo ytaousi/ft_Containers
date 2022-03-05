@@ -128,7 +128,7 @@ namespace ft
                 // 
             pair<iterator,bool> insert (const value_type& val)
             {
-                
+                return insert(val);
             }
             iterator insert (iterator position, const value_type& val)
             {
@@ -160,7 +160,7 @@ namespace ft
                 //
             void clear()
             {
-
+                _NotReadBlackTree.clear();
             }
                 // Observers functions
             key_compare key_comp() const

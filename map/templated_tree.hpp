@@ -46,6 +46,7 @@ namespace ft
                     {}
             };
         public:
+            // need to typedef                                                  key_type;
             typedef _T                                                          value_type;
             typedef _Compare                                                    value_compare;
             typedef _Alloc                                                      allocator_type;
@@ -245,6 +246,7 @@ namespace ft
                     return min_node;
                 }
             }
+        public:
             s_node<_T> *        _root;
         private:
             int                 _size; // allocator_type::size_type size_type

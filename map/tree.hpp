@@ -6,7 +6,7 @@
 #include "map_reverse_iterator.hpp"
 #include "map_iterator.hpp"
 #include "map_iterator_traits.hpp"
-    // 
+#include <memory>
 
 /*
 1. Left Rotation 
@@ -139,7 +139,7 @@ namespace ft
                     return RightLeftRotate(Node);
                 return Node;
             }
-            // Deletion                                    
+            // Deletion     Not Working                               
             t_node * deleteNode(t_node * Node, int key)
             {
                 t_node * p;
@@ -311,7 +311,41 @@ namespace ft
                     return min_node;
                 }
             }
-                //
+
+        /*----------------------------------------------------------*/
+        /*----------------------------------------------------------*/
+        // iterator functions
+        iterator begin();
+        const_iterator begin() const;
+        iterator end();
+        const_iterator end() const;
+        reverse_iterator rbegin();
+        const_reverse_iterator rbegin() const;
+        const_reverse_iterator rend() const;
+        /*----------------------------------------------------------*/
+        /*----------------------------------------------------------*/
+        // element modifier functions
+        value_type insert(const value_type& value);  // u need to check template parameter values
+        iterator insert(iterator position, const value_type value);
+            template<class InputIterator>
+        void insert(InputIterator first, InputIterator last);
+        void erase(iterator position);
+        size_type erase(const key_type& k);
+        void erase(iterator first. iterator last);
+        void clear();
+        /*----------------------------------------------------------*/
+        /*----------------------------------------------------------*/
+        // Operations functions
+        iterator find(const key_type& k);
+        const_iterator find(const key_type& k) const;
+        size_type count(const key_type& k) const;
+        iterator lower_bound(const key_type& k);
+        const_iterator lower_bound(const key_type& k) const;
+        iterator upper_bound(const key_type& k);
+        const_iterator upper_bound(const key_type& k) const;
+        value_type equal_range(const key_type& k);
+        value_type equal_range(const key_type& k) const;
+
     };
 /*                                                      
          z                                      y 
