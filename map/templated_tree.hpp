@@ -45,7 +45,7 @@ namespace ft
                     ~s_node()
                     {}
             };
-        public:
+        public: // if pair<key_type, mapped_type> is _T : _T::second_type; 
             // need to typedef                                                  key_type;
             typedef _T                                                          value_type;
             typedef _Compare                                                    value_compare;

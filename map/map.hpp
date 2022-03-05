@@ -108,16 +108,15 @@ namespace ft
             // Capacity
             bool empty() const
             {
-                return (begin() == end());
+                return _NotReadBlackTree.empty();
             }
             size_type size() const
             {
-                return (std::distance(begin(), end()));
-                // return (_size);
+                return _NotReadBlackTree.size();
             }
             size_type max_size() const
             {
-                return (_alloc.max_size());
+                return _NotReadBlackTree.max_size();
             }
             // element access is
             mapped_type& operator[] (const key_type& k)
@@ -155,7 +154,7 @@ namespace ft
                 //
             void swap (map& x)
             {
-
+                
             }
                 //
             void clear()
@@ -211,7 +210,7 @@ namespace ft
             }
             pair<const_iterator,const_iterator> equal_range (const key_type& k) const
             {
-                return _NotReadBlackTree.equal_range(k);
+                return _NotReadBlackTree.equal_range(k); // get return of pair<iterator, iterator> then return const iterators
             }
                 // get_allocator
             allocator_type get_allocator () const
