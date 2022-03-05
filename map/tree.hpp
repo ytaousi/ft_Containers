@@ -145,22 +145,22 @@ namespace ft
                 t_node * p;
                 if (Node == NULL)
                     return Node;
-                if (k > Node->key)
+                if (key > Node->key)
                 {
                     Node = deleteNode(Node->right, key);
                     // update balance factor
                     if (getBalanceFactor(Node) == 2)
-                        // fix rotation
+                        ;// fix rotation
                 }
                 else
                 {
 
-                    if (k < Node->key)
+                    if (key < Node->key)
                     {
                         Node = deleteNode(Node->left, key);
                         // update balance factor
                         if (getBalanceFactor(Node) == -2)
-                            // fix rotation
+                            ;// fix rotation
                     }
                     else
                     {
@@ -174,14 +174,14 @@ namespace ft
                             Node->key = p->key;
                             Node->right = deleteNode(Node->right, p->key);
                             // update balance factor
-                            if(balanceFactor(T) == 2)
-                                // fix rotation
+                            if(getBalanceFactor(Node) == 2)
+                                ;// fix rotation
                         }
                         else
                             return Node->left;
                     }
                 }
-                Node->height = max(getHeight(Node->left) - getHeight(Node->right));
+                Node->height = max(getHeight(Node->left) , getHeight(Node->right));
                 return Node;
             }
             // Search

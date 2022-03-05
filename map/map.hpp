@@ -22,7 +22,7 @@ namespace ft
 
             bool operator() (const first_argument_type& x, const second_argument_type& y) const
             {
-                return x < y;
+                return comp(x.first, y.first);
             }
         protected:
             Compare comp;
@@ -164,7 +164,7 @@ namespace ft
                 // Observers functions
             key_compare key_comp() const
             {
-                return (key_comp(key_type)); // not sure if correct
+                return (key_compare(key_type)); // not sure if correct
             }
             value_compare value_comp() const
             {
