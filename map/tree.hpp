@@ -81,6 +81,7 @@ namespace ft
         public:
         typedef struct s_node t_node;
             t_node *            root;
+            allocator_type      _alloc;
             AVL_Tree()
             {
                 //std::cout << "Empty tree only one node with no data" << std::endl;
@@ -347,9 +348,9 @@ namespace ft
         const value_type equal_range(const key_type& k) const;
         /*----------------------------------------------------------*/
         /*----------------------------------------------------------*/
-        bool empty() const;
-        size_type size() const;
-        size_type max_size() const;
+        bool empty() const {return _size == 0;};
+        size_type size() const {return _size;};
+        size_type max_size() const {return _alloc.max_size();};
 
     };
 /*                                                      

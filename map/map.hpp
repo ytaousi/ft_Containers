@@ -38,7 +38,6 @@ namespace ft
             typedef T                                                                               mapped_type;
             typedef ft::pair<const key_type, mapped_type>                                           value_type;
             typedef Compare                                                                         key_compare;
-            // dont know if correct typedef for class value_compare // done
             typedef ft::value_compare<value_type>                                                   value_compare;
             typedef typename allocator_type::reference                                              reference;
             typedef typename allocator_type::const_reference                                        const_reference;
@@ -63,11 +62,17 @@ namespace ft
             {}
             
             map(const map& object)
-            {}
+            {
+                // deallocate old tree
+                // copy object members to this object members
+                // 
+            }
 
                 // Destructor
             ~map()
-            {}
+            {
+                // AVL_Tree class fucntion to free the tree hold by the map
+            }
                 // Assignement Operator
             map& operator= (const map& x)
             {}
@@ -121,7 +126,7 @@ namespace ft
             // element access is
             mapped_type& operator[] (const key_type& k)
             {
-
+                return _NotReadBlackTree[k];
             }
             // element Modifiers
                 // 
@@ -210,7 +215,7 @@ namespace ft
             }
             pair<const_iterator,const_iterator> equal_range (const key_type& k) const
             {
-                return _NotReadBlackTree.equal_range(k); // get return of pair<iterator, iterator> then return const iterators
+                return _NotReadBlackTree.equal_range(k); // get return of pair<iterator, iterator> then return const iterators cast maybe !?
             }
                 // get_allocator
             allocator_type get_allocator () const
@@ -239,8 +244,6 @@ namespace ft
             //AVL_Tree<value_type, value_compare, allocator_type>   _NotReadBlackTree;
             AVL_Tree                                                _NotReadBlackTree;
             value_compare                                           _Comp;
-
-            
     };
         template <class Key, class T>
     bool operator== ( const map<Key,T>& lhs, const map<Key,T>& rhs )

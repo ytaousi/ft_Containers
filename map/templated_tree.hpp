@@ -52,6 +52,7 @@ namespace ft
             typedef _Alloc                                                      allocator_type;
             
             typedef s_node<_T>                                                  node_type;
+            // template typedef responsible of allocation for node objects
             typedef typename _Alloc::template rebind<node_type>::other		    node_allocator;
             typedef typename node_allocator::pointer							pointer;
             typedef typename node_allocator::const_pointer						const_pointer;
