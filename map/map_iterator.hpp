@@ -86,6 +86,7 @@ namespace ft
 
             private:
             pointer iter;
+            //RooT    tree;
     };
 
     template <class T>

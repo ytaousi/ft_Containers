@@ -184,9 +184,9 @@ namespace ft
         
         private:
             allocator_type                                          _alloc;
-            //AVL_Tree<value_type, key_compare, allocator_type>        _NotReadBlackTree;
+            //AVL_Tree<value_type, value_compare, allocator_type>   _NotReadBlackTree;
             AVL_Tree                                                _NotReadBlackTree;
-            key_compare                                             _Comp;
+            value_compare                                           _Comp;
 
             
     };

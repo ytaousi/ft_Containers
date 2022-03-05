@@ -142,22 +142,59 @@ namespace ft
             // Deletion                                    
             t_node * deleteNode(t_node * Node, int key)
             {
+                t_node * p;
                 if (Node == NULL)
                     return Node;
-                if (key < Node->key)
-                    deleteNode(Node->left, key);
-                else if (key > Node->key)
-                    deleteNode(Node->right, key);
+                if (k > Node->key)
+                {
+                    Node = deleteNode(Node->right, key);
+                    // update balance factor
+                    if (getBalanceFactor(Node) == 2)
+                        // fix rotation
+                }
                 else
                 {
-                    if (Node->left == NULL || Node->right == NULL)
-                        ;
-                    
+
+                    if (k < Node->key)
+                    {
+                        Node = deleteNode(Node->left, key);
+                        // update balance factor
+                        if (getBalanceFactor(Node) == -2)
+                            // fix rotation
+                    }
+                    else
+                    {
+                        if (Node->right != NULL)
+                        {
+                            p = Node->right;
+
+                            while(p->left != NULL)
+                                p = p->left;
+
+                            Node->key = p->key;
+                            Node->right = deleteNode(Node->right, p->key);
+                            // update balance factor
+                            if(balanceFactor(T) == 2)
+                                // fix rotation
+                        }
+                        else
+                            return Node->left;
+                    }
                 }
+                Node->height = max(getHeight(Node->left) - getHeight(Node->right));
                 return Node;
             }
             // Search
-            t_node* SearchKey(t_node * root, int key);
+            t_node* SearchKey(t_node * Node, int key)
+            {
+                if (Node == NULL || Node->key == key)
+                    return Node;
+                if (key < Node->key)
+                    return SearchKey(Node->left, key);
+                if (key > Node->key)
+                    return SearchKey(Node->right, key);
+                return Node;
+            }
             // Rotation
                 // rotate key roted with y
             t_node * RightRotate(t_node * y)      // i can update balance factor after every movement
@@ -325,6 +362,15 @@ namespace ft
                 -The insert and delete operation require rotations to be performed after violating the balance factor.
                 -The time complexity of insert, delete, and search operation is O(log N).
             
+            */
+
+            // Why AVL and not RBL Tree , well because i am lazy ok!! RTFM
+            /* ---------------------------------------------------------------- /
+                The AVL trees are more balanced compared to Red-Black Trees,
+                but they may cause more rotations during insertion and deletion.
+                So if your application involves frequent insertions and deletions,
+                then Red-Black trees should be preferred. And if the insertions and deletions are less frequent and search is a more frequent operation,
+                then AVL tree should be preferred over Red-Black Tree 
             */
 }
 
