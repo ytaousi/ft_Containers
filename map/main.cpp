@@ -18,16 +18,10 @@ int main()
     _NotReadBlackTree.root = _NotReadBlackTree.insertNode(_NotReadBlackTree.root, 102);
     _NotReadBlackTree.root = _NotReadBlackTree.insertNode(_NotReadBlackTree.root, 66);
     _NotReadBlackTree.root = _NotReadBlackTree.insertNode(_NotReadBlackTree.root, 13);
-    std::cout << "Minimal Value" << std::endl;
-    std::cout << _NotReadBlackTree.getMinValueNode(_NotReadBlackTree.root)->key << std::endl;
     std::cout << std::endl;
-    std::cout << "Maximal Value" << std::endl; 
-    std::cout << _NotReadBlackTree.getMaxValueNode(_NotReadBlackTree.root)->key << std::endl;
-
     //std::cout << "InorderTreeTraversal" << std::endl;
     //_NotReadBlackTree.printInOrder(_NotReadBlackTree.root);
     std::cout << std::endl;
-    //_NotReadBlackTree.root = _NotReadBlackTree.deleteNode(_NotReadBlackTree.root, 102);
     _NotReadBlackTree.printBT(_NotReadBlackTree.root);
     return (0);
 }
