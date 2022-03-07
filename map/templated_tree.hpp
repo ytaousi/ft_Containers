@@ -212,6 +212,29 @@ namespace ft
                     printInOrder(root->right);
                 }
             }
+
+            // print tree in pretty way
+            void printBT(const std::string& prefix, const t_node* Node, bool isLeft)
+            {
+                if( Node != NULL )
+                {
+                    std::cout << prefix;
+
+                    std::cout << (isLeft ? "├──" : "└──" );
+
+                    // print the value of the Node
+                    std::cout << Node->key << std::endl;
+
+                    // enter the next tree level - left and right branch
+                    printBT( prefix + (isLeft ? "│   " : "    "), Node->left, true);
+                    printBT( prefix + (isLeft ? "│   " : "    "), Node->right, false);
+                }
+            }
+
+            void printBT(const node_type* Node)
+            {
+                printBT("", Node, false);    
+            }
                 //
             value_type max(value_type a, value_type b) const
             { 
@@ -247,10 +270,25 @@ namespace ft
                     return min_node;
                 }
             }
+
+            size_type getSize() const
+            {
+                return _size;
+            }
+
+            s_node<_T> * getRoot() const 
+            {
+                return _root;
+            }
+
+            node_allocator getAllocator() const
+            {
+                return _alloc;
+            }
         public:
             s_node<_T> *        _root;
         private:
-            int                 _size; // allocator_type::size_type size_type
+            size_type           _size; // allocator_type::size_type size_type
             allocator_type      _alloc;
             node_allocator      _node_alloc;
     };

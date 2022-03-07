@@ -8,7 +8,7 @@
 #include "tree.hpp"
 
 namespace ft
-{
+{   // template <class T, class Node_type>
     template <class T>
     class biderectional_map_iterator : public ft::Iterator<std::bidirectional_iterator_tag, T>
     {
@@ -65,7 +65,9 @@ namespace ft
             // post incremented
             biderectional_map_iterator operator ++ (int)
             {
-                
+                biderectional_map_iterator * tmp = *this;
+                operator ++ ();
+                return tmp;
             }
 
             biderectional_map_iterator & operator -- ()
@@ -75,7 +77,9 @@ namespace ft
 
             biderectional_map_iterator operator -- (int)
             {
-                
+                biderectional_map_iterator * tmp = *this;
+                operator -- ();
+                return tmp;
             }
 
             template <class TT>
@@ -86,7 +90,7 @@ namespace ft
 
             private:
             pointer iter;
-            //RooT    tree;
+            //node_type * map_iter;
     };
 
     template <class T>

@@ -81,7 +81,7 @@ namespace ft
         public:
         typedef struct s_node t_node;
             t_node *            root;
-            allocator_type      _alloc;
+            //allocator_type      _alloc;
             AVL_Tree()
             {
                 //std::cout << "Empty tree only one node with no data" << std::endl;
@@ -114,77 +114,49 @@ namespace ft
             t_node * insertNode(t_node * Node, int key)
             {
                 if (Node == NULL)
-                    return new t_node(key);
-                if (key > Node->key)
-                    Node->right = insertNode(Node->right, key);
-                else if (key < Node->key)
-                    Node->left = insertNode(Node->left, key);
+                    return Node = new t_node(key);
                 else
-                    return Node;
-                
-                // update height of this ancestor node
-                Node->height = 1 + max(getHeight(Node->left), getHeight(Node->right));
+                {
+                    if (key < Node->key)
+                    {
+                        if (Node->left != NULL)
+                            Node = insertNode(Node->left, key);
+                        // update balance factor
+                        Node->balanceFactor = getBalanceFactor(Node);
+                        //  check balance factor
+                        if (Node->balanceFactor == 2)
+                        {
 
-             // Left Left Case
-                if (Node->balanceFactor > 1 && key < Node->left->key)
-                    return LeftLeftRotate(Node);
-                
-                // Right Right Case
-                if (Node->balanceFactor < -1 && key > Node->right->key)
-                    return RightRightRotate(Node);
-              // Left Right Case 
-                if (Node->balanceFactor > 1 && key > Node->left->key)
-                    return LeftRightRotate(Node);
-                // Right Left Case
-                if (Node->balanceFactor < -1 && key < Node->right->key)
-                    return RightLeftRotate(Node);
+                        }
+                        if (Node->balanceFactor == -2)
+                        {
+
+                        }
+                    }
+                    if (key > Node->key)
+                    {
+                        Node = insertNode(Node->right, key);
+                        // update balance factor
+                        Node->balanceFactor = getBalanceFactor(Node);
+                        // check balance factor
+                        if (Node->balanceFactor == 2)
+                        {
+                            
+
+                        }
+                        if (Node->balanceFactor == -2)
+                        {
+                            
+                        }
+                    }
+                    // update node height
+                    Node->height = getHeight(Node);
+                }
+                // 
                 return Node;
             }
             // Deletion     Not Working                               
-            t_node * deleteNode(t_node * Node, int key)
-            {
-                t_node * p;
-                if (Node == NULL)
-                    return Node;
-                if (key > Node->key)
-                {
-                    Node = deleteNode(Node->right, key);
-                    // update balance factor
-                    if (getBalanceFactor(Node) == 2)
-                        ;// fix rotation
-                }
-                else
-                {
-
-                    if (key < Node->key)
-                    {
-                        Node = deleteNode(Node->left, key);
-                        // update balance factor
-                        if (getBalanceFactor(Node) == -2)
-                            ;// fix rotation
-                    }
-                    else
-                    {
-                        if (Node->right != NULL)
-                        {
-                            p = Node->right;
-
-                            while(p->left != NULL)
-                                p = p->left;
-
-                            Node->key = p->key;
-                            Node->right = deleteNode(Node->right, p->key);
-                            // update balance factor
-                            if(getBalanceFactor(Node) == 2)
-                                ;// fix rotation
-                        }
-                        else
-                            return Node->left;
-                    }
-                }
-                Node->height = max(getHeight(Node->left) , getHeight(Node->right));
-                return Node;
-            }
+            t_node * deleteNode(t_node * Node, int key);
             // Search
             t_node* SearchKey(t_node * Node, int key)
             {
@@ -197,7 +169,7 @@ namespace ft
                 return Node;
             }
             // Rotation
-                // rotate key roted with y
+                // rotate key roted with y // should be fixed
             t_node * RightRotate(t_node * y)      // i can update balance factor after every movement
             {
                 t_node * x = y->left;
@@ -218,7 +190,7 @@ namespace ft
                 // return new root
                 return x;
             }
-                // rotate key roted with x
+                // rotate key roted with x // basic rotation that doesnt work at all
             t_node * LeftRotate(t_node * x) 
             {
                 t_node * y = x->right;
@@ -277,6 +249,29 @@ namespace ft
                     printInOrder(root->right);
                 }
             }
+
+            // print tree in pretty way
+            void printBT(const std::string& prefix, const t_node* Node, bool isLeft)
+            {
+                if( Node != NULL )
+                {
+                    std::cout << prefix;
+
+                    std::cout << (isLeft ? "├──" : "└──" );
+
+                    // print the value of the Node
+                    std::cout << Node->key << std::endl;
+
+                    // enter the next tree level - left and right branch
+                    printBT( prefix + (isLeft ? "│   " : "    "), Node->left, true);
+                    printBT( prefix + (isLeft ? "│   " : "    "), Node->right, false);
+                }
+            }
+
+            void printBT(const t_node* Node)
+            {
+                printBT("", Node, false);    
+            }
             int max(int a, int b) const
             { 
                 return (a > b) ? a : b;
@@ -293,9 +288,10 @@ namespace ft
             int         getHeight(t_node * Node) const
             {
                 if (Node == NULL)
-                    return 0;
-                return (Node->height);
+                    return -1;
+                return (max(getHeight(Node->left) , getHeight(Node->right)) + 1);
             }
+
                 //
             t_node *    getMinValueNode(t_node * Node) const
             {
@@ -312,45 +308,87 @@ namespace ft
                     return min_node;
                 }
             }
+            
+            t_node * getMaxValueNode(t_node * Node) const
+            {
+                if (Node == NULL)
+                    return Node;
+                else
+                {
+                    t_node * max_node;
+                    max_node = Node;
+                    while (max_node && max_node->right != NULL)
+                        max_node = max_node->right;
+
+                    return max_node;   
+                }
+            }
 
         /*----------------------------------------------------------*/
         /*----------------------------------------------------------*/
         // iterator functions
-        iterator begin();
-        const_iterator begin() const;
-        iterator end();
-        const_iterator end() const;
-        reverse_iterator rbegin();
-        const_reverse_iterator rbegin() const;
-        const_reverse_iterator rend() const;
-        /*----------------------------------------------------------*/
-        /*----------------------------------------------------------*/
-        // element modifier functions
-        value_type insert(const value_type& value);  // u need to check template parameter values
-        iterator insert(iterator position, const value_type value);
-            template<class InputIterator>
-        void insert(InputIterator first, InputIterator last);
-        void erase(iterator position);
-        size_type erase(const key_type& k);
-        void erase(iterator first. iterator last);
-        void clear();
-        /*----------------------------------------------------------*/
-        /*----------------------------------------------------------*/
-        // Operations functions
-        iterator find(const key_type& k);
-        const_iterator find(const key_type& k) const;
-        size_type count(const key_type& k) const;
-        iterator lower_bound(const key_type& k);
-        const_iterator lower_bound(const key_type& k) const;
-        iterator upper_bound(const key_type& k);
-        const_iterator upper_bound(const key_type& k) const;
-        value_type equal_range(const key_type& k);
-        const value_type equal_range(const key_type& k) const;
-        /*----------------------------------------------------------*/
-        /*----------------------------------------------------------*/
-        bool empty() const {return _size == 0;};
-        size_type size() const {return _size;};
-        size_type max_size() const {return _alloc.max_size();};
+        // iterator begin()
+        // {
+        //     return iterator(getMinValueNode(root));
+        // }
+        // const_iterator begin() const
+        // {
+        //     return const_iterator(getMinValueNode(root));
+        // }
+        // iterator end()
+        // {
+        //     return iterator(NULL);
+        // }
+        // const_iterator end() const
+        // {
+        //     return const_iterator(NULL);
+        // }
+        // reverse_iterator rbegin()
+        // {
+        //     return reverse_iterator(NULL);
+        // }
+        // const_reverse_iterator rbegin() const
+        // {
+        //     return const_reverse_iterator(NULL);
+        // }
+
+        // reverse_iterator rend()
+        // {
+        //     return reverse_iterator(getMinValueNode(root));
+        // }
+
+        // const_reverse_iterator rend() const
+        // {
+        //     return const_reverse_iterator(getMinValueNode(root));
+        // }
+        // /*----------------------------------------------------------*/
+        // /*----------------------------------------------------------*/
+        // // element modifier functions
+        // value_type insert(const value_type& value);  // u need to check template parameter values
+        // iterator insert(iterator position, const value_type value);
+        //     template<class InputIterator>
+        // void insert(InputIterator first, InputIterator last);
+        // void erase(iterator position);
+        // size_type erase(const key_type& k);
+        // void erase(iterator first. iterator last);
+        // void clear();
+        // /*----------------------------------------------------------*/
+        // /*----------------------------------------------------------*/
+        // // Operations functions
+        // iterator find(const key_type& k);
+        // const_iterator find(const key_type& k) const;
+        // size_type count(const key_type& k) const;
+        // iterator lower_bound(const key_type& k);
+        // const_iterator lower_bound(const key_type& k) const;
+        // iterator upper_bound(const key_type& k);
+        // const_iterator upper_bound(const key_type& k) const;
+        // value_type equal_range(const key_type& k);
+        // const value_type equal_range(const key_type& k) const;
+        // /*----------------------------------------------------------*/
+        // /*----------------------------------------------------------*/
+        // bool empty() const {return _size == 0;};
+        // size_type size() const {return _size;};
+        // size_type max_size() const {return _alloc.max_size();};
 
     };
 /*                                                      

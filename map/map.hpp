@@ -54,28 +54,37 @@ namespace ft
 
                 // Constructors
             
-            explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+            explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _Comp(comp)
             {}
             
             template <class InputIterator>
             map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-            {}
+            {
+                _alloc = alloc;
+                _Comp = comp;
+                // insert elements using iterator's // u can use insert function
+            }
             
             map(const map& object)
             {
-                // deallocate old tree
-                // copy object members to this object members
-                // 
+                *this = object;
             }
 
                 // Destructor
             ~map()
             {
                 // AVL_Tree class fucntion to free the tree hold by the map
+                // dealocate tree use clear ?
             }
                 // Assignement Operator
-            map& operator= (const map& x)
-            {}
+            map& operator= (const map& object)
+            {
+                // deallocate old tree use clear;
+                _Comp = objec._Comp;
+                _alloc = object._alloc;
+                // assign element of object tree to this object tree using insert !??
+                return *this;
+            }
                 // Iterator functions
             iterator begin()
             {
