@@ -24,7 +24,7 @@ namespace ft
             {
                 return comp(x.first, y.first);
             }
-        protected:
+        public:
             Compare comp;
             value_compare (Compare c) : comp(c) {}
     };
