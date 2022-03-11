@@ -43,15 +43,13 @@ namespace ft
             typedef typename allocator_type::const_reference                                        const_reference;
             typedef typename allocator_type::pointer                                                pointer;
             typedef typename allocator_type::const_pointer                                          const_pointer;
-            typedef ft::biderectional_map_iterator<value_type>                                      iterator;
-            typedef ft::biderectional_map_iterator<const value_type>                                const_iterator;
+            typedef ft::biderectional_map_iterator<value_type, key_compare>                         iterator;
+            typedef ft::biderectional_map_iterator<const value_type, key_compare>                   const_iterator;
             typedef ft::reverse_iterator<iterator>                                                  reverse_iterator;
             typedef ft::reverse_iterator<const iterator>                                            const_reverse_iterator;
             typedef ptrdiff_t                                                                       difference_type;
             typedef size_t                                                                          size_type;
             typedef Alloc                                                                           allocator_type;
-        
-
                 // Constructors
             
             explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _Comp(comp)
@@ -250,7 +248,7 @@ namespace ft
         
         private:
             allocator_type                                          _alloc;
-            //AVL_Tree<value_type, value_compare, allocator_type>   _NotReadBlackTree;
+            //AVL_Tree<value_type, key_compare, allocator_type>     _NotReadBlackTree;
             AVL_Tree                                                _NotReadBlackTree;
             value_compare                                           _Comp;
     };

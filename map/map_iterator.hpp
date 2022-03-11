@@ -8,8 +8,7 @@
 #include "tree.hpp"
 
 namespace ft
-{   // template <class T, class Node_type>
-    template <class T>
+{   //template <class T, class Compare>
     class biderectional_map_iterator : public ft::Iterator<std::bidirectional_iterator_tag, T>
     {
         public:
@@ -18,34 +17,40 @@ namespace ft
             typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::pointer           pointer;
             typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::reference         reference;
             typedef typename ft::Iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
-
-            biderectional_map_iterator() : iter(NULL)
+            typedef typename ft::s_node<value_type, Compare>                                      node_type;
+            
+            biderectional_map_iterator()
             {
 
             }
-            biderectional_map_iterator(pointer ptr) : iter(ptr)
+            biderectional_map_iterator(node_type *Node) : map_iter(Node)
             {
-
+                //end = 0
+                //rend = 0;
             }
 
-            virtual ~biderectional_map_iterator(){};
-            biderectional_map_iterator(const biderectional_map_iterator & instance) : iter(instance.base())
+            biderectional_map_iterator(const biderectional_map_iterator<value_type, Compare> & instance) : map_iter(instance.map_iter)
             {
-                *this = instance;
+                //end = instance.end
+                //rend = instance.rend
             }
-            biderectional_map_iterator & operator = (const biderectional_map_iterator & instance)
+            
+            ~biderectional_map_iterator(){};
+            biderectional_map_iterator & operator = (const biderectional_map_iterator<value_type, Compare> & instance)
             {
-                this->iter = instance.base();
+                biderectional_map_iterator temp = instance;
+
+                map_iter = instance.map_iter;
+                //end = instance.end;
+                //rend = instance.rend;
                 return *this;
             }
 
-            operator biderectional_map_iterator<const T> () const { return biderectional_map_iterator<const T>(iter); }
+            // operator biderectional_map_iterator<const T> () const
+            // {
+            //     return biderectional_map_iterator<const T>(map_iter);
+            // }
             
-            pointer base() const
-            {
-                return iter;
-            }
-
             reference operator * () const
             {
                 
@@ -65,9 +70,9 @@ namespace ft
             // post incremented
             biderectional_map_iterator operator ++ (int)
             {
-                biderectional_map_iterator * tmp = *this;
+                biderectional_map_iterator temp = *this;
                 operator ++ ();
-                return tmp;
+                return temp;
             }
 
             biderectional_map_iterator & operator -- ()
@@ -77,9 +82,9 @@ namespace ft
 
             biderectional_map_iterator operator -- (int)
             {
-                biderectional_map_iterator * tmp = *this;
+                biderectional_map_iterator temp = *this;
                 operator -- ();
-                return tmp;
+                return temp;
             }
 
             template <class TT>
@@ -89,18 +94,19 @@ namespace ft
 
 
             private:
-            pointer iter;
-            //node_type * map_iter;
+            node_type * map_iter;
+            //end
+            //rend
     };
 
     template <class T>
-    bool operator == (const biderectional_map_iterator<T>& lhs, const biderectional_map_iterator<T>& rhs)
+    bool operator == (const biderectional_map_iterator<T, Compare>& lhs, const biderectional_map_iterator<T, Compare>& rhs)
     {
         return (lhs.base() == rhs.base());
     }
 
     template <class T>
-    bool operator != (const biderectional_map_iterator<T>& lhs, const biderectional_map_iterator<T>& rhs)
+    bool operator != (const biderectional_map_iterator<T, Compare>& lhs, const biderectional_map_iterator<T, Compare>& rhs)
     {
         return (lhs.base() != rhs.base());
     }

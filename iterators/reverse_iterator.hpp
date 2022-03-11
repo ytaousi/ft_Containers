@@ -26,7 +26,7 @@ namespace ft
             {
 
             }
-            reverse_iterator(const reverse_iterator & other) : rev_iter(other.base() - 1)
+            reverse_iterator(const reverse_iterator & other) : rev_iter(other.rev_iter) // ??
             {
             }
             // initialization
