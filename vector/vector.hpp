@@ -204,7 +204,7 @@ namespace ft
         void reserve(size_type n)
         {
             if (n > max_size())
-                throw std::length_error("couldnt reserve the requested capacity");
+                throw std::length_error("requested capacity is more than the maximum possible  ");
             if (n > _capacity)
             {
 				value_type *tmp = _alloc.allocate(n);
@@ -440,9 +440,9 @@ namespace ft
         void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
         {
             difference_type difference = std::distance(begin(), position);
-            difference_type range = std::distance(first, last);
+            difference_type distance = std::distance(first, last);
             long long j = difference;
-            size_t n = range;
+            size_t n = distance;
             if ((_size + n) > _capacity)
             {
                 if (n > _size)
