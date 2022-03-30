@@ -121,30 +121,154 @@ int main ()
     std::cout << "*********************** std::vector::insert ****************************" << std::endl;
     std::cout << "************************************************************************" << std::endl;
 
-    std::vector<int> myvector (3,100);
+    std::vector<int> stdd_vector (3,100);
     std::vector<int>::iterator it;
 
-    it = myvector.begin();
-    it = myvector.insert ( it , 200 );
+    it = stdd_vector.begin();
+    it = stdd_vector.insert ( it , 200 );
 
-    myvector.insert (it,2,300);
+    stdd_vector.insert (it,2,300);
 
     // "it" no longer valid, get a new one:
-    it = myvector.begin();
+    it = stdd_vector.begin();
 
-    std::vector<int> anothervector (2,400);
-    myvector.insert (it+2,anothervector.begin(),anothervector.end());
+    for (; it != stdd_vector.end(); it++)
+        std::cout << " " << *it;
+    std::cout << std::endl;
 
-    int myarray [] = { 501,502,503 };
-    myvector.insert (myvector.begin(), myarray, myarray+3);
+    // std::vector<int> anothervector (2,400);
+    // stdd_vector.insert (it+2,anothervector.begin(),anothervector.end());
 
-    std::cout << "myvector contains:";
-    for (it=myvector.begin(); it<myvector.end(); it++)
-        std::cout << ' ' << *it;
+    // int myarray [] = { 501,502,503 };
+    // stdd_vector.insert (stdd_vector.begin(), myarray, myarray+3);
+
+    // std::cout << "stdd_vector contains:";
+    // for (it=stdd_vector.begin(); it<stdd_vector.end(); it++)
+    //     std::cout << ' ' << *it;
+    // std::cout << '\n';
+
+
+    std::cout << "************************* ft::Vector::insert *************************************" << std::endl;
+
+    ft::Vector<int> myy_vector (3,100);
+    ft::Vector<int>::iterator itt;
+
+    itt = myy_vector.begin();
+    itt = myy_vector.insert ( itt , 200 );
+
+    myy_vector.insert (itt,2,300);
+
+    // // "itt" no longer valid, get a new one:
+    itt = myy_vector.begin();
+
+    for (; itt != myy_vector.end(); itt++)
+        std::cout << " " << *itt;
+    std::cout << std::endl;
+    // std::vector<int> anothervector (2,400);
+    // myy_vector.insert (itt+2,anothervector.begin(),anothervector.end());
+
+    // int myarray [] = { 501,502,503 };
+    // myy_vector.insert (myy_vector.begin(), myarray, myarray+3);
+
+    // std::cout << "myy_vector contains:";
+    // for (itt=myy_vector.begin(); itt<myy_vector.end(); itt++)
+    //     std::cout << ' ' << *itt;
+    // std::cout << '\n';
+
+    std::cout << "********************************* std::vector::reserve ********************************" << std::endl;
+    std::cout << "***************************************************************************************" << std::endl;
+    
+    std::vector<int>::size_type sz;
+    std::vector<int> foo;
+    
+    sz = foo.capacity();
+    std::cout << "making foo grow:\n";
+    for (int i=0; i<100; ++i)
+    {
+        foo.push_back(i);
+        if (sz!=foo.capacity())
+        {
+            sz = foo.capacity();
+            std::cout << "capacity changed: " << sz << '\n';
+        }
+    }
+
+    std::vector<int> bar;
+    sz = bar.capacity();
+    bar.reserve(100);   // this is the only difference with foo above
+    std::cout << "making bar grow:\n";
+    for (int i=0; i<100; ++i)
+    {
+        bar.push_back(i);
+        if (sz!=bar.capacity())
+        {
+            sz = bar.capacity();
+            std::cout << "capacity changed: " << sz << '\n';
+        }
+    }
+
+    std::cout << "********************************* ft::Vector::reserve *********************************" << std::endl;
+
+    ft::Vector<int>::size_type szz;
+    ft::Vector<int> foofoo;
+    
+    szz = foofoo.capacity();
+    std::cout << "making foofoo grow:\n";
+    for (int i=0; i<100; ++i)
+    {
+        foofoo.push_back(i);
+        if (szz!=foofoo.capacity())
+        {
+            szz = foofoo.capacity();
+            std::cout << "capacity changed: " << szz << '\n';
+        }
+    }
+
+    std::vector<int> bbar;
+    szz = bbar.capacity();
+    bbar.reserve(100);   // this is the only difference with foofoo above
+    std::cout << "making bbar grow:\n";
+    for (int i=0; i<100; ++i)
+    {
+        bbar.push_back(i);
+        if (szz!=bbar.capacity())
+        {
+            szz = bbar.capacity();
+            std::cout << "capacity changed: " << szz << '\n';
+        }
+    }
+
+    std::cout << "********************************* std::vector::resize *********************************" << std::endl;
+    std::cout << "***************************************************************************************" << std::endl;
+
+    std::vector<int> stddd_vector;
+
+    // set some initial content:
+    for (int i=1;i<10;i++) stddd_vector.push_back(i);
+
+    stddd_vector.resize(5);
+    stddd_vector.resize(8,100);
+    stddd_vector.resize(12);
+
+    std::cout << "stddd_vector contains:";
+    for (int i=0;i<stddd_vector.size();i++)
+        std::cout << ' ' << stddd_vector[i];
     std::cout << '\n';
 
+    std::cout << "********************************** ft::Vector::resize **********************************" << std::endl;
 
-    std::cout << "*************************************************************************" << std::endl;
+    ft::Vector<int> myyyvector;
 
+    // set some initial content:
+    for (int i=1;i<10;i++) myyyvector.push_back(i);
+
+    myyyvector.resize(5);
+    myyyvector.resize(8,100);
+    myyyvector.resize(12);
+
+    std::cout << "myyyvector contains:";
+    for (int i=0;i<myyyvector.size();i++)
+        std::cout << ' ' << myyyvector[i];
+    std::cout << '\n';
   return 0;
 }

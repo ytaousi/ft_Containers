@@ -200,9 +200,11 @@ namespace ft
                 return false ;
         }
 
-        // SEGFAULT Sometimes
+        // fixed all good
         void reserve(size_type n)
         {
+            if (n > max_size())
+                throw std::length_error("couldnt reserve the requested capacity");
             if (n > _capacity)
             {
 				value_type *tmp = _alloc.allocate(n);
@@ -257,7 +259,7 @@ namespace ft
             return (_array[0]);
         }
 
-        //Returns a reference to the first element in the container. unlinke std::vector::begin that returns an iterator to the same element
+        //Returns a const reference to the first element in the container. unlinke std::vector::begin that returns an iterator to the same element
         //Calling front on an empty container is undefined.
         const_reference front() const
         {
@@ -271,7 +273,7 @@ namespace ft
             return (_array[_size - 1]);
         }
 
-        //Returns a reference to the last element in the container.
+        //Returns a const reference to the last element in the container.
         //Calling back on an empty container causes undefined behavior.
         const_reference back() const
         {
@@ -299,16 +301,15 @@ namespace ft
             std::swap(_array, x._array); 
         }
 
-        //
+        //Removes the last element in the vector, effectively reducing the container size by one.
+        //This destroys the removed element.
         void pop_back()
         {
-            //Removes the last element in the vector, effectively reducing the container size by one.
-            //This destroys the removed element.
             _alloc.destroy(_array + (_size - 1));
             _size -= 1;
         }
 
-        // segfault 3 / 10 wtf : fixed segfault
+        // fixed segfault
         void push_back (const value_type& val)
         {
             //if size is 0 reserve space for 1 unit
@@ -434,9 +435,9 @@ namespace ft
         }
         // range
         // template <class MyIterator>
-        // void inset (iterator position, MyIterator first, MyIterator last)
+        // void insert (iterator position, MyIterator first, MyIterator last)
         template <class InputIterator>
-        void insert (iterator position, InputIterator first, InputIterator last)
+        void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
         {
             difference_type difference = std::distance(begin(), position);
             difference_type range = std::distance(first, last);
