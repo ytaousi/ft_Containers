@@ -5,7 +5,7 @@
 # include <cstddef>
 # include <deque>
 # include <list>
-// # include "../vector/vector.hpp" under construction still need iterator implementation
+# include "../vector/vector.hpp"
 
 // STACK is implemented as an adaptive container it means it encapsulate
 //  an object of specifice container class as its underlying container 
@@ -17,7 +17,7 @@
 
 namespace ft
 {
-    template <class T, class Container = std::vector<T> > // ft::vector under construction
+    template <class T, class Container = ft::Vector<T> > // ft::vector under construction
     class stack
     {
         public:

@@ -59,7 +59,7 @@ namespace ft
         {
             //std::cout << "range contructor called" << std::endl;
             // construct vector from input iterator(random_access_iterator)
-            size_type difference = last - first;
+            size_type difference = std::distance(first, last);
             _size = difference;
             _capacity = difference;
             _array = _alloc.allocate(difference);
@@ -96,33 +96,41 @@ namespace ft
         }
         
         // Member Fuctions
-
             // Iterator Function's
 
+        // return an iterator (random-access-iterator) to the first element of the vector unlike std::vector::front that returns a direct reference to the same element
         iterator begin()
         {
             return iterator(_array);
         }
         
+        // return a const iterator to the first element of the vector
         const_iterator begin() const
         {
             return const_iterator(_array);
         }
 
+        // Returns a reverse iterator pointing to the last element in the vector (i.e., its reverse beginning).
+        // Reverse iterators iterate backwards: increasing them moves them towards the beginning of the container.
+        // rbegin points to the element right before the one that would be pointed to by member end.
+        // Notice that unlike member vector::back, which returns a reference to this same element, this function returns a reverse random access iterator.
         reverse_iterator rbegin()
         {
             return reverse_iterator(_array + _size);
         }
+
+        
         const_reverse_iterator rbegin() const
         {
             return const_reverse_iterator(_array + _size);
         }
-
+        // returns an iterator to the elment past the end of the vector (points after the last element of the vector)
+        // If the container is empty, this function returns the same as std::vector::begin
         iterator end()
         {
             return iterator(_array + _size);
         }
-
+        // returns a const iterator to the element past the end of the vector
         const_iterator end() const
         {
             return const_iterator(_array + _size);
@@ -249,7 +257,7 @@ namespace ft
             return (_array[0]);
         }
 
-        //Returns a reference to the first element in the container.
+        //Returns a reference to the first element in the container. unlinke std::vector::begin that returns an iterator to the same element
         //Calling front on an empty container is undefined.
         const_reference front() const
         {
@@ -276,17 +284,16 @@ namespace ft
         void clear()
         {
             //Erases all elements from the container. After this call, size() returns zero.
+            //Leaves the capacity() of the vector unchanged.
             //Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated.  
-            //Leaves the capacity() of the vector unchanged (note: the standard's restriction on the changes to capacity is in the specification of vector::reserve
             for (; _size > 0; _size--)
                 _alloc.destroy(_array + (_size - 1));
         }
 
-        //Exchanges the contents of the container with those of other. Does not invoke any move, copy, or swap operations on individual elements.
+        //Exchanges the contents of the container with those of other.
         //All iterators and references remain valid. The past-the-end iterator is invalidated.
         void swap (Vector& x)
         {
-            // sizes may differ ?? so capacity also ?? hmmm
             std::swap(_capacity, x._capacity);
             std::swap(_size, x._size);
             std::swap(_array, x._array); 
@@ -323,17 +330,17 @@ namespace ft
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
         {
-            size_type difference = last - first;
+            size_type difference = std::distance(first, last);
 
             if (difference > _size)
             {
                 reserve(difference);
                 _capacity = difference;
             }
-            for (size_type i = 0; first != last;first++)
-                _alloc.construct(&_array[i++], *first);
             for (size_type i = 0; i < _size; i++)
                 _alloc.destroy(&_array[i]);
+            for (size_type i = 0; first != last;first++)
+                _alloc.construct(&_array[i++], *first);
             _size = difference;
         }
 
@@ -356,7 +363,10 @@ namespace ft
             }
         }
 
-        // erase single element using iterator
+        //Removes from the vector either a single element (position) or a range of elements ([first,last)).
+        //This effectively reduces the container size by the number of elements removed, which are destroyed.
+        //Because vectors use an array as their underlying storage,erasing elements in positions other than
+        //the vector end causes the container to relocate all the elements after the segment erased to their new positions
         iterator erase (iterator position)
         {
             return (erase(position, position + 1));
@@ -365,10 +375,12 @@ namespace ft
         // erase range of elemets
         iterator erase (iterator first, iterator last)
         {
-            size_type difference = last - first;
-			size_type begin = first - this->begin();
-            size_type end = last - this->begin();
- 
+            size_type difference = std::distance(first, last);
+			//size_type begin = first - this->begin();
+            //size_type end = last - this->begin();
+            size_type begin = std::distance(this->begin(), first);
+            size_type end = std::distance(this->begin(), last);
+
             for(size_type i = begin; i < end; i++)
                 _alloc.destroy(&_array[i]);
             size_type j = 0;
@@ -379,20 +391,46 @@ namespace ft
                 end++;
             }
             _size -= difference;
-			return (first);
+			//An iterator pointing to the new location of the element that followed the last element erased 
+            // by the function call. This is the container end if the operation erased the last element
+            // in the sequence.
+            return (first);
         }
 
         //single element
         iterator insert (iterator position, const value_type& val)
         {
-            insert(position, 1, val);
-            return (position);
+            difference_type difference = std::distance(begin(), position);
+            if (_size == 0)
+                reserve(1);
+            else if (_size + 1 > _capacity)
+                reserve(_capacity * 2);
+            for (size_type i = difference + 1; i <= _size; i++)
+                std::swap(_array[difference], _array[i]);
+            _alloc.construct(&_array[difference], val);
+            _size++;
+            return (begin() + difference);
         }
 
         // fill
         void insert (iterator position, size_type n, const value_type& val)
         {
-            
+            difference_type difference = std::distance(begin(), position);
+            long long j = difference;
+            if ((_size + n) > _capacity)
+            {
+                if (n > _size)
+                    reserve(_size + n);
+                else
+                    reserve(_capacity * 2);
+            }
+            else if (_size == 0)
+                reserve(n);
+            for (long long i = _size - 1; i >= j; i--)
+                _alloc.construct(&_array[i + n], _array[i]);
+            for (size_type i = 0; i < n; i++)
+                _alloc.construct(&_array[j++], val);
+            _size += n;
         }
         // range
         // template <class MyIterator>
@@ -400,7 +438,27 @@ namespace ft
         template <class InputIterator>
         void insert (iterator position, InputIterator first, InputIterator last)
         {
-
+            difference_type difference = std::distance(begin(), position);
+            difference_type range = std::distance(first, last);
+            long long j = difference;
+            size_t n = range;
+            if ((_size + n) > _capacity)
+            {
+                if (n > _size)
+                    reserve(_size + n);
+                else
+                    reserve(_capacity * 2);
+            }
+            else if (_size == 0)
+                reserve(n);
+            for (long long i = _size - 1; i >= j; i--)
+                _alloc.construct(&_array[i + n], _array[i]);
+            for (size_type i = 0; i < n; i++)
+            {
+                _alloc.construct(&_array[j++], *first);
+                first++;
+            }
+            _size += n;
         }
             // Alloctor function
         
